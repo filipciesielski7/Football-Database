@@ -85,7 +85,28 @@ public class CrmService {
         return statusRepository.findAll();
     }
 
+    public List<Stadium> findAllStadiums(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return stadiumRepository.findAll();
+        }
+        else{
+            return stadiumRepository.search(filterText);
+        }
+    }
+
     public List<Stadium> findAllStadiums(){
         return stadiumRepository.findAll();
+    }
+
+    public void deleteStadium(Stadium stadium){
+        stadiumRepository.delete(stadium);
+    }
+
+    public void saveStadium(Stadium stadium){
+        if(stadium == null){
+            System.err.println("Stadium is null");
+        }
+
+        stadiumRepository.save(stadium);
     }
 }
