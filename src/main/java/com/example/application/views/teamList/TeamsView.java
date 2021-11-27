@@ -1,6 +1,6 @@
-package com.example.application.views.list;
+package com.example.application.views.teamList;
 
-import com.example.application.data.entity.Contact;
+import com.example.application.data.entity.Team;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Component;
@@ -13,17 +13,17 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@PageTitle("Contacts | Vaadin CRM")
-@Route(value = "", layout = MainLayout.class)
-public class ListView extends VerticalLayout {
-    Grid<Contact> grid = new Grid<>(Contact.class);
+@PageTitle("Teams | Vaadin CRM")
+@Route(value = "teams", layout = MainLayout.class)
+public class TeamsView  extends VerticalLayout{
+    Grid<Team> grid = new Grid<>(Team.class);
     TextField filterText = new TextField();
-    ContactForm form;
+    TeamForm form;
     private CrmService service;
 
-    public ListView(CrmService service) {
+    public TeamsView(CrmService service) {
         this.service = service;
-        addClassName("list-view");
+        addClassName("teams-view");
         setSizeFull();
 
         configureGrid();
@@ -36,13 +36,13 @@ public class ListView extends VerticalLayout {
     }
 
     private void closeEditor() {
-        form.setContact(null);
+        form.setTeam(null);
         form.setVisible(false);
         removeClassName("editing");
     }
 
     private void updateList() {
-        grid.setItems(service.findAllContacts(filterText.getValue()));
+        grid.setItems(service.findAllTeams(filterText.getValue()));
     }
 
     private Component getContent() {
@@ -56,64 +56,63 @@ public class ListView extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new ContactForm(service.findAllCompanies(), service.findAllStatuses());
+        form = new TeamForm(service.findAllStadiums());
         form.setWidth("25em");
 
-        form.addListener(ContactForm.SaveEvent.class, this::saveContact);
-        form.addListener(ContactForm.DeleteEvent.class, this::deleteContact);
-        form.addListener(ContactForm.CloseEvent.class, e -> closeEditor());
+        form.addListener(TeamForm.SaveEvent.class, this::saveTeam);
+        form.addListener(TeamForm.DeleteEvent.class, this::deleteTeam);
+        form.addListener(TeamForm.CloseEvent.class, e -> closeEditor());
     }
 
-    private void deleteContact(ContactForm.DeleteEvent event) {
-        service.deleteContact(event.getContact());
+    private void deleteTeam(TeamForm.DeleteEvent event) {
+        service.deleteTeam(event.getTeam());
         updateList();
         closeEditor();
     }
 
-    private void saveContact(ContactForm.SaveEvent event) {
-        service.saveContact(event.getContact());
+    private void saveTeam(TeamForm.SaveEvent event) {
+        service.saveTeam(event.getTeam());
         updateList();
         closeEditor();
     }
+
 
     private Component getToolbar() {
-        filterText.setPlaceholder("Filter by name");
+        filterText.setPlaceholder("Filter by team name");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.addValueChangeListener(e -> updateList());
 
-        Button addContactButton = new Button("Add contact");
-        addContactButton.addClickListener(e -> addContact());
+        Button addTeamButton = new Button("Add team");
+        addTeamButton.addClickListener(e -> addTeam());
 
-        HorizontalLayout toolbar = new HorizontalLayout(filterText, addContactButton);
+        HorizontalLayout toolbar = new HorizontalLayout(filterText, addTeamButton);
         toolbar.addClassName("toolbar");
         return toolbar;
     }
 
-    private void addContact() {
+    private void addTeam() {
         grid.asSingleSelect().clear();
-        editContact(new Contact());
+        editTeam(new Team());
     }
 
     private void configureGrid() {
-        grid.addClassName("contact-grid");
+        grid.addClassName("team-grid");
         grid.setSizeFull();
-        grid.setColumns("firstName", "lastName", "email");
-        grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Company");
-        grid.addColumn(contact -> contact.getStatus().getName()).setHeader("Status");
+        grid.setColumns("name", "city");
+        grid.addColumn(team -> team.getStadium().getName()).setHeader("Stadium");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
-        grid.asSingleSelect().addValueChangeListener(e -> editContact(e.getValue()));
+        grid.asSingleSelect().addValueChangeListener(e -> editTeam(e.getValue()));
     }
 
-    private void editContact(Contact contact) {
-        if(contact == null) {
+    private void editTeam(Team team) {
+        if(team == null) {
             closeEditor();
         }else{
-            form.setContact(contact);
+            form.setTeam(team);
             form.setVisible(true);
             addClassName("editing");
         }
     }
-
 }

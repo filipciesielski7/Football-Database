@@ -1,6 +1,7 @@
 package com.example.application.views;
 
-import com.example.application.views.list.ListView;
+import com.example.application.views.templateList.TemplateView;
+import com.example.application.views.teamList.TeamsView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
@@ -17,14 +18,20 @@ public class MainLayout extends AppLayout {
     }
 
     private void createDrawer() {
-        RouterLink listView = new RouterLink("List", ListView.class);
-        listView.setHighlightCondition(HighlightConditions.sameLocation());
+        RouterLink homeView = new RouterLink("Home", homeView.class);
+        homeView.setHighlightCondition(HighlightConditions.sameLocation());
 
-        addToDrawer(new VerticalLayout(listView));
+        RouterLink templateView = new RouterLink("Template", TemplateView.class);
+        templateView.setHighlightCondition(HighlightConditions.sameLocation());
+
+        RouterLink teamsView = new RouterLink("Teams", TeamsView.class);
+        teamsView.setHighlightCondition(HighlightConditions.sameLocation());
+
+        addToDrawer(new VerticalLayout(homeView, templateView, teamsView));
     }
 
     private void createHeader() {
-        H1 logo = new H1("Vaadin CRM");
+        H1 logo = new H1("Football Database");
         logo.addClassNames("text-l", "m-m");
 
         HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo);

@@ -1,4 +1,4 @@
-package com.example.application.views.list;
+package com.example.application.views.templateList;
 
 import com.example.application.data.entity.Company;
 import com.example.application.data.entity.Contact;
@@ -21,7 +21,7 @@ import com.vaadin.flow.shared.Registration;
 
 import java.util.List;
 
-public class ContactForm extends FormLayout {
+public class TemplateForm extends FormLayout {
     Binder<Contact> binder = new BeanValidationBinder<>(Contact.class);
 
     TextField firstName = new TextField("First Name");
@@ -36,7 +36,7 @@ public class ContactForm extends FormLayout {
     Button cancel = new Button("Cancel");
     private Contact contact;
 
-    public ContactForm(List<Company> companies, List<Status> statuses) {
+    public TemplateForm(List<Company> companies, List<Status> statuses) {
         addClassName("contact-form");
         binder.bindInstanceFields(this);
 
@@ -79,10 +79,10 @@ public class ContactForm extends FormLayout {
     }
 
     // Events
-    public static abstract class ContactFormEvent extends ComponentEvent<ContactForm> {
+    public static abstract class ContactFormEvent extends ComponentEvent<TemplateForm> {
         private Contact contact;
 
-        protected ContactFormEvent(ContactForm source, Contact contact) {
+        protected ContactFormEvent(TemplateForm source, Contact contact) {
             super(source, false);
             this.contact = contact;
         }
@@ -93,20 +93,20 @@ public class ContactForm extends FormLayout {
     }
 
     public static class SaveEvent extends ContactFormEvent {
-        SaveEvent(ContactForm source, Contact contact) {
+        SaveEvent(TemplateForm source, Contact contact) {
             super(source, contact);
         }
     }
 
     public static class DeleteEvent extends ContactFormEvent {
-        DeleteEvent(ContactForm source, Contact contact) {
+        DeleteEvent(TemplateForm source, Contact contact) {
             super(source, contact);
         }
 
     }
 
     public static class CloseEvent extends ContactFormEvent {
-        CloseEvent(ContactForm source) {
+        CloseEvent(TemplateForm source) {
             super(source, null);
         }
     }
