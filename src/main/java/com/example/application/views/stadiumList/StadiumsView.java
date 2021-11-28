@@ -98,7 +98,7 @@ public class StadiumsView extends VerticalLayout {
     private void configureGrid() {
         grid.addClassName("stadium-grid");
         grid.setSizeFull();
-        grid.setColumns("name", "capacity", "hasLighting", "hasUnderSoilHeating");
+        grid.setColumns("name", "capacity", "hasLightning", "hasUnderSoilHeating");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(e -> editStadium(e.getValue()));

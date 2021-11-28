@@ -2,43 +2,41 @@ package com.example.application.data.entity;
 
 import com.sun.istack.NotNull;
 
-import javax.annotation.Nullable;
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-@Table(name="stadiony")
+@Table(name="stadiums")
 public class Stadium {
 
     @Id
-    @Column(name="nazwa")
+    @Column(name="name")
     private String name;
 
-    @OneToMany(mappedBy = "stadium")
-    @Nullable
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "stadium")
     private List<Team> teams = new LinkedList<>();
 
     @NotNull
-    @Column(name="pojemnosc")
+    @Column(name="capacity")
     private int capacity;
 
     @NotNull
-    @Column(name="czy_oswietlenie")
-    private String hasLighting;
+    @Column(name="has_lightning")
+    private String hasLightning;
 
     @NotNull
-    @Column(name="czy_podgrzewana_murawa")
+    @Column(name="has_under_soil_heating")
     private String hasUnderSoilHeating;
 
     public Stadium() {
     }
 
-    public Stadium(String name, int capacity, String hasLightning, String hasUndersoilHeating) {
+    public Stadium (String name, int capacity, String hasLightning, String hasUnderSoilHeating) {
         this.name = name;
         this.capacity = capacity;
-        this.hasLighting = hasLightning;
-        this.hasUnderSoilHeating = hasUndersoilHeating;
+        this.hasLightning = hasLightning;
+        this.hasUnderSoilHeating = hasUnderSoilHeating;
     }
 
     public String getName() {
@@ -49,6 +47,14 @@ public class Stadium {
         this.name = name;
     }
 
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
     public int getCapacity() {
         return capacity;
     }
@@ -57,20 +63,20 @@ public class Stadium {
         this.capacity = capacity;
     }
 
-    public String getHasLighting() {
-        return hasLighting;
+    public String getHasLightning() {
+        return hasLightning;
     }
 
-    public void setHasLighting(String hasLightning) {
-        this.hasLighting = hasLightning;
+    public void setHasLightning(String hasLightning) {
+        this.hasLightning = hasLightning;
     }
 
     public String getHasUnderSoilHeating() {
         return hasUnderSoilHeating;
     }
 
-    public void setHasUnderSoilHeating(String hasUndersoilHeating) {
-        this.hasUnderSoilHeating = hasUndersoilHeating;
+    public void setHasUnderSoilHeating(String hasUnderSoilHeating) {
+        this.hasUnderSoilHeating = hasUnderSoilHeating;
     }
 
     @Override
@@ -78,16 +84,8 @@ public class Stadium {
         return "Stadiums{" +
                 "name='" + name + '\'' +
                 ", capacity=" + capacity +
-                ", hasLightning='" + hasLighting + '\'' +
+                ", hasLightning='" + hasLightning + '\'' +
                 ", hasUndersoilHeating='" + hasUnderSoilHeating + '\'' +
                 '}';
-    }
-
-    public List<Team> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
     }
 }

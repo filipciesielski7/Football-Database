@@ -1,31 +1,31 @@
 package com.example.application.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="kluby")
+@Table(name="teams")
 public class Team {
 
     @Id
-    @Column(name="nazwa")
-    private String name = "";
+    @Column(name="name")
+    private String name;
 
-    @NotEmpty
-    @Column(name="miejscowosc")
-    private String city = "";
+    @NotNull
+    @Column(name="city")
+    private String city;
 
     @ManyToOne
-    @JoinColumn(name = "stadiony_nazwa")
     @NotNull
+    @JoinColumn(name = "stadium_name")
     private Stadium stadium;
 
-    @Override
-    public String toString() {
-        return name + " from " + city;
+    public Team() {
+    }
+
+    public Team (String name, String city) {
+        this.name = name;
+        this.city = city;
     }
 
     public String getName() {
@@ -50,5 +50,13 @@ public class Team {
 
     public void setStadium(Stadium stadium) {
         this.stadium = stadium;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "name='" + name + '\'' +
+                ", city=" + city +
+                '}';
     }
 }
