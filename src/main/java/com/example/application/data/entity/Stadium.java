@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,14 +18,14 @@ public class Stadium {
     @Nullable
     private List<Team> teams = new LinkedList<>();
 
-    @NotEmpty
+    @NotNull
     private int Capacity = 0;
 
     @NotEmpty
-    private boolean hasLighting = false;
+    private String hasLighting = "";
 
     @NotEmpty
-    private boolean hasUnderSoilHeating = false;
+    private String hasUnderSoilHeating = "";
 
     @Override
     public String toString() {
@@ -44,22 +45,22 @@ public class Stadium {
     }
 
     public void setCapacity(int capacity) {
-        Capacity = capacity;
+        this.Capacity = capacity;
     }
 
-    public boolean getHasLighting() {
+    public String getHasLighting() {
         return hasLighting;
     }
 
-    public void setHasLighting(boolean hasLighting) {
+    public void setHasLighting(String hasLighting) {
         this.hasLighting = hasLighting;
     }
 
-    public boolean getHasUnderSoilHeating() {
+    public String getHasUnderSoilHeating() {
         return hasUnderSoilHeating;
     }
 
-    public void setHasUnderSoilHeating(boolean hasUnderSoilHeating) {
+    public void setHasUnderSoilHeating(String hasUnderSoilHeating) {
         this.hasUnderSoilHeating = hasUnderSoilHeating;
     }
 

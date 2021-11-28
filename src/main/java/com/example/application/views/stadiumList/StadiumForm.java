@@ -10,6 +10,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
@@ -20,10 +21,12 @@ public class StadiumForm extends FormLayout {
     Binder<Stadium> binder = new BeanValidationBinder<>(Stadium.class);
 
     TextField Name = new TextField("Team Name");
-    TextField City = new TextField("Capacity");
+    IntegerField Capacity = new IntegerField("Capacity");
+//    TextField hasLighting = new TextField("Has lighting?");
+//    TextField hasUnderSoilHeating = new TextField("Has under-soil heating?");
 
-    ComboBox<Boolean> hasLighting = new ComboBox<>("Has lighting?");
-    ComboBox<Boolean> hasUnderSoilHeating = new ComboBox<>("Has under-soil heating?");
+    ComboBox<String> hasLighting = new ComboBox<>("Has lighting?");
+    ComboBox<String> hasUnderSoilHeating = new ComboBox<>("Has under-soil heating?");
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -34,10 +37,15 @@ public class StadiumForm extends FormLayout {
         addClassName("stadium-form");
         binder.bindInstanceFields(this);
 
-        hasLighting.setItems(true, false);
-        hasUnderSoilHeating.setItems(true, false);
+        hasLighting.setItems("Yes", "No");
+        hasLighting.setValue("No");
+        hasLighting.setLabel("Has lighting?");
 
-        add(Name, City, hasLighting, hasUnderSoilHeating, createButtonLayout());
+        hasUnderSoilHeating .setItems("Yes", "No");
+        hasUnderSoilHeating .setValue("No");
+        hasUnderSoilHeating .setLabel("Has under-soil heating?");
+
+        add(Name, Capacity, hasLighting, hasUnderSoilHeating, createButtonLayout());
     }
 
     public void setStadium(Stadium stadium){
