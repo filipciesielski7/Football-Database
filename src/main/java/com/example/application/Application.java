@@ -25,18 +25,8 @@ import java.util.List;
 @Theme(value = "flowcrmtutorial")
 @PWA(name = "Flow CRM Tutorial", shortName = "Flow CRM Tutorial", offlineResources = {"images/logo.png"})
 @NpmPackage(value = "line-awesome", version = "1.3.0")
-public class Application extends SpringBootServletInitializer implements AppShellConfigurator, CommandLineRunner {
-
-    @Autowired
-    private StadiumRepository stadiumRepository;
-
+public class Application extends SpringBootServletInitializer implements AppShellConfigurator {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        List<Stadium> listStadium = stadiumRepository.findAll();
-        listStadium.forEach(System.out :: println);
     }
 }

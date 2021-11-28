@@ -10,14 +10,16 @@ import java.util.List;
 public class CrmService {
     private final StadiumRepository stadiumRepository;
     private final TeamRepository teamRepository;
+    private final LeagueSeasonRepository leagueSeasonRepository;
 
     public CrmService(StadiumRepository stadiumRepository,
-                      TeamRepository teamRepository){
+                      TeamRepository teamRepository,
+                      LeagueSeasonRepository leagueSeasonRepository){
 
         this.stadiumRepository = stadiumRepository;
         this.teamRepository = teamRepository;
+        this.leagueSeasonRepository = leagueSeasonRepository;
     }
-
 
     public List<Stadium> findAllStadiums(String filterText){
         if(filterText == null || filterText.isEmpty()){
@@ -67,5 +69,30 @@ public class CrmService {
         }
 
         teamRepository.save(team);
+    }
+
+    public List<LeagueSeason> findAllLeagueSeasons(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return leagueSeasonRepository.findAll();
+        }
+        else{
+            return leagueSeasonRepository.search(filterText);
+        }
+    }
+
+    public List<LeagueSeason> findAllLeagueSeasons(){
+        return leagueSeasonRepository.findAll();
+    }
+
+    public void deleteLeagueSeason(LeagueSeason leagueSeason){
+        leagueSeasonRepository.delete(leagueSeason);
+    }
+
+    public void saveLeagueSeason(LeagueSeason leagueSeason){
+        if(leagueSeason == null){
+            System.err.println("Stadium is null");
+        }
+
+        leagueSeasonRepository.save(leagueSeason);
     }
 }

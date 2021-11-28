@@ -1,5 +1,6 @@
 package com.example.application.views;
 
+import com.example.application.views.leagueSeasonList.LeagueSeasonsView;
 import com.example.application.views.stadiumList.StadiumsView;
 import com.example.application.views.teamList.TeamsView;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -27,7 +28,10 @@ public class MainLayout extends AppLayout {
         RouterLink stadiumsView = new RouterLink("Stadiums", StadiumsView.class);
         stadiumsView.setHighlightCondition(HighlightConditions.sameLocation());
 
-        addToDrawer(new VerticalLayout(homeView, teamsView, stadiumsView));
+        RouterLink leagueSeasonsView = new RouterLink("League Seasons", LeagueSeasonsView.class);
+        leagueSeasonsView.setHighlightCondition(HighlightConditions.sameLocation());
+
+        addToDrawer(new VerticalLayout(homeView, teamsView, stadiumsView, leagueSeasonsView));
     }
 
     private void createHeader() {
