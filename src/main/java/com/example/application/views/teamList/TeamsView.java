@@ -76,7 +76,6 @@ public class TeamsView  extends VerticalLayout{
         closeEditor();
     }
 
-
     private Component getToolbar() {
         filterText.setPlaceholder("Filter by team name");
         filterText.setClearButtonVisible(true);

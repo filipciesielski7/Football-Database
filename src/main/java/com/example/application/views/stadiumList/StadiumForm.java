@@ -20,7 +20,7 @@ import com.vaadin.flow.shared.Registration;
 public class StadiumForm extends FormLayout {
     Binder<Stadium> binder = new BeanValidationBinder<>(Stadium.class);
 
-    TextField Name = new TextField("Team Name");
+    TextField Name = new TextField("Stadium Name");
     IntegerField Capacity = new IntegerField("Capacity");
 //    TextField hasLighting = new TextField("Has lighting?");
 //    TextField hasUnderSoilHeating = new TextField("Has under-soil heating?");
