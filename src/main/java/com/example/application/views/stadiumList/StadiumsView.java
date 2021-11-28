@@ -13,7 +13,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@PageTitle("Stadiums | Vaadin CRM")
+@PageTitle("Stadiums | Football")
 @Route(value = "stadiums", layout = MainLayout.class)
 public class StadiumsView extends VerticalLayout {
     Grid<Stadium> grid = new Grid<>(Stadium.class);

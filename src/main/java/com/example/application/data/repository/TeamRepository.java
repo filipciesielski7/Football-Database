@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface TeamRepository extends JpaRepository<Team, Integer> {
+public interface TeamRepository extends JpaRepository<Team, String> {
     @Query("select c from Team c " +
             "where lower(c.Name) like lower(concat('%', :searchTerm, '%')) " +
             "or lower(c.City) like lower(concat('%', :searchTerm, '%'))")

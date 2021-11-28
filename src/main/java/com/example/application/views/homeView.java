@@ -6,7 +6,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@PageTitle("Home | Vaadin CRM")
+@PageTitle("Football Database")
 @Route(value = "", layout = MainLayout.class)
 public class homeView extends VerticalLayout {
     private CrmService service;
