@@ -8,48 +8,40 @@ import java.util.List;
 
 @Service
 public class CrmService {
-    private final ContactRepository contactRepository;
-    private final CompanyRepository companyRepository;
-    private final StatusRepository statusRepository;
-    private final TeamRepository teamRepository;
     private final StadiumRepository stadiumRepository;
+    private final TeamRepository teamRepository;
 
-    public CrmService(ContactRepository contactRepository,
-                      CompanyRepository companyRepository,
-                      StatusRepository statusRepository,
-                      TeamRepository teamRepository,
-                      StadiumRepository stadiumRepository){
+    public CrmService(StadiumRepository stadiumRepository,
+                      TeamRepository teamRepository){
 
-        this.contactRepository = contactRepository;
-        this.companyRepository = companyRepository;
-        this.statusRepository = statusRepository;
-        this.teamRepository = teamRepository;
         this.stadiumRepository = stadiumRepository;
+        this.teamRepository = teamRepository;
     }
 
-    public List<Contact> findAllContacts(String filterText){
+
+    public List<Stadium> findAllStadiums(String filterText){
         if(filterText == null || filterText.isEmpty()){
-            return contactRepository.findAll();
+            return stadiumRepository.findAll();
         }
         else{
-            return contactRepository.search(filterText);
+            return stadiumRepository.search(filterText);
         }
     }
 
-    public long countContacts() {
-        return contactRepository.count();
+    public List<Stadium> findAllStadiums(){
+        return stadiumRepository.findAll();
     }
 
-    public void deleteContact(Contact contact){
-        contactRepository.delete(contact);
+    public void deleteStadium(Stadium stadium){
+        stadiumRepository.delete(stadium);
     }
 
-    public void saveContact(Contact contact){
-        if(contact == null){
-            System.err.println("Contact is null");
+    public void saveStadium(Stadium stadium){
+        if(stadium == null){
+            System.err.println("Stadium is null");
         }
 
-        contactRepository.save(contact);
+        stadiumRepository.save(stadium);
     }
 
     public List<Team> findAllTeams(String filterText){
@@ -75,38 +67,5 @@ public class CrmService {
         }
 
         teamRepository.save(team);
-    }
-
-    public List<Company> findAllCompanies(){
-        return companyRepository.findAll();
-    }
-
-    public List<Status> findAllStatuses(){
-        return statusRepository.findAll();
-    }
-
-    public List<Stadium> findAllStadiums(String filterText){
-        if(filterText == null || filterText.isEmpty()){
-            return stadiumRepository.findAll();
-        }
-        else{
-            return stadiumRepository.search(filterText);
-        }
-    }
-
-    public List<Stadium> findAllStadiums(){
-        return stadiumRepository.findAll();
-    }
-
-    public void deleteStadium(Stadium stadium){
-        stadiumRepository.delete(stadium);
-    }
-
-    public void saveStadium(Stadium stadium){
-        if(stadium == null){
-            System.err.println("Stadium is null");
-        }
-
-        stadiumRepository.save(stadium);
     }
 }

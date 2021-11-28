@@ -7,45 +7,48 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name="kluby")
 public class Team {
+
     @Id
-    private String Name = "";
+    @Column(name="nazwa")
+    private String name = "";
 
     @NotEmpty
-    private String City = "";
+    @Column(name="miejscowosc")
+    private String city = "";
 
     @ManyToOne
-    @JoinColumn(name = "stadium_id")
+    @JoinColumn(name = "stadiony_nazwa")
     @NotNull
-    @JsonIgnoreProperties({"teams"})
     private Stadium stadium;
 
     @Override
     public String toString() {
-        return Name + " from " + City;
+        return name + " from " + city;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String Name) {
-        this.Name = Name;
+        this.name = Name;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String City) {
-        this.City = City;
+        this.city = City;
     }
 
     public Stadium getStadium() {
         return stadium;
     }
 
-    public void setCompany(Stadium stadium) {
+    public void setStadium(Stadium stadium) {
         this.stadium = stadium;
     }
 }

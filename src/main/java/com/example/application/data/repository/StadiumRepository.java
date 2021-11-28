@@ -6,10 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface StadiumRepository extends JpaRepository<Stadium, String> {
+
     @Query("select c from Stadium c " +
-            "where lower(c.Name) like lower(concat('%', :searchTerm, '%')) " +
-            "or lower(c.Capacity) like lower(concat('%', :searchTerm, '%'))")
+            "where lower(c.name) like lower(concat('%', :searchTerm, '%')) " +
+            "or lower(c.capacity) like lower(concat('%', :searchTerm, '%'))")
     List<Stadium> search(@Param("searchTerm") String searchTerm);
+
 }

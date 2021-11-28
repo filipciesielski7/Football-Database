@@ -37,12 +37,12 @@ public class StadiumForm extends FormLayout {
         addClassName("stadium-form");
         binder.bindInstanceFields(this);
 
-        hasLighting.setItems("Yes", "No");
-        hasLighting.setValue("No");
+        hasLighting.setItems("TAK", "NIE");
+        hasLighting.setValue("NIE");
         hasLighting.setLabel("Has lighting?");
 
-        hasUnderSoilHeating .setItems("Yes", "No");
-        hasUnderSoilHeating .setValue("No");
+        hasUnderSoilHeating .setItems("TAK", "NIE");
+        hasUnderSoilHeating .setValue("NIE");
         hasUnderSoilHeating .setLabel("Has under-soil heating?");
 
         add(Name, Capacity, hasLighting, hasUnderSoilHeating, createButtonLayout());

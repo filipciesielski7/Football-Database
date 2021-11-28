@@ -1,12 +1,18 @@
 package com.example.application;
 
+import com.example.application.data.entity.Stadium;
+import com.example.application.data.repository.StadiumRepository;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
+import java.util.List;
 
 /**
  * The entry point of the Spring Boot application.
@@ -19,10 +25,18 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @Theme(value = "flowcrmtutorial")
 @PWA(name = "Flow CRM Tutorial", shortName = "Flow CRM Tutorial", offlineResources = {"images/logo.png"})
 @NpmPackage(value = "line-awesome", version = "1.3.0")
-public class Application extends SpringBootServletInitializer implements AppShellConfigurator {
+public class Application extends SpringBootServletInitializer implements AppShellConfigurator, CommandLineRunner {
+
+    @Autowired
+    private StadiumRepository stadiumRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
+    @Override
+    public void run(String... args) throws Exception {
+        List<Stadium> listStadium = stadiumRepository.findAll();
+        listStadium.forEach(System.out :: println);
+    }
 }
