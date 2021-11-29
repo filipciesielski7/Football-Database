@@ -1,18 +1,12 @@
 package com.example.application;
 
-import com.example.application.data.entity.Stadium;
-import com.example.application.data.repository.StadiumRepository;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-
-import java.util.List;
 
 /**
  * The entry point of the Spring Boot application.

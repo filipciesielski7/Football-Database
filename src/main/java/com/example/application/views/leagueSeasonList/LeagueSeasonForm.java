@@ -7,7 +7,6 @@ import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
@@ -17,16 +16,10 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 public class LeagueSeasonForm  extends FormLayout {
     Binder<LeagueSeason> binder = new BeanValidationBinder<>(LeagueSeason.class);
 
-    TextField Name = new TextField("Name");
+    TextField Name = new TextField("Name and year");
     IntegerField Year = new IntegerField("Year");
     IntegerField Division = new IntegerField("Division");
 
