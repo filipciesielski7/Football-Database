@@ -2,10 +2,7 @@ package com.example.application.views.teamList;
 
 import com.example.application.data.entity.Stadium;
 import com.example.application.data.entity.Team;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEvent;
-import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -22,8 +19,8 @@ import java.util.List;
 public class TeamForm extends FormLayout {
     Binder<Team> binder = new BeanValidationBinder<>(Team.class);
 
-    TextField Name = new TextField("Team Name");
-    TextField City = new TextField("City");
+    TextField name = new TextField("Team Name");
+    TextField city = new TextField("City");
 
     ComboBox<Stadium> stadium = new ComboBox<>("Stadium");
 
@@ -34,12 +31,19 @@ public class TeamForm extends FormLayout {
 
     public TeamForm(List<Stadium> stadiums) {
         addClassName("team-form");
+
+        //binder.forField(name)
+                // Shorthand for requiring the field to be non-empty
+        //        .asRequired("Every employee must have a title")
+        //        .bind(Team::getName, Team::setName);
+
+
         binder.bindInstanceFields(this);
 
         stadium.setItems(stadiums);
         stadium.setItemLabelGenerator(Stadium::getName);
 
-        add(Name, City, stadium, createButtonLayout());
+        add(name, city, stadium, createButtonLayout());
     }
 
     public void setTeam(Team team){
@@ -70,6 +74,9 @@ public class TeamForm extends FormLayout {
             e.printStackTrace();
         }
     }
+
+
+
 
     // Events
     public static abstract class TeamFormEvent extends ComponentEvent<TeamForm> {

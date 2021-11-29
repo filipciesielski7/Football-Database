@@ -1,7 +1,11 @@
 package com.example.application.data.entity;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name="teams")
@@ -9,16 +13,22 @@ public class Team {
 
     @Id
     @Column(name="name")
-    private String name;
+    @NotEmpty
+    private String name = "";
 
-    @NotNull
+
     @Column(name="city")
-    private String city;
+    @NotEmpty
+    private String city = "";
 
     @ManyToOne
-    @NotNull
     @JoinColumn(name = "stadium_name")
+    @Nullable
     private Stadium stadium;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
+    private List<ClubEmployee> clubEmployees = new LinkedList<>();
+
 
     public Team() {
     }
@@ -50,6 +60,14 @@ public class Team {
 
     public void setStadium(Stadium stadium) {
         this.stadium = stadium;
+    }
+
+    public List<ClubEmployee> getClubEmployees() {
+        return clubEmployees;
+    }
+
+    public void setClubEmployees(List<ClubEmployee> clubEmployees) {
+        this.clubEmployees = clubEmployees;
     }
 
     @Override
