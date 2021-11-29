@@ -45,7 +45,6 @@ public class ClubEmployee {
 
     @ManyToOne(cascade=CascadeType.REMOVE)
     @JoinColumn(name="team_name")
-    @NotEmpty
     private Team team;
 
     public ClubEmployee() {
