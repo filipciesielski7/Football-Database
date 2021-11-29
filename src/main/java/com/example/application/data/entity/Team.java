@@ -1,51 +1,78 @@
 package com.example.application.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
+@Table(name="teams")
 public class Team {
-    @Id
-    private String Name = "";
 
+    @Id
+    @Column(name="name")
     @NotEmpty
-    private String City = "";
+    private String name;
+
+    @Column(name="city")
+    @NotEmpty
+    private String city;
 
     @ManyToOne
-    @JoinColumn(name = "stadium_id")
-    @NotNull
-    @JsonIgnoreProperties({"teams"})
+    @JoinColumn(name = "stadium_name")
+    @Nullable
     private Stadium stadium;
 
-    @Override
-    public String toString() {
-        return Name + " from " + City;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
+    private List<ClubEmployee> clubEmployees = new LinkedList<>();
+
+    public Team() {
+    }
+
+    public Team (String name, String city) {
+        this.name = name;
+        this.city = city;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String Name) {
-        this.Name = Name;
+        this.name = Name;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String City) {
-        this.City = City;
+        this.city = City;
     }
 
     public Stadium getStadium() {
         return stadium;
     }
 
-    public void setCompany(Stadium stadium) {
+    public void setStadium(Stadium stadium) {
         this.stadium = stadium;
+    }
+
+    public List<ClubEmployee> getClubEmployees() {
+        return clubEmployees;
+    }
+
+    public void setClubEmployees(List<ClubEmployee> clubEmployees) {
+        this.clubEmployees = clubEmployees;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "name='" + name + '\'' +
+                ", city=" + city +
+                '}';
     }
 }

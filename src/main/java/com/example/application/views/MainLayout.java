@@ -1,7 +1,8 @@
 package com.example.application.views;
 
+import com.example.application.views.clubEmployeeList.ClubEmployeesView;
+import com.example.application.views.leagueSeasonList.LeagueSeasonsView;
 import com.example.application.views.stadiumList.StadiumsView;
-import com.example.application.views.templateList.TemplateView;
 import com.example.application.views.teamList.TeamsView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -22,16 +23,19 @@ public class MainLayout extends AppLayout {
         RouterLink homeView = new RouterLink("Home", homeView.class);
         homeView.setHighlightCondition(HighlightConditions.sameLocation());
 
-        RouterLink templateView = new RouterLink("Template", TemplateView.class);
-        templateView.setHighlightCondition(HighlightConditions.sameLocation());
-
         RouterLink teamsView = new RouterLink("Teams", TeamsView.class);
         teamsView.setHighlightCondition(HighlightConditions.sameLocation());
 
         RouterLink stadiumsView = new RouterLink("Stadiums", StadiumsView.class);
         stadiumsView.setHighlightCondition(HighlightConditions.sameLocation());
 
-        addToDrawer(new VerticalLayout(homeView, templateView, teamsView, stadiumsView));
+        RouterLink leagueSeasonsView = new RouterLink("League Seasons", LeagueSeasonsView.class);
+        leagueSeasonsView.setHighlightCondition(HighlightConditions.sameLocation());
+
+        RouterLink clubEmployeesView = new RouterLink("Club Employees", ClubEmployeesView.class);
+        clubEmployeesView.setHighlightCondition(HighlightConditions.sameLocation());
+
+        addToDrawer(new VerticalLayout(homeView, teamsView, stadiumsView, leagueSeasonsView, clubEmployeesView));
     }
 
     private void createHeader() {

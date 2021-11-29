@@ -1,6 +1,6 @@
-package com.example.application.views.teamList;
+package com.example.application.views.leagueSeasonList;
 
-import com.example.application.data.entity.Team;
+import com.example.application.data.entity.LeagueSeason;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Component;
@@ -13,17 +13,17 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@PageTitle("Teams | Football")
-@Route(value = "teams", layout = MainLayout.class)
-public class TeamsView  extends VerticalLayout{
-    Grid<Team> grid = new Grid<>(Team.class);
+@PageTitle("League Seasons | Football")
+@Route(value = "league-seasons", layout = MainLayout.class)
+public class LeagueSeasonsView  extends VerticalLayout {
+    Grid<LeagueSeason> grid = new Grid<>(LeagueSeason.class);
     TextField filterText = new TextField();
-    TeamForm form;
+    LeagueSeasonForm form;
     private CrmService service;
 
-    public TeamsView(CrmService service) {
+    public LeagueSeasonsView(CrmService service) {
         this.service = service;
-        addClassName("teams-view");
+        addClassName("leagueSeasons-view");
         setSizeFull();
 
         configureGrid();
@@ -36,13 +36,13 @@ public class TeamsView  extends VerticalLayout{
     }
 
     private void closeEditor() {
-        form.setTeam(null);
+        form.setLeagueSeason(null);
         form.setVisible(false);
         removeClassName("editing");
     }
 
     private void updateList() {
-        grid.setItems(service.findAllTeams(filterText.getValue()));
+        grid.setItems(service.findAllLeagueSeasons(filterText.getValue()));
     }
 
     private Component getContent() {
@@ -56,60 +56,59 @@ public class TeamsView  extends VerticalLayout{
     }
 
     private void configureForm() {
-        form = new TeamForm(service.findAllStadiums());
+        form = new LeagueSeasonForm();
         form.setWidth("25em");
 
-        form.addListener(TeamForm.SaveEvent.class, this::saveTeam);
-        form.addListener(TeamForm.DeleteEvent.class, this::deleteTeam);
-        form.addListener(TeamForm.CloseEvent.class, e -> closeEditor());
+        form.addListener(LeagueSeasonForm.SaveEvent.class, this::saveLeagueSeason);
+        form.addListener(LeagueSeasonForm.DeleteEvent.class, this::deleteLeagueSeason);
+        form.addListener(LeagueSeasonForm.CloseEvent.class, e -> closeEditor());
     }
 
-    private void deleteTeam(TeamForm.DeleteEvent event) {
-        service.deleteTeam(event.getTeam());
+    private void deleteLeagueSeason(LeagueSeasonForm.DeleteEvent event) {
+        service.deleteLeagueSeason(event.getLeagueSeason());
         updateList();
         closeEditor();
     }
 
-    private void saveTeam(TeamForm.SaveEvent event) {
-        service.saveTeam(event.getTeam());
+    private void saveLeagueSeason(LeagueSeasonForm.SaveEvent event) {
+        service.saveLeagueSeason(event.getLeagueSeason());
         updateList();
         closeEditor();
     }
 
     private Component getToolbar() {
-        filterText.setPlaceholder("Filter by team name");
+        filterText.setPlaceholder("Filter by league season name and year");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.addValueChangeListener(e -> updateList());
 
-        Button addTeamButton = new Button("Add team");
-        addTeamButton.addClickListener(e -> addTeam());
+        Button addLeagueSeasonButton = new Button("Add league season");
+        addLeagueSeasonButton.addClickListener(e -> addLeagueSeason());
 
-        HorizontalLayout toolbar = new HorizontalLayout(filterText, addTeamButton);
+        HorizontalLayout toolbar = new HorizontalLayout(filterText, addLeagueSeasonButton);
         toolbar.addClassName("toolbar");
         return toolbar;
     }
 
-    private void addTeam() {
+    private void addLeagueSeason() {
         grid.asSingleSelect().clear();
-        editTeam(new Team());
+        editLeagueSeason(new LeagueSeason());
     }
 
     private void configureGrid() {
-        grid.addClassName("team-grid");
+        grid.addClassName("leagueSeasons-grid");
         grid.setSizeFull();
-        grid.setColumns("name", "city");
-        grid.addColumn(team -> team.getStadium() == null ? ' ' : team.getStadium().getName()).setHeader("Stadium");
+        grid.setColumns("name", "year", "division");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
-        grid.asSingleSelect().addValueChangeListener(e -> editTeam(e.getValue()));
+        grid.asSingleSelect().addValueChangeListener(e -> editLeagueSeason(e.getValue()));
     }
 
-    private void editTeam(Team team) {
-        if(team == null) {
+    private void editLeagueSeason(LeagueSeason leagueSeason) {
+        if(leagueSeason == null) {
             closeEditor();
         }else{
-            form.setTeam(team);
+            form.setLeagueSeason(leagueSeason);
             form.setVisible(true);
             addClassName("editing");
         }

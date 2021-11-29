@@ -25,7 +25,7 @@ public class StadiumForm extends FormLayout {
 //    TextField hasLighting = new TextField("Has lighting?");
 //    TextField hasUnderSoilHeating = new TextField("Has under-soil heating?");
 
-    ComboBox<String> hasLighting = new ComboBox<>("Has lighting?");
+    ComboBox<String> hasLightning = new ComboBox<>("Has lightning?");
     ComboBox<String> hasUnderSoilHeating = new ComboBox<>("Has under-soil heating?");
 
     Button save = new Button("Save");
@@ -37,15 +37,15 @@ public class StadiumForm extends FormLayout {
         addClassName("stadium-form");
         binder.bindInstanceFields(this);
 
-        hasLighting.setItems("Yes", "No");
-        hasLighting.setValue("No");
-        hasLighting.setLabel("Has lighting?");
+        hasLightning.setItems("YES", "NO");
+        hasLightning.setValue("NO");
+        hasLightning.setLabel("Has lightning?");
 
-        hasUnderSoilHeating .setItems("Yes", "No");
-        hasUnderSoilHeating .setValue("No");
-        hasUnderSoilHeating .setLabel("Has under-soil heating?");
+        hasUnderSoilHeating.setItems("YES", "NO");
+        hasUnderSoilHeating.setValue("NO");
+        hasUnderSoilHeating.setLabel("Has under-soil heating?");
 
-        add(Name, Capacity, hasLighting, hasUnderSoilHeating, createButtonLayout());
+        add(Name, Capacity, hasLightning, hasUnderSoilHeating, createButtonLayout());
     }
 
     public void setStadium(Stadium stadium){

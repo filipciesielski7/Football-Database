@@ -8,81 +8,20 @@ import java.util.List;
 
 @Service
 public class CrmService {
-    private final ContactRepository contactRepository;
-    private final CompanyRepository companyRepository;
-    private final StatusRepository statusRepository;
-    private final TeamRepository teamRepository;
     private final StadiumRepository stadiumRepository;
+    private final TeamRepository teamRepository;
+    private final LeagueSeasonRepository leagueSeasonRepository;
+    private final ClubEmployeeRepository clubEmployeeRepository;
 
-    public CrmService(ContactRepository contactRepository,
-                      CompanyRepository companyRepository,
-                      StatusRepository statusRepository,
+    public CrmService(StadiumRepository stadiumRepository,
                       TeamRepository teamRepository,
-                      StadiumRepository stadiumRepository){
+                      LeagueSeasonRepository leagueSeasonRepository,
+                      ClubEmployeeRepository clubEmployeeRepository){
 
-        this.contactRepository = contactRepository;
-        this.companyRepository = companyRepository;
-        this.statusRepository = statusRepository;
-        this.teamRepository = teamRepository;
         this.stadiumRepository = stadiumRepository;
-    }
-
-    public List<Contact> findAllContacts(String filterText){
-        if(filterText == null || filterText.isEmpty()){
-            return contactRepository.findAll();
-        }
-        else{
-            return contactRepository.search(filterText);
-        }
-    }
-
-    public long countContacts() {
-        return contactRepository.count();
-    }
-
-    public void deleteContact(Contact contact){
-        contactRepository.delete(contact);
-    }
-
-    public void saveContact(Contact contact){
-        if(contact == null){
-            System.err.println("Contact is null");
-        }
-
-        contactRepository.save(contact);
-    }
-
-    public List<Team> findAllTeams(String filterText){
-        if(filterText == null || filterText.isEmpty()){
-            return teamRepository.findAll();
-        }
-        else{
-            return teamRepository.search(filterText);
-        }
-    }
-
-    public long countTeams() {
-        return teamRepository.count();
-    }
-
-    public void deleteTeam(Team team){
-        teamRepository.delete(team);
-    }
-
-    public void saveTeam(Team team){
-        if(team == null){
-            System.err.println("Team is null");
-        }
-
-        teamRepository.save(team);
-    }
-
-    public List<Company> findAllCompanies(){
-        return companyRepository.findAll();
-    }
-
-    public List<Status> findAllStatuses(){
-        return statusRepository.findAll();
+        this.teamRepository = teamRepository;
+        this.leagueSeasonRepository = leagueSeasonRepository;
+        this.clubEmployeeRepository = clubEmployeeRepository;
     }
 
     public List<Stadium> findAllStadiums(String filterText){
@@ -108,5 +47,88 @@ public class CrmService {
         }
 
         stadiumRepository.save(stadium);
+    }
+
+    public List<Team> findAllTeams(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return teamRepository.findAll();
+        }
+        else{
+            return teamRepository.search(filterText);
+        }
+    }
+
+    public List<Team> findAllTeams(){
+        return teamRepository.findAll();
+    }
+
+    public long countTeams() {
+        return teamRepository.count();
+    }
+
+    public void deleteTeam(Team team){
+        teamRepository.delete(team);
+    }
+
+    public void saveTeam(Team team){
+        if(team == null){
+            System.err.println("Team is null");
+        }
+
+        teamRepository.save(team);
+    }
+
+    public List<LeagueSeason> findAllLeagueSeasons(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return leagueSeasonRepository.findAll();
+        }
+        else{
+            return leagueSeasonRepository.search(filterText);
+        }
+    }
+
+    public List<LeagueSeason> findAllLeagueSeasons(){
+        return leagueSeasonRepository.findAll();
+    }
+
+    public void deleteLeagueSeason(LeagueSeason leagueSeason){
+        leagueSeasonRepository.delete(leagueSeason);
+    }
+
+    public void saveLeagueSeason(LeagueSeason leagueSeason){
+        if(leagueSeason == null){
+            System.err.println("Stadium is null");
+        }
+
+        leagueSeasonRepository.save(leagueSeason);
+    }
+
+    public List<ClubEmployee> findAllClubEmployees(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return clubEmployeeRepository.findAll();
+        }
+        else{
+            return clubEmployeeRepository.search(filterText);
+        }
+    }
+
+    public List<ClubEmployee> findAllClubEmployees(){
+        return clubEmployeeRepository.findAll();
+    }
+
+    public long countClubEmployees() {
+        return clubEmployeeRepository.count();
+    }
+
+    public void deleteClubEmployee(ClubEmployee clubEmployee){
+        clubEmployeeRepository.delete(clubEmployee);
+    }
+
+    public void saveClubEmployee(ClubEmployee clubEmployee){
+        if(clubEmployee == null){
+            System.err.println("ClubEmployee is null");
+        }
+
+        clubEmployeeRepository.save(clubEmployee);
     }
 }
