@@ -6,7 +6,9 @@
     .teams-view.editing .toolbar,
     .teams-view.editing .team-grid,
     .leagueSeasons-view.editing .toolbar,
-    .leagueSeasons-view.editing .leagueSeasons-grid
+    .leagueSeasons-view.editing .leagueSeasons-grid,
+    .clubEmployees-view.editing .toolbar,
+    .clubEmployees-view.editing .clubEmployees-grid
     {
         display: none;
     }
