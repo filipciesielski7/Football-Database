@@ -11,14 +11,17 @@ public class CrmService {
     private final StadiumRepository stadiumRepository;
     private final TeamRepository teamRepository;
     private final LeagueSeasonRepository leagueSeasonRepository;
+    private final ClubEmployeeRepository clubEmployeeRepository;
 
     public CrmService(StadiumRepository stadiumRepository,
                       TeamRepository teamRepository,
-                      LeagueSeasonRepository leagueSeasonRepository){
+                      LeagueSeasonRepository leagueSeasonRepository,
+                      ClubEmployeeRepository clubEmployeeRepository){
 
         this.stadiumRepository = stadiumRepository;
         this.teamRepository = teamRepository;
         this.leagueSeasonRepository = leagueSeasonRepository;
+        this.clubEmployeeRepository = clubEmployeeRepository;
     }
 
     public List<Stadium> findAllStadiums(String filterText){
@@ -53,6 +56,10 @@ public class CrmService {
         else{
             return teamRepository.search(filterText);
         }
+    }
+
+    public List<Team> findAllTeams(){
+        return teamRepository.findAll();
     }
 
     public long countTeams() {
@@ -94,5 +101,34 @@ public class CrmService {
         }
 
         leagueSeasonRepository.save(leagueSeason);
+    }
+
+    public List<ClubEmployee> findAllClubEmployees(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return clubEmployeeRepository.findAll();
+        }
+        else{
+            return clubEmployeeRepository.search(filterText);
+        }
+    }
+
+    public List<ClubEmployee> findAllClubEmployees(){
+        return clubEmployeeRepository.findAll();
+    }
+
+    public long countClubEmployees() {
+        return clubEmployeeRepository.count();
+    }
+
+    public void deleteClubEmployee(ClubEmployee clubEmployee){
+        clubEmployeeRepository.delete(clubEmployee);
+    }
+
+    public void saveClubEmployee(ClubEmployee clubEmployee){
+        if(clubEmployee == null){
+            System.err.println("ClubEmployee is null");
+        }
+
+        clubEmployeeRepository.save(clubEmployee);
     }
 }

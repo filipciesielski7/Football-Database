@@ -3,6 +3,9 @@ package com.example.application.data.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,22 +15,28 @@ public class Stadium {
 
     @Id
     @Column(name="name")
+    @NotEmpty
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "stadium")
     private List<Team> teams = new LinkedList<>();
 
-    @NotNull
     @Column(name="capacity")
+    @NotNull
     private int capacity;
 
-    @NotNull
     @Column(name="has_lightning")
+    @NotNull
     private String hasLightning;
 
-    @NotNull
     @Column(name="has_under_soil_heating")
+    @NotNull
     private String hasUnderSoilHeating;
+
+    @PreRemove
+    public void nullificationTeams() {
+        teams.forEach(team -> team.setStadium(null));
+    }
 
     public Stadium() {
     }

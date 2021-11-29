@@ -1,6 +1,6 @@
-package com.example.application.views.teamList;
+package com.example.application.views.clubEmployeeList;
 
-import com.example.application.data.entity.Team;
+import com.example.application.data.entity.ClubEmployee;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Component;
@@ -13,17 +13,17 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@PageTitle("Teams | Football")
-@Route(value = "teams", layout = MainLayout.class)
-public class TeamsView  extends VerticalLayout{
-    Grid<Team> grid = new Grid<>(Team.class);
+@PageTitle("Club Employees | Football")
+@Route(value = "club-employees", layout = MainLayout.class)
+public class ClubEmployeesView extends VerticalLayout {
+    Grid<ClubEmployee> grid = new Grid<>(ClubEmployee.class);
     TextField filterText = new TextField();
-    TeamForm form;
+    ClubEmployeeForm form;
     private CrmService service;
 
-    public TeamsView(CrmService service) {
+    public ClubEmployeesView(CrmService service) {
         this.service = service;
-        addClassName("teams-view");
+        addClassName("clubEmployees-view");
         setSizeFull();
 
         configureGrid();
@@ -36,13 +36,13 @@ public class TeamsView  extends VerticalLayout{
     }
 
     private void closeEditor() {
-        form.setTeam(null);
+        form.setClubEmployee(null);
         form.setVisible(false);
         removeClassName("editing");
     }
 
     private void updateList() {
-        grid.setItems(service.findAllTeams(filterText.getValue()));
+        grid.setItems(service.findAllClubEmployees(filterText.getValue()));
     }
 
     private Component getContent() {
@@ -56,60 +56,60 @@ public class TeamsView  extends VerticalLayout{
     }
 
     private void configureForm() {
-        form = new TeamForm(service.findAllStadiums());
+        form = new ClubEmployeeForm(service.findAllTeams());
         form.setWidth("25em");
 
-        form.addListener(TeamForm.SaveEvent.class, this::saveTeam);
-        form.addListener(TeamForm.DeleteEvent.class, this::deleteTeam);
-        form.addListener(TeamForm.CloseEvent.class, e -> closeEditor());
+        form.addListener(ClubEmployeeForm.SaveEvent.class, this::saveClubEmployee);
+        form.addListener(ClubEmployeeForm.DeleteEvent.class, this::deleteClubEmployee);
+        form.addListener(ClubEmployeeForm.CloseEvent.class, e -> closeEditor());
     }
 
-    private void deleteTeam(TeamForm.DeleteEvent event) {
-        service.deleteTeam(event.getTeam());
+    private void deleteClubEmployee(ClubEmployeeForm.DeleteEvent event) {
+        service.deleteClubEmployee(event.getClubEmployee());
         updateList();
         closeEditor();
     }
 
-    private void saveTeam(TeamForm.SaveEvent event) {
-        service.saveTeam(event.getTeam());
+    private void saveClubEmployee(ClubEmployeeForm.SaveEvent event) {
+        service.saveClubEmployee(event.getClubEmployee());
         updateList();
         closeEditor();
     }
 
     private Component getToolbar() {
-        filterText.setPlaceholder("Filter by team name");
+        filterText.setPlaceholder("Filter by club employee name");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.addValueChangeListener(e -> updateList());
 
-        Button addTeamButton = new Button("Add team");
-        addTeamButton.addClickListener(e -> addTeam());
+        Button addClubEmployeeButton = new Button("Add club employee");
+        addClubEmployeeButton.addClickListener(e -> addClubEmployee());
 
-        HorizontalLayout toolbar = new HorizontalLayout(filterText, addTeamButton);
+        HorizontalLayout toolbar = new HorizontalLayout(filterText, addClubEmployeeButton);
         toolbar.addClassName("toolbar");
         return toolbar;
     }
 
-    private void addTeam() {
+    private void addClubEmployee() {
         grid.asSingleSelect().clear();
-        editTeam(new Team());
+        editClubEmployee(new ClubEmployee());
     }
 
     private void configureGrid() {
-        grid.addClassName("team-grid");
+        grid.addClassName("clubEmployees-grid");
         grid.setSizeFull();
-        grid.setColumns("name", "city");
-        grid.addColumn(team -> team.getStadium() == null ? ' ' : team.getStadium().getName()).setHeader("Stadium");
+        grid.setColumns("pesel", "firstName", "lastName", "salary", "dateOfBirth", "role", "position", "function");
+        grid.addColumn(clubEmployee -> clubEmployee.getTeam().getName()).setHeader("Team");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
-        grid.asSingleSelect().addValueChangeListener(e -> editTeam(e.getValue()));
+        grid.asSingleSelect().addValueChangeListener(e -> editClubEmployee(e.getValue()));
     }
 
-    private void editTeam(Team team) {
-        if(team == null) {
+    private void editClubEmployee(ClubEmployee clubEmployee) {
+        if(clubEmployee == null) {
             closeEditor();
         }else{
-            form.setTeam(team);
+            form.setClubEmployee(clubEmployee);
             form.setVisible(true);
             addClassName("editing");
         }

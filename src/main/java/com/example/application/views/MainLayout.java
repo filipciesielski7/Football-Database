@@ -1,5 +1,6 @@
 package com.example.application.views;
 
+import com.example.application.views.clubEmployeeList.ClubEmployeesView;
 import com.example.application.views.leagueSeasonList.LeagueSeasonsView;
 import com.example.application.views.stadiumList.StadiumsView;
 import com.example.application.views.teamList.TeamsView;
@@ -31,7 +32,10 @@ public class MainLayout extends AppLayout {
         RouterLink leagueSeasonsView = new RouterLink("League Seasons", LeagueSeasonsView.class);
         leagueSeasonsView.setHighlightCondition(HighlightConditions.sameLocation());
 
-        addToDrawer(new VerticalLayout(homeView, teamsView, stadiumsView, leagueSeasonsView));
+        RouterLink clubEmployeesView = new RouterLink("Club Employees", ClubEmployeesView.class);
+        clubEmployeesView.setHighlightCondition(HighlightConditions.sameLocation());
+
+        addToDrawer(new VerticalLayout(homeView, teamsView, stadiumsView, leagueSeasonsView, clubEmployeesView));
     }
 
     private void createHeader() {

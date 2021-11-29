@@ -41,9 +41,9 @@ public class StadiumForm extends FormLayout {
         hasLightning.setValue("NO");
         hasLightning.setLabel("Has lightning?");
 
-        hasUnderSoilHeating .setItems("YES", "NO");
-        hasUnderSoilHeating .setValue("NO");
-        hasUnderSoilHeating .setLabel("Has under-soil heating?");
+        hasUnderSoilHeating.setItems("YES", "NO");
+        hasUnderSoilHeating.setValue("NO");
+        hasUnderSoilHeating.setLabel("Has under-soil heating?");
 
         add(Name, Capacity, hasLightning, hasUnderSoilHeating, createButtonLayout());
     }

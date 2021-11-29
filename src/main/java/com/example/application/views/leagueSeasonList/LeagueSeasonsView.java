@@ -56,7 +56,7 @@ public class LeagueSeasonsView  extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new LeagueSeasonForm(); // xd
+        form = new LeagueSeasonForm();
         form.setWidth("25em");
 
         form.addListener(LeagueSeasonForm.SaveEvent.class, this::saveLeagueSeason);

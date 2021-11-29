@@ -1,6 +1,7 @@
 package com.example.application.data.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -11,12 +12,12 @@ public class LeagueSeason {
     @Column(name="name")
     private String name;
 
-    @NotNull
     @Column(name="end_year")
+    @NotNull
     private int year;
 
-    @NotNull
     @Column(name="division")
+    @NotNull
     private int division;
 
     public LeagueSeason() {}
