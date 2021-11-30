@@ -22,6 +22,7 @@ public class LeagueEmployee {
     private String lastName;
 
     @Column(name="date_of_birth")
+    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
     @Column(name="role")

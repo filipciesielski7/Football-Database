@@ -1,13 +1,10 @@
 package com.example.application.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -33,6 +30,7 @@ public class ClubEmployee {
     private int salary;
 
     @Column(name="date_of_birth")
+    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
     @Column(name="role")
