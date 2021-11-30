@@ -23,7 +23,6 @@ public class LeagueSeasonForm  extends FormLayout {
     IntegerField Year = new IntegerField("Year");
     IntegerField Division = new IntegerField("Division");
 
-//    ComboBox<Integer> YearPicker = new ComboBox<>("End year");
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -34,14 +33,6 @@ public class LeagueSeasonForm  extends FormLayout {
         addClassName("leagueSeasons-form");
         binder.bindInstanceFields(this);
 
-//        LocalDate now = LocalDate.now(ZoneId.systemDefault());
-//        List<Integer> selectableYears = IntStream.range(
-//                        now.getYear() - 99,
-//                        now.getYear() + 2)
-//                .boxed().collect(Collectors.toList());
-//
-//        YearPicker.setItems(selectableYears);
-//        YearPicker.setValue(now.getYear());
 
         add(Name, Year, Division, createButtonLayout());
     }

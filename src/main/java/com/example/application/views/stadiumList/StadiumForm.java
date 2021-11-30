@@ -22,8 +22,6 @@ public class StadiumForm extends FormLayout {
 
     TextField Name = new TextField("Stadium Name");
     IntegerField Capacity = new IntegerField("Capacity");
-//    TextField hasLighting = new TextField("Has lighting?");
-//    TextField hasUnderSoilHeating = new TextField("Has under-soil heating?");
 
     ComboBox<String> hasLightning = new ComboBox<>("Has lightning?");
     ComboBox<String> hasUnderSoilHeating = new ComboBox<>("Has under-soil heating?");

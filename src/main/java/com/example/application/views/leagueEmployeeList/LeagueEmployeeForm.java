@@ -1,9 +1,6 @@
 package com.example.application.views.leagueEmployeeList;
 
-import com.example.application.data.entity.ClubEmployee;
 import com.example.application.data.entity.LeagueEmployee;
-import com.example.application.data.entity.Team;
-import com.example.application.views.clubEmployeeList.ClubEmployeeForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -14,15 +11,12 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.data.converter.LocalDateToDateConverter;
 import com.vaadin.flow.shared.Registration;
-
-import java.util.List;
 
 public class LeagueEmployeeForm extends FormLayout {
 
@@ -34,7 +28,6 @@ public class LeagueEmployeeForm extends FormLayout {
     DatePicker dateOfBirth = new DatePicker("Date of Birth");
 
     ComboBox<String> role = new ComboBox<>("Role");
-//    TextField role = new TextField("Role");
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -44,10 +37,6 @@ public class LeagueEmployeeForm extends FormLayout {
     public LeagueEmployeeForm() {
         addClassName("LeagueEmployees-form");
 
-        //binder.forField(name)
-        // Shorthand for requiring the field to be non-empty
-        //        .asRequired("Every employee must have a title")
-        //        .bind(Team::getName, Team::setName);
         binder.forField(dateOfBirth).withConverter(new LocalDateToDateConverter()).bind(LeagueEmployee::getDateOfBirth, LeagueEmployee::setDateOfBirth);
         binder.bindInstanceFields(this);
 

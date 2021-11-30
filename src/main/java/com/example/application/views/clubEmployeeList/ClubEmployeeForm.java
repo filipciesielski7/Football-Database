@@ -33,7 +33,6 @@ public class ClubEmployeeForm extends FormLayout {
     DatePicker dateOfBirth = new DatePicker("Date of Birth");
 
     ComboBox<String> role = new ComboBox<>("Role");
-//    TextField role = new TextField("Role");
 
     TextField position = new TextField("Position");
     TextField function = new TextField("Function");
@@ -48,10 +47,6 @@ public class ClubEmployeeForm extends FormLayout {
     public ClubEmployeeForm(List<Team> teams) {
         addClassName("ClubEmployees-form");
 
-        //binder.forField(name)
-        // Shorthand for requiring the field to be non-empty
-        //        .asRequired("Every employee must have a title")
-        //        .bind(Team::getName, Team::setName);
         binder.forField(dateOfBirth).withConverter(new LocalDateToDateConverter()).bind(ClubEmployee::getDateOfBirth, ClubEmployee::setDateOfBirth);
         binder.bindInstanceFields(this);
 
