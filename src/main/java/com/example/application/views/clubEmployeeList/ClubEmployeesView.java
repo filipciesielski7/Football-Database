@@ -99,7 +99,7 @@ public class ClubEmployeesView extends VerticalLayout {
         grid.addClassName("clubEmployees-grid");
         grid.setSizeFull();
         grid.setColumns("pesel", "firstName", "lastName", "salary", "dateOfBirth", "role", "position", "function");
-        grid.addColumn(clubEmployee -> clubEmployee.getTeam().getName()).setHeader("Team");
+        grid.addColumn(clubEmployee -> clubEmployee.getTeam() == null ? ' ' : clubEmployee.getTeam().getName()).setHeader("Team");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(e -> editClubEmployee(e.getValue()));

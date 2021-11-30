@@ -31,7 +31,10 @@ public class ClubEmployeeForm extends FormLayout {
     TextField lastName = new TextField("Last Name");
     IntegerField salary = new IntegerField("Salary");
     DatePicker dateOfBirth = new DatePicker("Date of Birth");
-    TextField role = new TextField("Role");
+
+    ComboBox<String> role = new ComboBox<>("Role");
+//    TextField role = new TextField("Role");
+
     TextField position = new TextField("Position");
     TextField function = new TextField("Function");
 
@@ -51,6 +54,10 @@ public class ClubEmployeeForm extends FormLayout {
         //        .bind(Team::getName, Team::setName);
         binder.forField(dateOfBirth).withConverter(new LocalDateToDateConverter()).bind(ClubEmployee::getDateOfBirth, ClubEmployee::setDateOfBirth);
         binder.bindInstanceFields(this);
+
+        role.setItems("Player", "Trainer", "Employee");
+        role.setValue("Player");
+        role.setLabel("Role");
 
         team.setItems(teams);
         team.setItemLabelGenerator(Team::getName);

@@ -3,7 +3,6 @@ package com.example.application.data.entity;
 import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,6 +26,11 @@ public class Team {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
     private List<ClubEmployee> clubEmployees = new LinkedList<>();
+
+    @PreRemove
+    public void nullificationClubEmployees() {
+        clubEmployees.forEach(clubEmployee -> clubEmployee.setTeam(null));
+    }
 
     public Team() {
     }

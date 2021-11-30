@@ -1,5 +1,8 @@
 package com.example.application.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -43,7 +46,7 @@ public class ClubEmployee {
     private String function;
 
     @ManyToOne(cascade=CascadeType.REMOVE)
-    @NotNull
+    @Nullable
     @JoinColumn(name="team_name")
     private Team team;
 

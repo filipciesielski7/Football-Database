@@ -3,7 +3,6 @@ package com.example.application.data.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.LinkedList;
@@ -22,14 +21,16 @@ public class Stadium {
     private List<Team> teams = new LinkedList<>();
 
     @Column(name="capacity")
-    @NotNull
+    @Min(value = 1)
     private int capacity;
 
     @Column(name="has_lightning")
+    @NotEmpty
     @NotNull
     private String hasLightning;
 
     @Column(name="has_under_soil_heating")
+    @NotEmpty
     @NotNull
     private String hasUnderSoilHeating;
 
