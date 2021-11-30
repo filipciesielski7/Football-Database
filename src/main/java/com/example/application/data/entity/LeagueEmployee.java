@@ -1,18 +1,12 @@
 package com.example.application.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import javax.annotation.Nullable;
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name="club_employees")
-public class ClubEmployee {
+@Table(name="league_employees")
+public class LeagueEmployee {
 
     @Id
     @Column(name="pesel")
@@ -27,11 +21,6 @@ public class ClubEmployee {
     @NotEmpty
     private String lastName;
 
-    @Column(name="salary")
-    @Min(value = 1)
-    @Max(value = 1000000)
-    private int salary;
-
     @Column(name="date_of_birth")
     private Date dateOfBirth;
 
@@ -39,29 +28,15 @@ public class ClubEmployee {
     @NotEmpty
     private String role;
 
-    @Column(name="position")
-    private String position;
-
-    @Column(name="function")
-    private String function;
-
-    @ManyToOne
-    @Nullable
-    @JoinColumn(name="team_name")
-    private Team team;
-
-    public ClubEmployee() {
+    public LeagueEmployee() {
     }
 
-    public ClubEmployee(String pesel, String firstName, String lastName, int salary, Date dateOfBirth, String role, String position, String function) {
+    public LeagueEmployee(String pesel, String firstName, String lastName, Date dateOfBirth, String role) {
         this.pesel = pesel;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.salary = salary;
         this.dateOfBirth = dateOfBirth;
         this.role = role;
-        this.position = position;
-        this.function = function;
     }
 
     public String getPesel() {
@@ -88,14 +63,6 @@ public class ClubEmployee {
         this.lastName = lastName;
     }
 
-    public int getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -112,33 +79,9 @@ public class ClubEmployee {
         this.role = role;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public String getFunction() {
-        return function;
-    }
-
-    public void setFunction(String function) {
-        this.function = function;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
     @Override
     public String toString() {
-        return "ClubEmployee{" +
+        return "LeagueEmployee{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
