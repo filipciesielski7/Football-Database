@@ -1,5 +1,6 @@
 package com.example.application.views.leagueSeasonList;
 
+import com.example.application.components.ConfirmDialogComponent;
 import com.example.application.data.entity.LeagueSeason;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
@@ -65,9 +66,13 @@ public class LeagueSeasonsView  extends VerticalLayout {
     }
 
     private void deleteLeagueSeason(LeagueSeasonForm.DeleteEvent event) {
-        service.deleteLeagueSeason(event.getLeagueSeason());
-        updateList();
-        closeEditor();
+        ConfirmDialogComponent dialog = new ConfirmDialogComponent(event.getLeagueSeason().getName());
+        dialog.getDeleteConfirmDialog().addConfirmListener(event2 -> {
+            service.deleteLeagueSeason(event.getLeagueSeason());
+            updateList();
+            closeEditor();
+        });
+        dialog.getDeleteConfirmDialog().open();
     }
 
     private void saveLeagueSeason(LeagueSeasonForm.SaveEvent event) {

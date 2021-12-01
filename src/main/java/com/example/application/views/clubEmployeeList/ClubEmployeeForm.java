@@ -1,5 +1,6 @@
 package com.example.application.views.clubEmployeeList;
 
+import com.example.application.components.NotificationComponent;
 import com.example.application.data.entity.ClubEmployee;
 import com.example.application.data.entity.Team;
 import com.vaadin.flow.component.Component;
@@ -86,12 +87,13 @@ public class ClubEmployeeForm extends FormLayout {
         try{
             binder.writeBean(clubEmployee);
             fireEvent(new SaveEvent(this, clubEmployee));
-            new Notification("Club employee saved", 3000).open();
+            NotificationComponent notification = new NotificationComponent("Club employee saved");
+            notification.getSucessNotification().open();
+
         } catch (ValidationException e){
             e.printStackTrace();
-            Notification notification = new Notification(e.toString(), 3000);
-            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-            notification.open();
+            NotificationComponent notification = new NotificationComponent(e.toString());
+            notification.getErrorNotification().open();
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.application.views.leagueEmployeeList;
 
+import com.example.application.components.NotificationComponent;
 import com.example.application.data.entity.LeagueEmployee;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
@@ -72,12 +73,13 @@ public class LeagueEmployeeForm extends FormLayout {
         try{
             binder.writeBean(leagueEmployee);
             fireEvent(new SaveEvent(this, leagueEmployee));
-            new Notification("League employee saved", 3000).open();
+            NotificationComponent notification = new NotificationComponent("League employee saved");
+            notification.getSucessNotification().open();
+
         } catch (ValidationException e){
             e.printStackTrace();
-            Notification notification = new Notification(e.toString(), 3000);
-            notification.addThemeName("error");
-            notification.open();
+            NotificationComponent notification = new NotificationComponent(e.toString());
+            notification.getErrorNotification().open();
         }
     }
 

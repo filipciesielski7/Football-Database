@@ -1,5 +1,6 @@
 package com.example.application.views.teamList;
 
+import com.example.application.components.NotificationComponent;
 import com.example.application.data.entity.Stadium;
 import com.example.application.data.entity.Team;
 import com.vaadin.flow.component.Component;
@@ -67,12 +68,13 @@ public class TeamForm extends FormLayout {
         try{
             binder.writeBean(team);
             fireEvent(new SaveEvent(this, team));
-            new Notification("Team saved", 3000).open();
+            NotificationComponent notification = new NotificationComponent("Team saved");
+            notification.getSucessNotification().open();
+
         } catch (ValidationException e){
             e.printStackTrace();
-            Notification notification = new Notification(e.toString(), 3000);
-            notification.addThemeName("error");
-            notification.open();
+            NotificationComponent notification = new NotificationComponent(e.toString());
+            notification.getErrorNotification().open();
         }
     }
 

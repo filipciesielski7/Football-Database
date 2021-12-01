@@ -1,5 +1,6 @@
 package com.example.application.views.stadiumList;
 
+import com.example.application.components.NotificationComponent;
 import com.example.application.data.entity.Stadium;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
@@ -77,29 +78,13 @@ public class StadiumForm extends FormLayout {
         try{
             binder.writeBean(stadium);
             fireEvent(new SaveEvent(this, stadium));
-
-            Notification notification = new Notification("Stadium saved", 3000);
-            notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-            Icon icon = VaadinIcon.CHECK_CIRCLE.create();
-            Div info = new Div(new Text("Stadium saved"));
-            HorizontalLayout layout = new HorizontalLayout(icon, info);
-            layout.setAlignItems(FlexComponent.Alignment.CENTER);
-            notification.add(layout);
-            notification.setPosition(Notification.Position.BOTTOM_END);
-            notification.open();
+            NotificationComponent notification = new NotificationComponent("Stadium saved");
+            notification.getSucessNotification().open();
 
         } catch (ValidationException e){
             e.printStackTrace();
-
-            Notification notification = new Notification(e.toString(), 3000);
-            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-            Icon icon = VaadinIcon.WARNING.create();
-            Div info = new Div(new Text(e.toString()));
-            HorizontalLayout layout = new HorizontalLayout(icon, info);
-            layout.setAlignItems(FlexComponent.Alignment.CENTER);
-            notification.add(layout);
-            notification.setPosition(Notification.Position.BOTTOM_END);
-            notification.open();
+            NotificationComponent notification = new NotificationComponent(e.toString());
+            notification.getErrorNotification().open();
         }
     }
 

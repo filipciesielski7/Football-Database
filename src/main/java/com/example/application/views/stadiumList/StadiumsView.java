@@ -1,5 +1,6 @@
 package com.example.application.views.stadiumList;
 
+import com.example.application.components.ConfirmDialogComponent;
 import com.example.application.data.entity.Stadium;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
@@ -66,21 +67,13 @@ public class StadiumsView extends VerticalLayout {
     }
 
     private void deleteStadium(StadiumForm.DeleteEvent event) {
-        ConfirmDialog dialog = new ConfirmDialog();
-        dialog.setHeader("Delete");
-        dialog.setText("Are you sure you want to permanently delete " + event.getStadium().getName() + " stadium?");
-
-        dialog.setCancelable(true);
-
-        dialog.setConfirmText("Delete");
-        dialog.setConfirmButtonTheme("error primary");
-        dialog.addConfirmListener(event2 -> {
+        ConfirmDialogComponent dialog = new ConfirmDialogComponent(event.getStadium().getName());
+        dialog.getDeleteConfirmDialog().addConfirmListener(event2 -> {
             service.deleteStadium(event.getStadium());
             updateList();
             closeEditor();
         });
-
-        dialog.open();
+        dialog.getDeleteConfirmDialog().open();
     }
 
     private void saveStadium(StadiumForm.SaveEvent event) {

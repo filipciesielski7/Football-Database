@@ -1,5 +1,6 @@
 package com.example.application.views.clubEmployeeList;
 
+import com.example.application.components.ConfirmDialogComponent;
 import com.example.application.data.entity.ClubEmployee;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
@@ -65,9 +66,13 @@ public class ClubEmployeesView extends VerticalLayout {
     }
 
     private void deleteClubEmployee(ClubEmployeeForm.DeleteEvent event) {
-        service.deleteClubEmployee(event.getClubEmployee());
-        updateList();
-        closeEditor();
+        ConfirmDialogComponent dialog = new ConfirmDialogComponent(event.getClubEmployee().getFirstName() + " " + event.getClubEmployee().getLastName());
+        dialog.getDeleteConfirmDialog().addConfirmListener(event2 -> {
+            service.deleteClubEmployee(event.getClubEmployee());
+            updateList();
+            closeEditor();
+        });
+        dialog.getDeleteConfirmDialog().open();
     }
 
     private void saveClubEmployee(ClubEmployeeForm.SaveEvent event) {

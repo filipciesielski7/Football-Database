@@ -1,5 +1,6 @@
 package com.example.application.views.leagueSeasonList;
 
+import com.example.application.components.NotificationComponent;
 import com.example.application.data.entity.LeagueSeason;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
@@ -65,12 +66,13 @@ public class LeagueSeasonForm  extends FormLayout {
         try{
             binder.writeBean(leagueSeason);
             fireEvent(new SaveEvent(this, leagueSeason));
-            new Notification("League season saved", 3000).open();
+            NotificationComponent notification = new NotificationComponent("League season saved");
+            notification.getSucessNotification().open();
+
         } catch (ValidationException e){
             e.printStackTrace();
-            Notification notification = new Notification(e.toString(), 3000);
-            notification.addThemeName("error");
-            notification.open();
+            NotificationComponent notification = new NotificationComponent(e.toString());
+            notification.getErrorNotification().open();
         }
     }
 

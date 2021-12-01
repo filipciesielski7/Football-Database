@@ -1,5 +1,6 @@
 package com.example.application.views.teamList;
 
+import com.example.application.components.ConfirmDialogComponent;
 import com.example.application.data.entity.Team;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
@@ -65,9 +66,13 @@ public class TeamsView  extends VerticalLayout{
     }
 
     private void deleteTeam(TeamForm.DeleteEvent event) {
-        service.deleteTeam(event.getTeam());
-        updateList();
-        closeEditor();
+        ConfirmDialogComponent dialog = new ConfirmDialogComponent(event.getTeam().getName());
+        dialog.getDeleteConfirmDialog().addConfirmListener(event2 -> {
+            service.deleteTeam(event.getTeam());
+            updateList();
+            closeEditor();
+        });
+        dialog.getDeleteConfirmDialog().open();
     }
 
     private void saveTeam(TeamForm.SaveEvent event) {
