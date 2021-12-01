@@ -1,5 +1,7 @@
 package com.example.application.data.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -29,6 +31,12 @@ public class Team {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
     private List<ClubEmployee> clubEmployees = new LinkedList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "homeTeam", cascade = CascadeType.REMOVE)
+    private List<Match> homeMatches = new LinkedList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "awayTeam", cascade = CascadeType.REMOVE)
+    private List<Match> awayMatches = new LinkedList<>();
 
     @PreRemove
     public void nullificationClubEmployees() {
@@ -73,6 +81,22 @@ public class Team {
 
     public void setClubEmployees(List<ClubEmployee> clubEmployees) {
         this.clubEmployees = clubEmployees;
+    }
+
+    public List<Match> getHomeMatches() {
+        return homeMatches;
+    }
+
+    public void setHomeMatches(List<Match> homeMatches) {
+        this.homeMatches = homeMatches;
+    }
+
+    public List<Match> getAwayMatches() {
+        return awayMatches;
+    }
+
+    public void setAwayMatches(List<Match> awayMatches) {
+        this.awayMatches = awayMatches;
     }
 
     @Override

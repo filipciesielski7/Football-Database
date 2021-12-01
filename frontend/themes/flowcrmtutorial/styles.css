@@ -10,7 +10,9 @@
     .clubEmployees-view.editing .toolbar,
     .clubEmployees-view.editing .clubEmployees-grid,
     .leagueEmployees-view.editing .toolbar,
-    .leagueEmployees-view.editing .leagueEmployees-grid
+    .leagueEmployees-view.editing .leagueEmployees-grid,
+    .matches-view.editing .toolbar,
+    .matches-view.editing .matches-grid
     {
         display: none;
     }

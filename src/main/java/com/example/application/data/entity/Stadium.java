@@ -23,6 +23,9 @@ public class Stadium {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "stadium")
     private List<Team> teams = new LinkedList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "stadium", cascade = CascadeType.REMOVE)
+    private List<Match> matches = new LinkedList<>();
+
     @Column(name="capacity")
     @Min(value = 1)
     private int capacity;
@@ -90,6 +93,14 @@ public class Stadium {
 
     public void setHasUnderSoilHeating(String hasUnderSoilHeating) {
         this.hasUnderSoilHeating = hasUnderSoilHeating;
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.example.application.data.entity;
 
-
-
 import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.*;

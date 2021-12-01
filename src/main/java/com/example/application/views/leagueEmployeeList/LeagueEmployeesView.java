@@ -1,11 +1,9 @@
 package com.example.application.views.leagueEmployeeList;
 
 import com.example.application.components.ConfirmDialogComponent;
-import com.example.application.data.entity.ClubEmployee;
 import com.example.application.data.entity.LeagueEmployee;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
-import com.example.application.views.leagueEmployeeList.LeagueEmployeeForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;

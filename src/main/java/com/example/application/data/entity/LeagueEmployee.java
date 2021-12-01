@@ -5,6 +5,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name="league_employees")
@@ -35,6 +37,9 @@ public class LeagueEmployee {
     @Column(name="role")
     @NotEmpty
     private String role;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "leagueEmployee", cascade = CascadeType.REMOVE)
+    private List<Match> matches = new LinkedList<>();
 
     public LeagueEmployee() {
     }
@@ -85,6 +90,14 @@ public class LeagueEmployee {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
     }
 
     @Override

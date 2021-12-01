@@ -13,18 +13,21 @@ public class CrmService {
     private final LeagueSeasonRepository leagueSeasonRepository;
     private final ClubEmployeeRepository clubEmployeeRepository;
     private final LeagueEmployeeRepository leagueEmployeeRepository;
+    private final MatchRepository matchRepository;
 
     public CrmService(StadiumRepository stadiumRepository,
                       TeamRepository teamRepository,
                       LeagueSeasonRepository leagueSeasonRepository,
                       ClubEmployeeRepository clubEmployeeRepository,
-                      LeagueEmployeeRepository leagueEmployeeRepository){
+                      LeagueEmployeeRepository leagueEmployeeRepository,
+                      MatchRepository matchRepository){
 
         this.stadiumRepository = stadiumRepository;
         this.teamRepository = teamRepository;
         this.leagueSeasonRepository = leagueSeasonRepository;
         this.clubEmployeeRepository = clubEmployeeRepository;
         this.leagueEmployeeRepository = leagueEmployeeRepository;
+        this.matchRepository = matchRepository;
     }
 
     public List<Stadium> findAllStadiums(String filterText){
@@ -162,6 +165,31 @@ public class CrmService {
         }
 
         leagueEmployeeRepository.save(leagueEmployee);
+    }
+
+    public List<Match> findAllMatches(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return matchRepository.findAll();
+        }
+        else{
+            return matchRepository.search(filterText);
+        }
+    }
+
+    public List<Match> findAllMatches(){
+        return matchRepository.findAll();
+    }
+
+    public void deleteMatch(Match match){
+        matchRepository.delete(match);
+    }
+
+    public void saveMatch(Match match){
+        if(match == null){
+            System.err.println("Match is null");
+        }
+
+        matchRepository.save(match);
     }
 
 }

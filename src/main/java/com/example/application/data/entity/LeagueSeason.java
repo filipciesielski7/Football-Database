@@ -5,6 +5,8 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name="league_seasons")
@@ -27,6 +29,9 @@ public class LeagueSeason {
     @Max(value = 99)
     @NotNull
     private int division;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "leagueSeason", cascade = CascadeType.REMOVE)
+    private List<Match> matches = new LinkedList<>();
 
     public LeagueSeason() {}
 
@@ -58,6 +63,14 @@ public class LeagueSeason {
 
     public void setDivision(int division) {
         this.division = division;
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
     }
 
     @Override
