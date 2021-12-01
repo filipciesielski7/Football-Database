@@ -3,8 +3,10 @@ package com.example.application.data.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ public class Stadium {
 
     @Id
     @Column(name="name")
+    @Size(max = 100)
     @NotEmpty
     private String name;
 

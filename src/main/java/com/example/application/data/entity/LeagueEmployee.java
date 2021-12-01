@@ -2,6 +2,8 @@ package com.example.application.data.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -10,14 +12,19 @@ public class LeagueEmployee {
 
     @Id
     @Column(name="pesel")
+    @Size(min = 11, message = "wielkość musi być równa 11")
+    @Size(max = 11, message = "wielkość musi być równa 11")
+    @Pattern(regexp="^[0-9]*$", message = "pesel może składać się tylko z cyfr")
     @NotEmpty
     private String pesel;
 
     @Column(name="first_name")
+    @Size(max = 20)
     @NotEmpty
     private String firstName;
 
     @Column(name="last_name")
+    @Size(max = 30)
     @NotEmpty
     private String lastName;
 

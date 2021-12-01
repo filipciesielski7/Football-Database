@@ -10,6 +10,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -66,8 +67,10 @@ public class TeamForm extends FormLayout {
         try{
             binder.writeBean(team);
             fireEvent(new SaveEvent(this, team));
+            new Notification("Team saved", 3000).open();
         } catch (ValidationException e){
             e.printStackTrace();
+            new Notification(e.toString(), 3000).open();
         }
     }
 
@@ -94,6 +97,7 @@ public class TeamForm extends FormLayout {
     public static class DeleteEvent extends TeamFormEvent {
         DeleteEvent(TeamForm source, Team team) {
             super(source, team);
+            new Notification("Team deleted", 3000).open();
         }
 
     }

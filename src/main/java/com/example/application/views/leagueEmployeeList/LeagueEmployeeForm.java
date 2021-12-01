@@ -10,6 +10,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -71,8 +72,10 @@ public class LeagueEmployeeForm extends FormLayout {
         try{
             binder.writeBean(leagueEmployee);
             fireEvent(new SaveEvent(this, leagueEmployee));
+            new Notification("League employee saved", 3000).open();
         } catch (ValidationException e){
             e.printStackTrace();
+            new Notification(e.toString(), 3000).open();
         }
     }
 
@@ -99,6 +102,7 @@ public class LeagueEmployeeForm extends FormLayout {
     public static class DeleteEvent extends LeagueEmployeeFormEvent {
         DeleteEvent(LeagueEmployeeForm source, LeagueEmployee leagueEmployee) {
             super(source, leagueEmployee);
+            new Notification("League employee deleted", 3000).open();
         }
 
     }

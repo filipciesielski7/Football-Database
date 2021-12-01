@@ -3,6 +3,7 @@ package com.example.application.data.entity;
 import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,10 +13,12 @@ public class Team {
 
     @Id
     @Column(name="name")
+    @Size(max = 40)
     @NotEmpty
     private String name;
 
     @Column(name="city")
+    @Size(max = 40)
     @NotEmpty
     private String city;
 

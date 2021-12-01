@@ -1,10 +1,10 @@
 package com.example.application.data.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.util.Date;
 
 @Entity
 @Table(name="league_seasons")
@@ -12,16 +12,19 @@ public class LeagueSeason {
 
     @Id
     @Column(name="name")
+    @Size(max = 100)
     @NotEmpty
     private String name;
 
     @Column(name="end_year")
     @Min(value = 1)
+    @Max(value = 2022)
     @NotNull
     private int year;
 
     @Column(name="division")
     @Min(value = 1)
+    @Max(value = 99)
     @NotNull
     private int division;
 

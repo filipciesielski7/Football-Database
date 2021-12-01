@@ -9,6 +9,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -70,8 +71,10 @@ public class StadiumForm extends FormLayout {
         try{
             binder.writeBean(stadium);
             fireEvent(new SaveEvent(this, stadium));
+            new Notification("Stadium saved", 3000).open();
         } catch (ValidationException e){
             e.printStackTrace();
+            new Notification(e.toString(), 3000).open();
         }
     }
 
@@ -98,6 +101,7 @@ public class StadiumForm extends FormLayout {
     public static class DeleteEvent extends StadiumFormEvent {
         DeleteEvent(StadiumForm source, Stadium stadium) {
             super(source, stadium);
+            new Notification("Stadium deleted", 3000).open();
         }
 
     }

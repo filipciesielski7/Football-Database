@@ -11,12 +11,14 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.converter.Converter;
 import com.vaadin.flow.data.converter.LocalDateToDateConverter;
 import com.vaadin.flow.shared.Registration;
 
@@ -25,7 +27,6 @@ import java.util.List;
 public class ClubEmployeeForm extends FormLayout {
 
     Binder<ClubEmployee> binder = new BeanValidationBinder<>(ClubEmployee.class);
-
     TextField pesel = new TextField("Pesel");
     TextField firstName = new TextField("First Name");
     TextField lastName = new TextField("Last Name");
@@ -84,8 +85,10 @@ public class ClubEmployeeForm extends FormLayout {
         try{
             binder.writeBean(clubEmployee);
             fireEvent(new SaveEvent(this, clubEmployee));
+            new Notification("Club employee saved", 3000).open();
         } catch (ValidationException e){
             e.printStackTrace();
+            new Notification(e.toString(), 3000).open();
         }
     }
 
@@ -112,6 +115,7 @@ public class ClubEmployeeForm extends FormLayout {
     public static class DeleteEvent extends ClubEmployeeFormEvent {
         DeleteEvent(ClubEmployeeForm source, ClubEmployee clubEmployee) {
             super(source, clubEmployee);
+            new Notification("Club employee deleted", 3000).open();
         }
 
     }

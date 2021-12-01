@@ -4,9 +4,7 @@ package com.example.application.data.entity;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
@@ -15,14 +13,19 @@ public class ClubEmployee {
 
     @Id
     @Column(name="pesel")
+    @Size(min = 11, message = "wielkość musi być równa 11")
+    @Size(max = 11, message = "wielkość musi być równa 11")
+    @Pattern(regexp="^[0-9]*$", message = "pesel może składać się tylko z cyfr")
     @NotEmpty
     private String pesel;
 
     @Column(name="first_name")
+    @Size(max = 20)
     @NotEmpty
     private String firstName;
 
     @Column(name="last_name")
+    @Size(max = 30)
     @NotEmpty
     private String lastName;
 
@@ -40,9 +43,11 @@ public class ClubEmployee {
     private String role;
 
     @Column(name="position")
+    @Size(max = 20)
     private String position;
 
     @Column(name="function")
+    @Size(max = 20)
     private String function;
 
     @ManyToOne

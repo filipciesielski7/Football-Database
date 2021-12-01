@@ -8,7 +8,9 @@
     .leagueSeasons-view.editing .toolbar,
     .leagueSeasons-view.editing .leagueSeasons-grid,
     .clubEmployees-view.editing .toolbar,
-    .clubEmployees-view.editing .clubEmployees-grid
+    .clubEmployees-view.editing .clubEmployees-grid,
+    .leagueEmployees-view.editing .toolbar,
+    .leagueEmployees-view.editing .leagueEmployees-grid
     {
         display: none;
     }
