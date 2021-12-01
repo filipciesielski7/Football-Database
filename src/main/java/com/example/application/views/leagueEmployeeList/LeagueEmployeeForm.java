@@ -75,7 +75,9 @@ public class LeagueEmployeeForm extends FormLayout {
             new Notification("League employee saved", 3000).open();
         } catch (ValidationException e){
             e.printStackTrace();
-            new Notification(e.toString(), 3000).open();
+            Notification notification = new Notification(e.toString(), 3000);
+            notification.addThemeName("error");
+            notification.open();
         }
     }
 

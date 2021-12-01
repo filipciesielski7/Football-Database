@@ -12,6 +12,7 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -88,7 +89,9 @@ public class ClubEmployeeForm extends FormLayout {
             new Notification("Club employee saved", 3000).open();
         } catch (ValidationException e){
             e.printStackTrace();
-            new Notification(e.toString(), 3000).open();
+            Notification notification = new Notification(e.toString(), 3000);
+            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+            notification.open();
         }
     }
 

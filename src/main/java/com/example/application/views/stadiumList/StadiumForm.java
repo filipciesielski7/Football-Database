@@ -1,15 +1,19 @@
 package com.example.application.views.stadiumList;
 
 import com.example.application.data.entity.Stadium;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEvent;
-import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -17,6 +21,8 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
+
+import javax.management.remote.NotificationResult;
 
 public class StadiumForm extends FormLayout {
     Binder<Stadium> binder = new BeanValidationBinder<>(Stadium.class);
@@ -71,10 +77,29 @@ public class StadiumForm extends FormLayout {
         try{
             binder.writeBean(stadium);
             fireEvent(new SaveEvent(this, stadium));
-            new Notification("Stadium saved", 3000).open();
+
+            Notification notification = new Notification("Stadium saved", 3000);
+            notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+            Icon icon = VaadinIcon.CHECK_CIRCLE.create();
+            Div info = new Div(new Text("Stadium saved"));
+            HorizontalLayout layout = new HorizontalLayout(icon, info);
+            layout.setAlignItems(FlexComponent.Alignment.CENTER);
+            notification.add(layout);
+            notification.setPosition(Notification.Position.BOTTOM_END);
+            notification.open();
+
         } catch (ValidationException e){
             e.printStackTrace();
-            new Notification(e.toString(), 3000).open();
+
+            Notification notification = new Notification(e.toString(), 3000);
+            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+            Icon icon = VaadinIcon.WARNING.create();
+            Div info = new Div(new Text(e.toString()));
+            HorizontalLayout layout = new HorizontalLayout(icon, info);
+            layout.setAlignItems(FlexComponent.Alignment.CENTER);
+            notification.add(layout);
+            notification.setPosition(Notification.Position.BOTTOM_END);
+            notification.open();
         }
     }
 
@@ -101,7 +126,6 @@ public class StadiumForm extends FormLayout {
     public static class DeleteEvent extends StadiumFormEvent {
         DeleteEvent(StadiumForm source, Stadium stadium) {
             super(source, stadium);
-            new Notification("Stadium deleted", 3000).open();
         }
 
     }

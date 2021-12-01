@@ -5,6 +5,7 @@ import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -65,9 +66,21 @@ public class StadiumsView extends VerticalLayout {
     }
 
     private void deleteStadium(StadiumForm.DeleteEvent event) {
-        service.deleteStadium(event.getStadium());
-        updateList();
-        closeEditor();
+        ConfirmDialog dialog = new ConfirmDialog();
+        dialog.setHeader("Delete");
+        dialog.setText("Are you sure you want to permanently delete " + event.getStadium().getName() + " stadium?");
+
+        dialog.setCancelable(true);
+
+        dialog.setConfirmText("Delete");
+        dialog.setConfirmButtonTheme("error primary");
+        dialog.addConfirmListener(event2 -> {
+            service.deleteStadium(event.getStadium());
+            updateList();
+            closeEditor();
+        });
+
+        dialog.open();
     }
 
     private void saveStadium(StadiumForm.SaveEvent event) {

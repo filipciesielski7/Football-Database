@@ -68,7 +68,9 @@ public class LeagueSeasonForm  extends FormLayout {
             new Notification("League season saved", 3000).open();
         } catch (ValidationException e){
             e.printStackTrace();
-            new Notification(e.toString(), 3000).open();
+            Notification notification = new Notification(e.toString(), 3000);
+            notification.addThemeName("error");
+            notification.open();
         }
     }
 
