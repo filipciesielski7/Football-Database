@@ -2,7 +2,6 @@ package com.example.application.views.matchList;
 
 import com.example.application.components.NotificationComponent;
 import com.example.application.data.entity.*;
-import com.example.application.views.clubEmployeeList.ClubEmployeeForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -26,7 +25,7 @@ import java.util.List;
 public class MatchForm extends FormLayout {
 
     Binder<Match> binder = new BeanValidationBinder<>(Match.class);
-    IntegerField matchId = new IntegerField("Match Id");
+    // IntegerField matchId = new IntegerField("Match Id");
     DatePicker matchDate = new DatePicker("Date of Match");
     IntegerField homeGoals = new IntegerField("Home Goals");
     IntegerField awayGoals = new IntegerField("Away Goals");
@@ -64,7 +63,7 @@ public class MatchForm extends FormLayout {
         leagueEmployee.setItems(leagueEmployees);
         leagueEmployee.setItemLabelGenerator(LeagueEmployee::getLastName);
 
-        add(matchId, matchDate, homeGoals, awayGoals, fansNumber, homeTeam, awayTeam, stadium, leagueSeason, leagueEmployee, createButtonLayout());
+        add(matchDate, homeGoals, awayGoals, fansNumber, homeTeam, awayTeam, stadium, leagueSeason, leagueEmployee, createButtonLayout());
     }
 
     public void setMatch(Match match){

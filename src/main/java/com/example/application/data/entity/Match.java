@@ -11,7 +11,8 @@ import java.util.Date;
 public class Match {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator="match_seq")
+    @SequenceGenerator(name="match_seq", sequenceName = "MATCH_SEQ", allocationSize = 1)
     @Column(name="match_id")
     private Integer matchId;
 
