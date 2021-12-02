@@ -14,13 +14,15 @@ public class CrmService {
     private final ClubEmployeeRepository clubEmployeeRepository;
     private final LeagueEmployeeRepository leagueEmployeeRepository;
     private final MatchRepository matchRepository;
+    private final RefereeingRepository refereeingRepository;
 
     public CrmService(StadiumRepository stadiumRepository,
                       TeamRepository teamRepository,
                       LeagueSeasonRepository leagueSeasonRepository,
                       ClubEmployeeRepository clubEmployeeRepository,
                       LeagueEmployeeRepository leagueEmployeeRepository,
-                      MatchRepository matchRepository){
+                      MatchRepository matchRepository,
+                      RefereeingRepository refereeingRepository){
 
         this.stadiumRepository = stadiumRepository;
         this.teamRepository = teamRepository;
@@ -28,6 +30,7 @@ public class CrmService {
         this.clubEmployeeRepository = clubEmployeeRepository;
         this.leagueEmployeeRepository = leagueEmployeeRepository;
         this.matchRepository = matchRepository;
+        this.refereeingRepository = refereeingRepository;
     }
 
     public List<Stadium> findAllStadiums(String filterText){
@@ -151,6 +154,10 @@ public class CrmService {
         return leagueEmployeeRepository.findAll();
     }
 
+    public List<LeagueEmployee> findAllLeagueDelegates(String theRole){
+        return leagueEmployeeRepository.findByRole(theRole);
+    }
+
     public long countLeagueEmployees() {
         return leagueEmployeeRepository.count();
     }
@@ -190,6 +197,31 @@ public class CrmService {
         }
 
         matchRepository.save(match);
+    }
+
+    public List<Refereeing> findAllRefereeing(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return refereeingRepository.findAll();
+        }
+        else{
+            return refereeingRepository.search(filterText);
+        }
+    }
+
+    public List<Refereeing> findAllRefereeing(){
+        return refereeingRepository.findAll();
+    }
+
+    public void deleteRefereeing(Refereeing refereeing){
+        refereeingRepository.delete(refereeing);
+    }
+
+    public void saveRefereeing(Refereeing refereeing){
+        if(refereeing == null){
+            System.err.println("Refereeing is null");
+        }
+
+        refereeingRepository.save(refereeing);
     }
 
 }

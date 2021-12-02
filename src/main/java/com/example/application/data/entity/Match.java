@@ -1,10 +1,12 @@
 package com.example.application.data.entity;
 
-import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name="matches")
@@ -36,28 +38,32 @@ public class Match {
 
     @ManyToOne
     @JoinColumn(name = "home_team")
-    @Nullable
+    @NotNull
     private Team homeTeam;
 
     @ManyToOne
     @JoinColumn(name = "away_team")
-    @Nullable
+    @NotNull
     private Team awayTeam;
 
     @ManyToOne
     @JoinColumn(name = "stadium_name")
-    @Nullable
+    @NotNull
     private Stadium stadium;
 
     @ManyToOne
     @JoinColumn(name = "league_year")
-    @Nullable
+    @NotNull
     private LeagueSeason leagueSeason;
 
     @ManyToOne
     @JoinColumn(name = "delegate")
-    @Nullable
+    @NotNull
     private LeagueEmployee leagueEmployee;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "matchId", cascade = CascadeType.REMOVE)
+    private List<Refereeing> refereeings = new LinkedList<>();
+
 
     public Match() {
     }
@@ -148,6 +154,19 @@ public class Match {
 
     public void setLeagueEmployee(LeagueEmployee leagueEmployee) {
         this.leagueEmployee = leagueEmployee;
+    }
+
+    public String getMatchIdString() {
+        return matchId.toString();
+    }
+
+
+    public List<Refereeing> getRefereeings() {
+        return refereeings;
+    }
+
+    public void setRefereeings(List<Refereeing> refereeings) {
+        this.refereeings = refereeings;
     }
 
     @Override

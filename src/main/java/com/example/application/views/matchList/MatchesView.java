@@ -1,11 +1,9 @@
 package com.example.application.views.matchList;
 
 import com.example.application.components.ConfirmDialogComponent;
-import com.example.application.data.entity.ClubEmployee;
 import com.example.application.data.entity.Match;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
-import com.example.application.views.clubEmployeeList.ClubEmployeeForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -59,7 +57,7 @@ public class MatchesView extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new MatchForm(service.findAllTeams(), service.findAllStadiums(), service.findAllLeagueSeasons(), service.findAllLeagueEmployees());
+        form = new MatchForm(service.findAllTeams(), service.findAllStadiums(), service.findAllLeagueSeasons(), service.findAllLeagueDelegates("Delegate"));
         form.setWidth("25em");
 
         form.addListener(MatchForm.SaveEvent.class, this::saveMatch);
@@ -106,10 +104,10 @@ public class MatchesView extends VerticalLayout {
         grid.addClassName("matches-grid");
         grid.setSizeFull();
         grid.setColumns("matchId", "matchDate", "homeGoals", "awayGoals", "fansNumber");
-        grid.addColumn(match -> match.getHomeTeam().getName()).setHeader("HomeTeam");
-        grid.addColumn(match -> match.getAwayTeam().getName()).setHeader("AwayTeam");
+        grid.addColumn(match -> match.getHomeTeam().getName()).setHeader("Home Team");
+        grid.addColumn(match -> match.getAwayTeam().getName()).setHeader("Away Team");
         grid.addColumn(match -> match.getStadium().getName()).setHeader("Stadium");
-        grid.addColumn(match -> match.getLeagueSeason().getName()).setHeader("LeagueSeason");
+        grid.addColumn(match -> match.getLeagueSeason().getName()).setHeader("League Season");
         grid.addColumn(match -> match.getLeagueEmployee().getLastName()).setHeader("Delegate");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 

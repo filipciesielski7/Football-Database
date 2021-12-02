@@ -1,6 +1,5 @@
 package com.example.application.data.repository;
 
-import com.example.application.data.entity.ClubEmployee;
 import com.example.application.data.entity.LeagueEmployee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,4 +12,6 @@ public interface LeagueEmployeeRepository extends JpaRepository<LeagueEmployee, 
             "where lower(c.firstName) like lower(concat('%', :searchTerm, '%')) " +
             "or lower(c.lastName) like lower(concat('%', :searchTerm, '%'))")
     List<LeagueEmployee> search(@Param("searchTerm") String searchTerm);
+
+    List<LeagueEmployee> findByRole(String theRole);
 }

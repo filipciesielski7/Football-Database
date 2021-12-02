@@ -4,6 +4,7 @@ import com.example.application.views.clubEmployeeList.ClubEmployeesView;
 import com.example.application.views.leagueEmployeeList.LeagueEmployeesView;
 import com.example.application.views.leagueSeasonList.LeagueSeasonsView;
 import com.example.application.views.matchList.MatchesView;
+import com.example.application.views.refereeingList.RefereeingView;
 import com.example.application.views.stadiumList.StadiumsView;
 import com.example.application.views.teamList.TeamsView;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -43,6 +44,9 @@ public class MainLayout extends AppLayout {
         RouterLink matchesView = new RouterLink("Matches", MatchesView.class);
         matchesView.setHighlightCondition(HighlightConditions.sameLocation());
 
+        RouterLink refereeingView = new RouterLink("Refereeing", RefereeingView.class);
+        refereeingView.setHighlightCondition(HighlightConditions.sameLocation());
+
 
         addToDrawer(new VerticalLayout(homeView,
                 teamsView,
@@ -50,7 +54,8 @@ public class MainLayout extends AppLayout {
                 leagueSeasonsView,
                 clubEmployeesView,
                 leagueEmployeesView,
-                matchesView));
+                matchesView,
+                refereeingView));
     }
 
     private void createHeader() {

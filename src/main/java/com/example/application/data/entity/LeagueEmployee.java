@@ -41,6 +41,9 @@ public class LeagueEmployee {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "leagueEmployee", cascade = CascadeType.REMOVE)
     private List<Match> matches = new LinkedList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pesel", cascade = CascadeType.REMOVE)
+    private List<Refereeing> refereeings = new LinkedList<>();
+
     public LeagueEmployee() {
     }
 
@@ -98,6 +101,14 @@ public class LeagueEmployee {
 
     public void setMatches(List<Match> matches) {
         this.matches = matches;
+    }
+
+    public List<Refereeing> getRefereeings() {
+        return refereeings;
+    }
+
+    public void setRefereeings(List<Refereeing> refereeings) {
+        this.refereeings = refereeings;
     }
 
     @Override

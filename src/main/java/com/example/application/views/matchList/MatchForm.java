@@ -123,7 +123,7 @@ public class MatchForm extends FormLayout {
     public static class DeleteEvent extends MatchFormEvent {
         DeleteEvent(MatchForm source, Match match) {
             super(source, match);
-            new Notification("Club employee deleted", 3000).open();
+            new Notification("Match deleted", 3000).open();
         }
 
     }
