@@ -1,9 +1,11 @@
-package com.example.application.views.refereeingList;
+package com.example.application.views.participatingList;
 
 import com.example.application.components.ConfirmDialogComponent;
+import com.example.application.data.entity.Participating;
 import com.example.application.data.entity.Refereeing;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
+import com.example.application.views.refereeingList.RefereeingForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -14,17 +16,17 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@PageTitle("Refereeing | Football")
-@Route(value = "refereeing", layout = MainLayout.class)
-public class RefereeingView extends VerticalLayout {
-    Grid<Refereeing> grid = new Grid<>(Refereeing.class);
+@PageTitle("Participating | Football")
+@Route(value = "participating", layout = MainLayout.class)
+public class ParticipatingView extends VerticalLayout {
+    Grid<Participating> grid = new Grid<>(Participating.class);
     TextField filterText = new TextField();
-    RefereeingForm form;
+    ParticipatingForm form;
     private CrmService service;
 
-    public RefereeingView(CrmService service) {
+    public ParticipatingView(CrmService service) {
         this.service = service;
-        addClassName("refereeing-view");
+        addClassName("participating-view");
         setSizeFull();
 
         configureGrid();
@@ -37,13 +39,13 @@ public class RefereeingView extends VerticalLayout {
     }
 
     private void closeEditor() {
-        form.setRefereeing(null);
+        form.setParticipating(null);
         form.setVisible(false);
         removeClassName("editing");
     }
 
     private void updateList() {
-        grid.setItems(service.findAllRefereeing(filterText.getValue()));
+        grid.setItems(service.findAllParticipating(filterText.getValue()));
     }
 
     private Component getContent() {
@@ -57,26 +59,26 @@ public class RefereeingView extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new RefereeingForm(service.findAllLeagueEmployees(), service.findAllMatches());
+        form = new ParticipatingForm(service.findAllClubEmployees(), service.findAllMatches());
         form.setWidth("25em");
 
-        form.addListener(RefereeingForm.SaveEvent.class, this::saveRefereeing);
-        form.addListener(RefereeingForm.DeleteEvent.class, this::deleteRefereeing);
-        form.addListener(RefereeingForm.CloseEvent.class, e -> closeEditor());
+        form.addListener(ParticipatingForm.SaveEvent.class, this::saveParticipating);
+        form.addListener(ParticipatingForm.DeleteEvent.class, this::deleteParticipating);
+        form.addListener(ParticipatingForm.CloseEvent.class, e -> closeEditor());
     }
 
-    private void deleteRefereeing(RefereeingForm.DeleteEvent event) {
-        ConfirmDialogComponent dialog = new ConfirmDialogComponent(event.getRefereeing().getMatchId().getMatchId() + " match refereeing");
+    private void deleteParticipating(ParticipatingForm.DeleteEvent event) {
+        ConfirmDialogComponent dialog = new ConfirmDialogComponent(event.getParticipating().getPesel().getFirstName() + " " + event.getParticipating().getPesel().getLastName() + " participating in match " + event.getParticipating().getMatchId().getMatchIdString());
         dialog.getDeleteConfirmDialog().addConfirmListener(event2 -> {
-            service.deleteRefereeing(event.getRefereeing());
+            service.deleteParticipating(event.getParticipating());
             updateList();
             closeEditor();
         });
         dialog.getDeleteConfirmDialog().open();
     }
 
-    private void saveRefereeing(RefereeingForm.SaveEvent event) {
-        service.saveRefereeing(event.getRefereeing());
+    private void saveParticipating(ParticipatingForm.SaveEvent event) {
+        service.saveParticipating(event.getParticipating());
         updateList();
         closeEditor();
     }
@@ -87,37 +89,37 @@ public class RefereeingView extends VerticalLayout {
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.addValueChangeListener(e -> updateList());
 
-        Button addRefereeingButton = new Button("Add refereeing");
-        addRefereeingButton.addClickListener(e -> addRefereeing());
+        Button addParticipatingButton = new Button("Add participating");
+        addParticipatingButton.addClickListener(e -> addParticipating());
 
-        HorizontalLayout toolbar = new HorizontalLayout(filterText, addRefereeingButton);
+        HorizontalLayout toolbar = new HorizontalLayout(filterText, addParticipatingButton);
         toolbar.addClassName("toolbar");
         return toolbar;
     }
 
-    private void addRefereeing() {
+    private void addParticipating() {
         grid.asSingleSelect().clear();
-        editRefereeing(new Refereeing());
+        editParticipating(new Participating());
     }
 
     private void configureGrid() {
-        grid.addClassName("refereeing-grid");
+        grid.addClassName("participating-grid");
         grid.setSizeFull();
-        grid.setColumns("function");
-        grid.addColumn(refereeing -> refereeing.getMatchId().getMatchIdString()).setHeader("Match Id");
-        grid.addColumn(refereeing-> refereeing.getPesel().getPesel()).setHeader("Pesel");
+        grid.setColumns("goals", "assists", "gotYellowCard", "gotRedCard");
+        grid.addColumn(participating -> participating.getMatchId().getMatchIdString()).setHeader("Match Id");
+        grid.addColumn(participating-> participating.getPesel().getPesel()).setHeader("Pesel");
 //        grid.addColumn(refereeing-> refereeing.getPesel().getFirstName()).setHeader("First Name");
 //        grid.addColumn(refereeing-> refereeing.getPesel().getLastName()).setHeader("Last Name");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
-        grid.asSingleSelect().addValueChangeListener(e -> editRefereeing(e.getValue()));
+        grid.asSingleSelect().addValueChangeListener(e -> editParticipating(e.getValue()));
     }
 
-    private void editRefereeing(Refereeing refereeing) {
-        if(refereeing == null) {
+    private void editParticipating(Participating participating) {
+        if(participating == null) {
             closeEditor();
         }else{
-            form.setRefereeing(refereeing);
+            form.setParticipating(participating);
             form.setVisible(true);
             addClassName("editing");
         }
