@@ -4,6 +4,8 @@ import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name="club_employees")
@@ -52,6 +54,9 @@ public class ClubEmployee {
     @Nullable
     @JoinColumn(name="team_name")
     private Team team;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pesel", cascade = CascadeType.REMOVE)
+    private List<Participating> participatings = new LinkedList<>();
 
     public ClubEmployee() {
     }
@@ -137,6 +142,14 @@ public class ClubEmployee {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public List<Participating> getParticipatings() {
+        return participatings;
+    }
+
+    public void setParticipatings(List<Participating> participatings) {
+        this.participatings = participatings;
     }
 
     @Override

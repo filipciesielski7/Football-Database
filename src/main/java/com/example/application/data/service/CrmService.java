@@ -15,6 +15,7 @@ public class CrmService {
     private final LeagueEmployeeRepository leagueEmployeeRepository;
     private final MatchRepository matchRepository;
     private final RefereeingRepository refereeingRepository;
+    private final ParticipatingRepository participatingRepository;
 
     public CrmService(StadiumRepository stadiumRepository,
                       TeamRepository teamRepository,
@@ -22,7 +23,8 @@ public class CrmService {
                       ClubEmployeeRepository clubEmployeeRepository,
                       LeagueEmployeeRepository leagueEmployeeRepository,
                       MatchRepository matchRepository,
-                      RefereeingRepository refereeingRepository){
+                      RefereeingRepository refereeingRepository,
+                      ParticipatingRepository participatingRepository){
 
         this.stadiumRepository = stadiumRepository;
         this.teamRepository = teamRepository;
@@ -31,6 +33,7 @@ public class CrmService {
         this.leagueEmployeeRepository = leagueEmployeeRepository;
         this.matchRepository = matchRepository;
         this.refereeingRepository = refereeingRepository;
+        this.participatingRepository = participatingRepository;
     }
 
     public List<Stadium> findAllStadiums(String filterText){
@@ -224,4 +227,28 @@ public class CrmService {
         refereeingRepository.save(refereeing);
     }
 
+    public List<Participating> findAllParticipating(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return participatingRepository.findAll();
+        }
+        else{
+            return participatingRepository.search(filterText);
+        }
+    }
+
+    public List<Participating> findAllParticipating(){
+        return participatingRepository.findAll();
+    }
+
+    public void deleteParticipating(Participating participating){
+        participatingRepository.delete(participating);
+    }
+
+    public void saveParticipating(Participating participating){
+        if(participating == null){
+            System.err.println("Participating is null");
+        }
+
+        participatingRepository.save(participating);
+    }
 }

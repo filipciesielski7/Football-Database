@@ -4,6 +4,7 @@ import com.example.application.views.clubEmployeeList.ClubEmployeesView;
 import com.example.application.views.leagueEmployeeList.LeagueEmployeesView;
 import com.example.application.views.leagueSeasonList.LeagueSeasonsView;
 import com.example.application.views.matchList.MatchesView;
+import com.example.application.views.participatingList.ParticipatingView;
 import com.example.application.views.refereeingList.RefereeingView;
 import com.example.application.views.stadiumList.StadiumsView;
 import com.example.application.views.teamList.TeamsView;
@@ -47,6 +48,8 @@ public class MainLayout extends AppLayout {
         RouterLink refereeingView = new RouterLink("Refereeing", RefereeingView.class);
         refereeingView.setHighlightCondition(HighlightConditions.sameLocation());
 
+        RouterLink participatingView = new RouterLink("Participating", ParticipatingView.class);
+        participatingView.setHighlightCondition(HighlightConditions.sameLocation());
 
         addToDrawer(new VerticalLayout(homeView,
                 teamsView,
@@ -55,7 +58,8 @@ public class MainLayout extends AppLayout {
                 clubEmployeesView,
                 leagueEmployeesView,
                 matchesView,
-                refereeingView));
+                refereeingView,
+                participatingView));
     }
 
     private void createHeader() {
