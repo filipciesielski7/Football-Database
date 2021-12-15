@@ -14,4 +14,5 @@ public interface LeagueEmployeeRepository extends JpaRepository<LeagueEmployee, 
     List<LeagueEmployee> search(@Param("searchTerm") String searchTerm);
 
     List<LeagueEmployee> findByRole(String theRole);
+
 }

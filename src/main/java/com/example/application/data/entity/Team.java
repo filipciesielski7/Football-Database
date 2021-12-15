@@ -1,9 +1,8 @@
 package com.example.application.data.entity;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.annotation.Nullable;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.LinkedList;
@@ -28,6 +27,10 @@ public class Team {
     @JoinColumn(name = "stadium_name")
     @Nullable
     private Stadium stadium;
+
+    @Column(name="wins", columnDefinition = "integer default 0")
+    @Max(value=10000)
+    private Integer wins = 0;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
     private List<ClubEmployee> clubEmployees = new LinkedList<>();
@@ -97,6 +100,14 @@ public class Team {
 
     public void setAwayMatches(List<Match> awayMatches) {
         this.awayMatches = awayMatches;
+    }
+
+    public Integer getWins() {
+        return wins;
+    }
+
+    public void setWins(Integer wins) {
+        this.wins = wins;
     }
 
     @Override

@@ -86,7 +86,6 @@ public class CrmService {
         if(team == null){
             System.err.println("Team is null");
         }
-
         teamRepository.save(team);
     }
 
@@ -101,6 +100,10 @@ public class CrmService {
 
     public List<ClubEmployee> findAllClubEmployees(){
         return clubEmployeeRepository.findAll();
+    }
+
+    public List<ClubEmployee> findAllClubPlayers(String theRole){
+        return clubEmployeeRepository.findByRole(theRole);
     }
 
     public long countClubEmployees() {
@@ -158,6 +161,10 @@ public class CrmService {
     }
 
     public List<LeagueEmployee> findAllLeagueDelegates(String theRole){
+        return leagueEmployeeRepository.findByRole(theRole);
+    }
+
+    public List<LeagueEmployee> findAllLeagueReferees(String theRole){
         return leagueEmployeeRepository.findByRole(theRole);
     }
 
@@ -251,4 +258,9 @@ public class CrmService {
 
         participatingRepository.save(participating);
     }
+
+    public String getGoldenShoeWinner() {
+        return clubEmployeeRepository.callGoldenShoe();
+    }
+
 }

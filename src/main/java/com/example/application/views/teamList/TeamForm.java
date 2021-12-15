@@ -44,7 +44,7 @@ public class TeamForm extends FormLayout {
         add(Name, City, stadium, createButtonLayout());
     }
 
-    public void setTeam(Team team){
+    public void setTeam(Team team) {
         this.team = team;
         binder.readBean(team);
     }

@@ -7,6 +7,7 @@ import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -21,6 +22,7 @@ public class ClubEmployeesView extends VerticalLayout {
     TextField filterText = new TextField();
     ClubEmployeeForm form;
     private CrmService service;
+
 
     public ClubEmployeesView(CrmService service) {
         this.service = service;
@@ -89,8 +91,17 @@ public class ClubEmployeesView extends VerticalLayout {
 
         Button addClubEmployeeButton = new Button("Add club employee");
         addClubEmployeeButton.addClickListener(e -> addClubEmployee());
+        Span goldenShoe = new Span("Current Golden Shoe winner is:");
+        goldenShoe.getElement().getStyle().set("font-size", "25px");
 
-        HorizontalLayout toolbar = new HorizontalLayout(filterText, addClubEmployeeButton);
+        Span goldenShoeName = new Span(service.getGoldenShoeWinner());
+        goldenShoeName.getElement().getStyle().set("font-size", "25px");
+        goldenShoeName.getElement().getStyle().set("color", "Tomato");
+        // TextField goldenShoe = new Label();
+        // goldenShoe.setValue(service.getGoldenShoeWinner());
+        // goldenShoe.setReadOnly(true);
+
+        HorizontalLayout toolbar = new HorizontalLayout(filterText, addClubEmployeeButton, goldenShoe, goldenShoeName);
         toolbar.addClassName("toolbar");
         return toolbar;
     }
@@ -106,8 +117,9 @@ public class ClubEmployeesView extends VerticalLayout {
         grid.setColumns("pesel", "firstName", "lastName", "salary", "dateOfBirth", "role", "position", "function");
         grid.addColumn(clubEmployee -> clubEmployee.getTeam() == null ? ' ' : clubEmployee.getTeam().getName()).setHeader("Team");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
-
         grid.asSingleSelect().addValueChangeListener(e -> editClubEmployee(e.getValue()));
+
+
     }
 
     private void editClubEmployee(ClubEmployee clubEmployee) {

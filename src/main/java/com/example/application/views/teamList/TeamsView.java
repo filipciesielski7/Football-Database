@@ -103,7 +103,7 @@ public class TeamsView  extends VerticalLayout{
     private void configureGrid() {
         grid.addClassName("team-grid");
         grid.setSizeFull();
-        grid.setColumns("name", "city");
+        grid.setColumns("name", "city", "wins");
         grid.addColumn(team -> team.getStadium() == null ? ' ' : team.getStadium().getName()).setHeader("Stadium");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
