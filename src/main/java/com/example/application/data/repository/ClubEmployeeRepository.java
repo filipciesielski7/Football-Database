@@ -12,4 +12,6 @@ public interface ClubEmployeeRepository extends JpaRepository<ClubEmployee, Stri
             "where lower(c.firstName) like lower(concat('%', :searchTerm, '%')) " +
             "or lower(c.lastName) like lower(concat('%', :searchTerm, '%'))")
     List<ClubEmployee> search(@Param("searchTerm") String searchTerm);
+
+    List<ClubEmployee> findByRole(String theRole);
 }
