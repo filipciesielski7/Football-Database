@@ -16,6 +16,7 @@ public class CrmService {
     private final MatchRepository matchRepository;
     private final RefereeingRepository refereeingRepository;
     private final ParticipatingRepository participatingRepository;
+    private final RankingRepository rankingRepository;
 
     public CrmService(StadiumRepository stadiumRepository,
                       TeamRepository teamRepository,
@@ -24,7 +25,8 @@ public class CrmService {
                       LeagueEmployeeRepository leagueEmployeeRepository,
                       MatchRepository matchRepository,
                       RefereeingRepository refereeingRepository,
-                      ParticipatingRepository participatingRepository){
+                      ParticipatingRepository participatingRepository,
+                      RankingRepository rankingRepository){
 
         this.stadiumRepository = stadiumRepository;
         this.teamRepository = teamRepository;
@@ -34,6 +36,7 @@ public class CrmService {
         this.matchRepository = matchRepository;
         this.refereeingRepository = refereeingRepository;
         this.participatingRepository = participatingRepository;
+        this.rankingRepository = rankingRepository;
     }
 
     public List<Stadium> findAllStadiums(String filterText){
@@ -125,6 +128,15 @@ public class CrmService {
         }
         else{
             return leagueSeasonRepository.search(filterText);
+        }
+    }
+
+    public List<String> findAllLeagueSeasonsNames(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return leagueSeasonRepository.searchAllNames();
+        }
+        else{
+            return leagueSeasonRepository.searchName(filterText);
         }
     }
 
@@ -251,4 +263,18 @@ public class CrmService {
 
         participatingRepository.save(participating);
     }
+
+    public List<Ranking> findAllRanking(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return rankingRepository.findAll();
+        }
+        else{
+            return rankingRepository.search(filterText);
+        }
+    }
+
+    public List<Ranking> findAllRanking(){
+        return rankingRepository.findAll();
+    }
+
 }

@@ -5,6 +5,7 @@ import com.example.application.views.leagueEmployeeList.LeagueEmployeesView;
 import com.example.application.views.leagueSeasonList.LeagueSeasonsView;
 import com.example.application.views.matchList.MatchesView;
 import com.example.application.views.participatingList.ParticipatingView;
+import com.example.application.views.rankingList.RankingsView;
 import com.example.application.views.refereeingList.RefereeingView;
 import com.example.application.views.stadiumList.StadiumsView;
 import com.example.application.views.teamList.TeamsView;
@@ -26,6 +27,9 @@ public class MainLayout extends AppLayout {
     private void createDrawer() {
         RouterLink homeView = new RouterLink("Home", homeView.class);
         homeView.setHighlightCondition(HighlightConditions.sameLocation());
+
+        RouterLink rankingView = new RouterLink("Rankings", RankingsView.class);
+        rankingView.setHighlightCondition(HighlightConditions.sameLocation());
 
         RouterLink teamsView = new RouterLink("Teams", TeamsView.class);
         teamsView.setHighlightCondition(HighlightConditions.sameLocation());
@@ -52,6 +56,7 @@ public class MainLayout extends AppLayout {
         participatingView.setHighlightCondition(HighlightConditions.sameLocation());
 
         addToDrawer(new VerticalLayout(homeView,
+                rankingView,
                 teamsView,
                 stadiumsView,
                 leagueSeasonsView,
