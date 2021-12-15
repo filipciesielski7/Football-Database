@@ -106,6 +106,10 @@ public class CrmService {
         return clubEmployeeRepository.findAll();
     }
 
+    public List<ClubEmployee> findAllClubPlayers(String theRole){
+        return clubEmployeeRepository.findByRole(theRole);
+    }
+
     public long countClubEmployees() {
         return clubEmployeeRepository.count();
     }
@@ -170,6 +174,10 @@ public class CrmService {
     }
 
     public List<LeagueEmployee> findAllLeagueDelegates(String theRole){
+        return leagueEmployeeRepository.findByRole(theRole);
+    }
+
+    public List<LeagueEmployee> findAllLeagueReferees(String theRole){
         return leagueEmployeeRepository.findByRole(theRole);
     }
 

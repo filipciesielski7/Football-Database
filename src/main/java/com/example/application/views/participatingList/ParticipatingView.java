@@ -2,10 +2,8 @@ package com.example.application.views.participatingList;
 
 import com.example.application.components.ConfirmDialogComponent;
 import com.example.application.data.entity.Participating;
-import com.example.application.data.entity.Refereeing;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
-import com.example.application.views.refereeingList.RefereeingForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -59,7 +57,7 @@ public class ParticipatingView extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new ParticipatingForm(service.findAllClubEmployees(), service.findAllMatches());
+        form = new ParticipatingForm(service.findAllClubPlayers("Player"), service.findAllMatches());
         form.setWidth("25em");
 
         form.addListener(ParticipatingForm.SaveEvent.class, this::saveParticipating);

@@ -57,7 +57,7 @@ public class RefereeingView extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new RefereeingForm(service.findAllLeagueEmployees(), service.findAllMatches());
+        form = new RefereeingForm(service.findAllLeagueReferees("Referee"), service.findAllMatches());
         form.setWidth("25em");
 
         form.addListener(RefereeingForm.SaveEvent.class, this::saveRefereeing);
