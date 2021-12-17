@@ -2,6 +2,7 @@ package com.example.application.data.service;
 
 import com.example.application.data.entity.*;
 import com.example.application.data.repository.*;
+import com.vaadin.flow.component.charts.model.Top;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class CrmService {
     private final RefereeingRepository refereeingRepository;
     private final ParticipatingRepository participatingRepository;
     private final RankingRepository rankingRepository;
+    private final TopPlayerRepository topPlayerRepository;
 
     public CrmService(StadiumRepository stadiumRepository,
                       TeamRepository teamRepository,
@@ -26,7 +28,8 @@ public class CrmService {
                       MatchRepository matchRepository,
                       RefereeingRepository refereeingRepository,
                       ParticipatingRepository participatingRepository,
-                      RankingRepository rankingRepository){
+                      RankingRepository rankingRepository,
+                      TopPlayerRepository topPlayerRepository){
 
         this.stadiumRepository = stadiumRepository;
         this.teamRepository = teamRepository;
@@ -37,6 +40,7 @@ public class CrmService {
         this.refereeingRepository = refereeingRepository;
         this.participatingRepository = participatingRepository;
         this.rankingRepository = rankingRepository;
+        this.topPlayerRepository = topPlayerRepository;
     }
 
     public List<Stadium> findAllStadiums(String filterText){
@@ -283,6 +287,19 @@ public class CrmService {
 
     public List<Ranking> findAllRanking(){
         return rankingRepository.findAll();
+    }
+
+    public List<TopPlayer> findAllTopPlayer(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return topPlayerRepository.findAll();
+        }
+        else{
+            return topPlayerRepository.search(filterText);
+        }
+    }
+
+    public List<TopPlayer> findAllTopPlayer(){
+        return topPlayerRepository.findAll();
     }
 
 }
