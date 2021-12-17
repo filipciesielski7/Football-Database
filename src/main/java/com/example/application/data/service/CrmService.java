@@ -2,7 +2,6 @@ package com.example.application.data.service;
 
 import com.example.application.data.entity.*;
 import com.example.application.data.repository.*;
-import com.vaadin.flow.component.charts.model.Top;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +18,7 @@ public class CrmService {
     private final ParticipatingRepository participatingRepository;
     private final RankingRepository rankingRepository;
     private final TopPlayerRepository topPlayerRepository;
+    private final TopAttendanceRepository topAttendanceRepository;
 
     public CrmService(StadiumRepository stadiumRepository,
                       TeamRepository teamRepository,
@@ -29,7 +29,8 @@ public class CrmService {
                       RefereeingRepository refereeingRepository,
                       ParticipatingRepository participatingRepository,
                       RankingRepository rankingRepository,
-                      TopPlayerRepository topPlayerRepository){
+                      TopPlayerRepository topPlayerRepository,
+                      TopAttendanceRepository topAttendanceRepository){
 
         this.stadiumRepository = stadiumRepository;
         this.teamRepository = teamRepository;
@@ -41,6 +42,7 @@ public class CrmService {
         this.participatingRepository = participatingRepository;
         this.rankingRepository = rankingRepository;
         this.topPlayerRepository = topPlayerRepository;
+        this.topAttendanceRepository = topAttendanceRepository;
     }
 
     public List<Stadium> findAllStadiums(String filterText){
@@ -300,6 +302,19 @@ public class CrmService {
 
     public List<TopPlayer> findAllTopPlayer(){
         return topPlayerRepository.findAll();
+    }
+
+    public List<TopAttendance> findAllTopAttendance(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return topAttendanceRepository.findAll();
+        }
+        else{
+            return topAttendanceRepository.search(filterText);
+        }
+    }
+
+    public List<TopAttendance> findAllTopAttendance(){
+        return topAttendanceRepository.findAll();
     }
 
 }

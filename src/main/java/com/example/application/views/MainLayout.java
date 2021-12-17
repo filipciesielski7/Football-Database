@@ -9,6 +9,7 @@ import com.example.application.views.rankingList.RankingsView;
 import com.example.application.views.refereeingList.RefereeingView;
 import com.example.application.views.stadiumList.StadiumsView;
 import com.example.application.views.teamList.TeamsView;
+import com.example.application.views.topAttendanceList.TopAttendancesView;
 import com.example.application.views.topPlayerList.TopPlayersView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -34,6 +35,9 @@ public class MainLayout extends AppLayout {
 
         RouterLink topPlayerView = new RouterLink("Top Players", TopPlayersView.class);
         topPlayerView.setHighlightCondition(HighlightConditions.sameLocation());
+
+        RouterLink topAttendanceView = new RouterLink("Top Attendances", TopAttendancesView.class);
+        topAttendanceView.setHighlightCondition(HighlightConditions.sameLocation());
 
         RouterLink teamsView = new RouterLink("Teams", TeamsView.class);
         teamsView.setHighlightCondition(HighlightConditions.sameLocation());
@@ -62,6 +66,7 @@ public class MainLayout extends AppLayout {
         addToDrawer(new VerticalLayout(homeView,
                 rankingView,
                 topPlayerView,
+                topAttendanceView,
                 teamsView,
                 stadiumsView,
                 leagueSeasonsView,
