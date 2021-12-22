@@ -17,9 +17,9 @@ public class TopPlayer {
 
     @Id
     @Column(name="pesel")
-    @Size(min = 11, message = "wielkość musi być równa 11")
-    @Size(max = 11, message = "wielkość musi być równa 11")
-    @Pattern(regexp="^[0-9]*$", message = "pesel może składać się tylko z cyfr")
+    @Size(min = 11, message = "pesel size must be 11")
+    @Size(max = 11, message = "pesel size must be 11")
+    @Pattern(regexp="^[0-9]*$", message = "pesel must consist of 11 numbers")
     private String pesel;
 
     @Column(name="first_name")
