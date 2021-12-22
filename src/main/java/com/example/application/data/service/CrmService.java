@@ -203,12 +203,17 @@ public class CrmService {
         leagueEmployeeRepository.save(leagueEmployee);
     }
 
-    public List<Match> findAllMatches(String filterText){
+    public List<Match> findAllMatches(String filterText, String league){
         if(filterText == null || filterText.isEmpty()){
-            return matchRepository.findAll();
+            if(league != null & !league.isEmpty()){
+                return matchRepository.search(league, filterText);
+            }
+            else {
+                return matchRepository.findAll();
+            }
         }
         else{
-            return matchRepository.search(filterText);
+            return matchRepository.search(league, filterText);
         }
     }
 

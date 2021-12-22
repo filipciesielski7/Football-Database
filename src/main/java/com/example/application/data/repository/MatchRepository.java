@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface MatchRepository extends JpaRepository<Match, Long> {
     @Query("select c from Match c " +
-            "where lower(c.homeTeam) like lower(concat('%', :searchTerm, '%')) " +
-            "or lower(c.awayTeam) like lower(concat('%', :searchTerm, '%'))")
-    List<Match> search(@Param("searchTerm") String searchTerm);
+            "where (lower(c.homeTeam) like lower(concat('%', :searchTerm, '%')) " +
+            "or lower(c.awayTeam) like lower(concat('%', :searchTerm, '%')))" +
+            "and lower(c.leagueSeason) like lower(concat('%', :league, '%'))")
+    List<Match> search(@Param("searchTerm") String searchTerm, @Param("league") String league);
 }

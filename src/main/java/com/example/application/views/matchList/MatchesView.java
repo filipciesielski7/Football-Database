@@ -6,6 +6,7 @@ import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -14,10 +15,13 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import java.util.List;
+
 @PageTitle("Matches | Football")
 @Route(value = "matches", layout = MainLayout.class)
 public class MatchesView extends VerticalLayout {
     Grid<Match> grid = new Grid<>(Match.class);
+    ComboBox<String> comboBox = new ComboBox<>("League season");
     TextField filterText = new TextField();
     MatchForm form;
     private CrmService service;
@@ -32,6 +36,15 @@ public class MatchesView extends VerticalLayout {
 
         add(getToolbar(), getContent());
 
+        comboBox.addValueChangeListener(event -> {
+            if(event.getValue() == "All Leagues"){
+                grid.setItems(service.findAllMatches("", filterText.getValue()));
+            }
+            else{
+                grid.setItems(service.findAllMatches(event.getValue(), filterText.getValue()));
+            }
+        });
+
         updateList();
         closeEditor();
     }
@@ -43,7 +56,12 @@ public class MatchesView extends VerticalLayout {
     }
 
     private void updateList() {
-        grid.setItems(service.findAllMatches(filterText.getValue()));
+        if(comboBox.getValue() == "All Leagues" || comboBox.getValue() == "null") {
+            grid.setItems(service.findAllMatches("", filterText.getValue()));
+        }
+        else {
+            grid.setItems(service.findAllMatches(comboBox.getValue(), filterText.getValue()));
+        }
     }
 
     private Component getContent() {
@@ -82,6 +100,12 @@ public class MatchesView extends VerticalLayout {
     }
 
     private Component getToolbar() {
+        List<String> league_names = service.findAllLeagueSeasonsNames(null);
+        league_names.add(0, "All Leagues");
+        comboBox.setItems(league_names);
+        comboBox.setPlaceholder("Filter by league name");
+        comboBox.getStyle().set("--vaadin-combo-box-overlay-width", "250px");
+
         filterText.setPlaceholder("Filter by home or away team");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
@@ -90,7 +114,8 @@ public class MatchesView extends VerticalLayout {
         Button addMatchButton = new Button("Add match");
         addMatchButton.addClickListener(e -> addMatch());
 
-        HorizontalLayout toolbar = new HorizontalLayout(filterText, addMatchButton);
+        HorizontalLayout toolbar = new HorizontalLayout(comboBox, filterText, addMatchButton);
+        toolbar.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
         toolbar.addClassName("toolbar");
         return toolbar;
     }
