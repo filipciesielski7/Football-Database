@@ -88,6 +88,9 @@ public class MatchForm extends FormLayout {
 
     private void validateAndSave() {
         try{
+            if(fansNumber.getValue() > stadium.getValue().getCapacity()){
+                throw new Exception(stadium.getValue().getName() + " has a capacity of only " + stadium.getValue().getCapacity());
+            }
             binder.writeBean(match);
             fireEvent(new SaveEvent(this, match));
             NotificationComponent notification = new NotificationComponent("Match saved");
@@ -96,6 +99,10 @@ public class MatchForm extends FormLayout {
         } catch (ValidationException e){
             e.printStackTrace();
             NotificationComponent notification = new NotificationComponent(e.toString());
+            notification.getErrorNotification().open();
+        } catch (Exception e) {
+//            e.printStackTrace();
+            NotificationComponent notification = new NotificationComponent(e.getMessage());
             notification.getErrorNotification().open();
         }
     }
