@@ -8,6 +8,8 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -19,6 +21,7 @@ public class TopPlayersView extends VerticalLayout {
     private CrmService service;
     Grid<TopPlayer> grid = new Grid<>(TopPlayer.class);
     ComboBox<String> comboBox = new ComboBox<>("League season");
+    TextField filterText = new TextField();
 
     public TopPlayersView(CrmService service){
         this.service = service;
@@ -29,17 +32,24 @@ public class TopPlayersView extends VerticalLayout {
         comboBox.setPlaceholder("Filter by league name");
         comboBox.getStyle().set("--vaadin-combo-box-overlay-width", "250px");
 
+        filterText.setPlaceholder("Search by player name");
+        filterText.setClearButtonVisible(true);
+        filterText.setValueChangeMode(ValueChangeMode.LAZY);
+        filterText.addValueChangeListener(e -> updateList());
+
         configureGrid();
-        add(comboBox, getContent());
+
+        HorizontalLayout toolbar = new HorizontalLayout(comboBox, filterText);
+        toolbar.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
+
+        add(toolbar, getContent());
 
         comboBox.addValueChangeListener(event -> {
             if(event.getValue() == "All Leagues"){
-                grid.setItems(service.findAllTopPlayer());
-//                grid.setColumns("firstName", "lastName", "goals", "assists", "teamName", "league");
+                grid.setItems(service.findAllTopPlayer("", filterText.getValue()));
             }
             else{
-                grid.setItems(service.findAllTopPlayer(event.getValue()));
-//                grid.setColumns("firstName", "lastName", "goals", "assists", "teamName");
+                grid.setItems(service.findAllTopPlayer(event.getValue(), filterText.getValue()));
             }
         });
 
@@ -47,7 +57,12 @@ public class TopPlayersView extends VerticalLayout {
     }
 
     private void updateList() {
-        grid.setItems(service.findAllTopPlayer(comboBox.getValue()));
+        if(comboBox.getValue() == "All Leagues" || comboBox.getValue() == "null") {
+            grid.setItems(service.findAllTopPlayer("", filterText.getValue()));
+        }
+        else {
+            grid.setItems(service.findAllTopPlayer(comboBox.getValue(), filterText.getValue()));
+        }
     }
 
     private Component getContent() {

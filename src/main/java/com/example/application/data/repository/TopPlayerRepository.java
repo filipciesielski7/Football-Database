@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface TopPlayerRepository extends JpaRepository<TopPlayer, String> {
     @Query("select c from TopPlayer c " +
-            "where lower(c.league) like lower(concat('%', :searchTerm, '%'))")
-    List<TopPlayer> search(@Param("searchTerm") String searchTerm);
+            "where lower(c.league) like lower(concat('%', :searchTerm, '%'))" +
+            "and (lower(c.lastName) like lower(concat('%', :name, '%'))" +
+            "or lower(c.firstName) like lower(concat('%', :name, '%')))")
+    List<TopPlayer> search(@Param("searchTerm") String searchTerm,  @Param("name") String name);
 }

@@ -8,6 +8,8 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -16,10 +18,10 @@ import java.util.List;
 @PageTitle("Top Attendances | Football")
 @Route(value = "top-attendances", layout = MainLayout.class)
 public class TopAttendancesView extends VerticalLayout {
-
     private CrmService service;
     Grid<TopAttendance> grid = new Grid<>(TopAttendance.class);
     ComboBox<String> comboBox = new ComboBox<>("League season");
+    TextField filterText = new TextField();
 
     public TopAttendancesView(CrmService service){
         this.service = service;
@@ -32,17 +34,24 @@ public class TopAttendancesView extends VerticalLayout {
         comboBox.setPlaceholder("Filter by league name");
         comboBox.getStyle().set("--vaadin-combo-box-overlay-width", "250px");
 
+        filterText.setPlaceholder("Search by stadium");
+        filterText.setClearButtonVisible(true);
+        filterText.setValueChangeMode(ValueChangeMode.LAZY);
+        filterText.addValueChangeListener(e -> updateList());
+
         configureGrid();
-        add(comboBox, getContent());
+
+        HorizontalLayout toolbar = new HorizontalLayout(comboBox, filterText);
+        toolbar.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
+
+        add(toolbar, getContent());
 
         comboBox.addValueChangeListener(event -> {
             if(event.getValue() == "All Leagues"){
-                grid.setItems(service.findAllTopAttendance());
-//                grid.setColumns("stadiumName", "fansNumber", "matchDate", "homeTeam", "awayTeam", "league");
+                grid.setItems(service.findAllTopAttendance("", filterText.getValue()));
             }
             else{
-                grid.setItems(service.findAllTopAttendance(event.getValue()));
-//                grid.setColumns("stadiumName", "fansNumber", "matchDate", "homeTeam", "awayTeam", "league");
+                grid.setItems(service.findAllTopAttendance(event.getValue(), filterText.getValue()));
             }
         });
 
@@ -50,7 +59,12 @@ public class TopAttendancesView extends VerticalLayout {
     }
 
     private void updateList() {
-        grid.setItems(service.findAllTopAttendance(comboBox.getValue()));
+        if(comboBox.getValue() == "All Leagues" || comboBox.getValue() == "null") {
+            grid.setItems(service.findAllTopAttendance("", filterText.getValue()));
+        }
+        else {
+            grid.setItems(service.findAllTopAttendance(comboBox.getValue(), filterText.getValue()));
+        }
     }
 
     private Component getContent() {

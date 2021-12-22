@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface TopAttendanceRepository extends JpaRepository<TopAttendance, Integer> {
     @Query("select c from TopAttendance c " +
-            "where lower(c.league) like lower(concat('%', :searchTerm, '%'))")
-    List<TopAttendance> search(@Param("searchTerm") String searchTerm);
+            "where lower(c.league) like lower(concat('%', :searchTerm, '%'))"+
+            "and lower(c.stadiumName) like lower(concat('%', :name, '%'))")
+    List<TopAttendance> search(@Param("searchTerm") String searchTerm, @Param("name") String name);
 }

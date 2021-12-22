@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface RankingRepository extends JpaRepository<Ranking, String> {
     @Query("select c from Ranking c " +
-            "where lower(c.league) like lower(concat('%', :searchTerm, '%'))")
-    List<Ranking> search(@Param("searchTerm") String searchTerm);
+            "where lower(c.league) like lower(concat('%', :searchTerm, '%'))" +
+            "and lower(c.name) like lower(concat('%', :teamName, '%'))")
+    List<Ranking> search(@Param("searchTerm") String searchTerm, @Param("teamName") String teamName);
 }

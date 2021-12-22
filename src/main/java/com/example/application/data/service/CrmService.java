@@ -278,12 +278,17 @@ public class CrmService {
         participatingRepository.save(participating);
     }
 
-    public List<Ranking> findAllRanking(String filterText){
+    public List<Ranking> findAllRanking(String filterText, String teamName){
         if(filterText == null || filterText.isEmpty()){
-            return rankingRepository.findAll();
+            if(teamName != null & !teamName.isEmpty()){
+                return rankingRepository.search(filterText, teamName);
+            }
+            else {
+                return rankingRepository.findAll();
+            }
         }
-        else{
-            return rankingRepository.search(filterText);
+        else {
+            return rankingRepository.search(filterText, teamName);
         }
     }
 
@@ -291,12 +296,17 @@ public class CrmService {
         return rankingRepository.findAll();
     }
 
-    public List<TopPlayer> findAllTopPlayer(String filterText){
+    public List<TopPlayer> findAllTopPlayer(String filterText, String name){
         if(filterText == null || filterText.isEmpty()){
-            return topPlayerRepository.findAll();
+            if(name != null & !name.isEmpty()){
+                return topPlayerRepository.search(filterText, name);
+            }
+            else {
+                return topPlayerRepository.findAll();
+            }
         }
         else{
-            return topPlayerRepository.search(filterText);
+            return topPlayerRepository.search(filterText, name);
         }
     }
 
@@ -304,12 +314,17 @@ public class CrmService {
         return topPlayerRepository.findAll();
     }
 
-    public List<TopAttendance> findAllTopAttendance(String filterText){
+    public List<TopAttendance> findAllTopAttendance(String filterText, String name){
         if(filterText == null || filterText.isEmpty()){
-            return topAttendanceRepository.findAll();
+            if(name != null & !name.isEmpty()){
+                return topAttendanceRepository.search(filterText, name);
+            }
+            else {
+                return topAttendanceRepository.findAll();
+            }
         }
         else{
-            return topAttendanceRepository.search(filterText);
+            return topAttendanceRepository.search(filterText, name);
         }
     }
 
