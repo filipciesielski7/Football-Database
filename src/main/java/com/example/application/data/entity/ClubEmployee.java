@@ -159,4 +159,8 @@ public class ClubEmployee {
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
+
+    public String firstAndLastName() {
+        return firstName + " " + lastName;
+    }
 }

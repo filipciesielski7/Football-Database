@@ -188,4 +188,8 @@ public class Match {
                 ", awayGoals=" + awayGoals +
                 '}';
     }
+
+    public String matchInfo() {
+        return matchId + ". " + homeTeam.getName() + " vs " + awayTeam.getName();
+    }
 }

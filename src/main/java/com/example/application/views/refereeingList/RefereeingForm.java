@@ -25,8 +25,8 @@ import java.util.List;
 public class RefereeingForm extends FormLayout {
     Binder<Refereeing> binder = new BeanValidationBinder<>(Refereeing.class);
 
-    ComboBox<LeagueEmployee> pesel = new ComboBox<>("Pesel");
-    ComboBox<Match> matchId = new ComboBox<>("Match id");
+    ComboBox<LeagueEmployee> pesel = new ComboBox<>("League employee");
+    ComboBox<Match> matchId = new ComboBox<>("Match");
     TextField function = new TextField("Function");
 
     Button save = new Button("Save");
@@ -40,10 +40,10 @@ public class RefereeingForm extends FormLayout {
         binder.bindInstanceFields(this);
 
         matchId.setItems(matches);
-        matchId.setItemLabelGenerator(Match::getMatchIdString);
+        matchId.setItemLabelGenerator(Match::matchInfo);
 
         pesel.setItems(leagueEmployees);
-        pesel.setItemLabelGenerator(LeagueEmployee::getPesel);
+        pesel.setItemLabelGenerator(LeagueEmployee::firstAndLastName);
 
         add(matchId, pesel, function, createButtonLayout());
     }

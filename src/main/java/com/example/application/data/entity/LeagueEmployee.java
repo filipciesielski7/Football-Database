@@ -118,4 +118,8 @@ public class LeagueEmployee {
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
+
+    public String firstAndLastName() {
+        return firstName + " " + lastName;
+    }
 }

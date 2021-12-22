@@ -105,9 +105,12 @@ public class ParticipatingView extends VerticalLayout {
         grid.setSizeFull();
         grid.setColumns("goals", "assists", "gotYellowCard", "gotRedCard");
         grid.addColumn(participating -> participating.getMatchId().getMatchIdString()).setHeader("Match Id");
-        grid.addColumn(participating-> participating.getPesel().getPesel()).setHeader("Pesel");
-//        grid.addColumn(refereeing-> refereeing.getPesel().getFirstName()).setHeader("First Name");
-//        grid.addColumn(refereeing-> refereeing.getPesel().getLastName()).setHeader("Last Name");
+        grid.addColumn(participating -> participating.getPesel().getPesel()).setHeader("Pesel");
+        grid.addColumn(participating -> participating.getPesel().getFirstName()).setHeader("First Name");
+        grid.addColumn(participating -> participating.getPesel().getLastName()).setHeader("Last Name");
+        grid.addColumn(participating -> participating.getMatchId().getHomeTeam().getName()).setHeader("Home Team");
+        grid.addColumn(participating -> participating.getMatchId().getAwayTeam().getName()).setHeader("Away Team");
+        grid.addColumn(participating -> participating.getMatchId().getLeagueSeason().getName()).setHeader("League Season");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(e -> editParticipating(e.getValue()));

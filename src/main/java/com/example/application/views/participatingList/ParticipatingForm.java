@@ -25,8 +25,8 @@ import java.util.List;
 public class ParticipatingForm extends FormLayout {
     Binder<Participating> binder = new BeanValidationBinder<>(Participating.class);
 
-    ComboBox<ClubEmployee> pesel = new ComboBox<>("Pesel");
-    ComboBox<Match> matchId = new ComboBox<>("Match id");
+    ComboBox<ClubEmployee> pesel = new ComboBox<>("Club employee");
+    ComboBox<Match> matchId = new ComboBox<>("Match");
     IntegerField goals = new IntegerField("Goals");
     IntegerField assists = new IntegerField("Assists");
 
@@ -44,10 +44,10 @@ public class ParticipatingForm extends FormLayout {
         binder.bindInstanceFields(this);
 
         matchId.setItems(matches);
-        matchId.setItemLabelGenerator(Match::getMatchIdString);
+        matchId.setItemLabelGenerator(Match::matchInfo);
 
         pesel.setItems(clubEmployees);
-        pesel.setItemLabelGenerator(ClubEmployee::getPesel);
+        pesel.setItemLabelGenerator(ClubEmployee::firstAndLastName);
 
         gotYellowCard.setItems("Yes", "No");
         gotYellowCard.setValue("No");
