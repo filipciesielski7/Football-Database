@@ -226,3 +226,12 @@ BEGIN
 END;
 
 -- ---------------------------------------------------
+
+CREATE OR REPLACE FUNCTION LeagueNameCount (
+vleague_name IN VARCHAR)
+RETURN NUMBER IS
+vleague_count NUMBER;
+BEGIN
+    SELECT COUNT(m.league_year) INTO vleague_count FROM MATCHES m WHERE m.league_year=vleague_name;
+    RETURN vleague_count;
+END LeagueNameCount;

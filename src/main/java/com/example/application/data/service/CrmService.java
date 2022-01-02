@@ -233,6 +233,10 @@ public class CrmService {
         matchRepository.save(match);
     }
 
+    public long countMatches() {
+        return matchRepository.count();
+    }
+
     public List<Refereeing> findAllRefereeing(String filterText){
         if(filterText == null || filterText.isEmpty()){
             return refereeingRepository.findAll();

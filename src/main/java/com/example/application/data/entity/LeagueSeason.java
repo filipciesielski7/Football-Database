@@ -1,10 +1,9 @@
 package com.example.application.data.entity;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,6 +31,9 @@ public class LeagueSeason {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "leagueSeason", cascade = CascadeType.REMOVE)
     private List<Match> matches = new LinkedList<>();
+
+    @Formula("(select LeagueNameCount(name) from dual)")
+    private int matchesCount;
 
     public LeagueSeason() {}
 
@@ -71,6 +73,10 @@ public class LeagueSeason {
 
     public void setMatches(List<Match> matches) {
         this.matches = matches;
+    }
+
+    public int getMatchesCount() {
+        return matchesCount;
     }
 
     @Override
