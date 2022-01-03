@@ -76,7 +76,24 @@ public class RefereeingView extends VerticalLayout {
     }
 
     private void saveRefereeing(RefereeingForm.SaveEvent event) {
-        service.saveRefereeing(event.getRefereeing());
+        Refereeing refereeingCopy = service.findAllRefereeing().stream().filter(refereeing -> event.getRefereeing().getPesel().toString().equals(refereeing.getPesel().toString()) && event.getRefereeing().getMatchId().toString().equals(refereeing.getMatchId().toString()))
+                .findAny().orElse(null);
+
+        if(refereeingCopy != null && !refereeingCopy.toString().equals(event.getRefereeing().toString())){
+            ConfirmDialogComponent dialog = new ConfirmDialogComponent(" referee with pesel " + refereeingCopy.getPesel().getPesel() + " refereeing match number " + refereeingCopy.getMatchId().getMatchId().toString());
+            dialog.getModifyConfirmDialog().addConfirmListener(event2 -> {
+                service.saveRefereeing(event.getRefereeing());
+                updateList();
+                closeEditor();
+            });
+            dialog.getModifyConfirmDialog().open();
+        }
+        else if (refereeingCopy != null && refereeingCopy.toString().equals(event.getRefereeing().toString())) {
+//            System.out.println("No changes");
+        }
+        else{
+            service.saveRefereeing(event.getRefereeing());
+        }
         updateList();
         closeEditor();
     }

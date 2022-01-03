@@ -76,7 +76,23 @@ public class LeagueEmployeesView extends VerticalLayout {
     }
 
     private void saveLeagueEmployee(LeagueEmployeeForm.SaveEvent event) {
-        service.saveLeagueEmployee(event.getLeagueEmployee());
+        LeagueEmployee leagueEmployeeCopy = service.findAllLeagueEmployees().stream().filter(leagueEmployee -> event.getLeagueEmployee().getPesel().equals(leagueEmployee.getPesel()))
+                .findAny().orElse(null);
+        if(leagueEmployeeCopy != null && !leagueEmployeeCopy.toString().equals(event.getLeagueEmployee().toString())){
+            ConfirmDialogComponent dialog = new ConfirmDialogComponent(leagueEmployeeCopy.getFirstName() + " " + leagueEmployeeCopy.getLastName());
+            dialog.getModifyConfirmDialog().addConfirmListener(event2 -> {
+                service.saveLeagueEmployee(event.getLeagueEmployee());
+                updateList();
+                closeEditor();
+            });
+            dialog.getModifyConfirmDialog().open();
+        }
+        else if (leagueEmployeeCopy != null && leagueEmployeeCopy.toString().equals(event.getLeagueEmployee().toString())) {
+//            System.out.println("No changes");
+        }
+        else{
+            service.saveLeagueEmployee(event.getLeagueEmployee());
+        }
         updateList();
         closeEditor();
     }

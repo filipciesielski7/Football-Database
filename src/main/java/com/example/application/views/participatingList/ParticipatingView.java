@@ -76,7 +76,24 @@ public class ParticipatingView extends VerticalLayout {
     }
 
     private void saveParticipating(ParticipatingForm.SaveEvent event) {
-        service.saveParticipating(event.getParticipating());
+        Participating participatingCopy = service.findAllParticipating().stream().filter(participating -> event.getParticipating().getPesel().toString().equals(participating.getPesel().toString()) && event.getParticipating().getMatchId().toString().equals(participating.getMatchId().toString()))
+                .findAny().orElse(null);
+
+        if(participatingCopy != null && !participatingCopy.toString().equals(event.getParticipating().toString())){
+            ConfirmDialogComponent dialog = new ConfirmDialogComponent(" player with pesel " + participatingCopy.getPesel().getPesel() + " playing in match number " + participatingCopy.getMatchId().getMatchId().toString());
+            dialog.getModifyConfirmDialog().addConfirmListener(event2 -> {
+                service.saveParticipating(event.getParticipating());
+                updateList();
+                closeEditor();
+            });
+            dialog.getModifyConfirmDialog().open();
+        }
+        else if (participatingCopy != null && participatingCopy.toString().equals(event.getParticipating().toString())) {
+//            System.out.println("No changes");
+        }
+        else{
+            service.saveParticipating(event.getParticipating());
+        }
         updateList();
         closeEditor();
     }

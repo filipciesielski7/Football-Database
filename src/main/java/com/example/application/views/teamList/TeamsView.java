@@ -76,7 +76,23 @@ public class TeamsView  extends VerticalLayout{
     }
 
     private void saveTeam(TeamForm.SaveEvent event) {
-        service.saveTeam(event.getTeam());
+        Team teamCopy = service.findAllTeams().stream().filter(team -> event.getTeam().getName().equals(team.getName()))
+                .findAny().orElse(null);
+        if(teamCopy != null && !teamCopy.toString().equals(event.getTeam().toString())){
+            ConfirmDialogComponent dialog = new ConfirmDialogComponent(teamCopy.getName());
+            dialog.getModifyConfirmDialog().addConfirmListener(event2 -> {
+                service.saveTeam(event.getTeam());
+                updateList();
+                closeEditor();
+            });
+            dialog.getModifyConfirmDialog().open();
+        }
+        else if (teamCopy != null && teamCopy.toString().equals(event.getTeam().toString())){
+//            System.out.println("No changes");
+        }
+        else{
+            service.saveTeam(event.getTeam());
+        }
         updateList();
         closeEditor();
     }

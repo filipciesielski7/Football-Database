@@ -76,7 +76,23 @@ public class LeagueSeasonsView  extends VerticalLayout {
     }
 
     private void saveLeagueSeason(LeagueSeasonForm.SaveEvent event) {
-        service.saveLeagueSeason(event.getLeagueSeason());
+        LeagueSeason leagueSeasonCopy = service.findAllLeagueSeasons().stream().filter(leagueSeason -> event.getLeagueSeason().getName().equals(leagueSeason.getName()))
+                .findAny().orElse(null);
+        if(leagueSeasonCopy != null && !leagueSeasonCopy.toString().equals(event.getLeagueSeason().toString())){
+            ConfirmDialogComponent dialog = new ConfirmDialogComponent(leagueSeasonCopy.getName());
+            dialog.getModifyConfirmDialog().addConfirmListener(event2 -> {
+                service.saveLeagueSeason(event.getLeagueSeason());
+                updateList();
+                closeEditor();
+            });
+            dialog.getModifyConfirmDialog().open();
+        }
+        else if (leagueSeasonCopy != null && leagueSeasonCopy.toString().equals(event.getLeagueSeason().toString())) {
+//            System.out.println("No changes");
+        }
+        else{
+            service.saveLeagueSeason(event.getLeagueSeason());
+        }
         updateList();
         closeEditor();
     }

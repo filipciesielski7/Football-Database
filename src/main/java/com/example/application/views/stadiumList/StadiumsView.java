@@ -6,7 +6,6 @@ import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -77,7 +76,23 @@ public class StadiumsView extends VerticalLayout {
     }
 
     private void saveStadium(StadiumForm.SaveEvent event) {
-        service.saveStadium(event.getStadium());
+        Stadium stadiumCopy = service.findAllStadiums().stream().filter(stadium -> event.getStadium().getName().equals(stadium.getName()))
+                        .findAny().orElse(null);
+        if(stadiumCopy != null && !stadiumCopy.toString().equals(event.getStadium().toString())){
+            ConfirmDialogComponent dialog = new ConfirmDialogComponent(stadiumCopy.getName());
+            dialog.getModifyConfirmDialog().addConfirmListener(event2 -> {
+                service.saveStadium(event.getStadium());
+                updateList();
+                closeEditor();
+            });
+            dialog.getModifyConfirmDialog().open();
+        }
+        else if (stadiumCopy != null && stadiumCopy.toString().equals(event.getStadium().toString())) {
+//            System.out.println("No changes");
+        }
+        else{
+            service.saveStadium(event.getStadium());
+        }
         updateList();
         closeEditor();
     }

@@ -76,7 +76,23 @@ public class ClubEmployeesView extends VerticalLayout {
     }
 
     private void saveClubEmployee(ClubEmployeeForm.SaveEvent event) {
-        service.saveClubEmployee(event.getClubEmployee());
+        ClubEmployee clubEmployeeCopy = service.findAllClubEmployees().stream().filter(clubEmployee -> event.getClubEmployee().getPesel().equals(clubEmployee.getPesel()))
+                .findAny().orElse(null);
+        if(clubEmployeeCopy != null && !clubEmployeeCopy.toString().equals(event.getClubEmployee().toString())){
+            ConfirmDialogComponent dialog = new ConfirmDialogComponent(clubEmployeeCopy.getFirstName() + " " + clubEmployeeCopy.getLastName());
+            dialog.getModifyConfirmDialog().addConfirmListener(event2 -> {
+                service.saveClubEmployee(event.getClubEmployee());
+                updateList();
+                closeEditor();
+            });
+            dialog.getModifyConfirmDialog().open();
+        }
+        else if (clubEmployeeCopy != null && clubEmployeeCopy.toString().equals(event.getClubEmployee().toString())) {
+//            System.out.println("No changes");
+        }
+        else{
+            service.saveClubEmployee(event.getClubEmployee());
+        }
         updateList();
         closeEditor();
     }

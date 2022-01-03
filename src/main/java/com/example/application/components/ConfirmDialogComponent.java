@@ -36,4 +36,14 @@ public class ConfirmDialogComponent {
 
         return confirmDialog;
     }
+
+    public ConfirmDialog getModifyConfirmDialog(){
+        this.confirmDialog.setHeader("Modify");
+        this.confirmDialog.setText("Are you sure you want to permanently modify already existing " + this.objectInfo + "?");
+        this.confirmDialog.setCancelable(true);
+        this.confirmDialog.setConfirmText("Modify");
+//        this.confirmDialog.setConfirmButtonTheme("error primary");
+
+        return confirmDialog;
+    }
 }

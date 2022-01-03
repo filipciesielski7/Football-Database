@@ -1,6 +1,7 @@
 package com.example.application.views.matchList;
 
 import com.example.application.components.ConfirmDialogComponent;
+import com.example.application.data.entity.ClubEmployee;
 import com.example.application.data.entity.Match;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
@@ -94,7 +95,23 @@ public class MatchesView extends VerticalLayout {
     }
 
     private void saveMatch(MatchForm.SaveEvent event) {
-        service.saveMatch(event.getMatch());
+        Match matchCopy = service.findAllMatches().stream().filter(match -> event.getMatch().getMatchId().equals(match.getMatchId()))
+                .findAny().orElse(null);
+        if(matchCopy != null && !matchCopy.toString().equals(event.getMatch().toString())){
+            ConfirmDialogComponent dialog = new ConfirmDialogComponent(" match number " + matchCopy.getMatchId().toString());
+            dialog.getModifyConfirmDialog().addConfirmListener(event2 -> {
+                service.saveMatch(event.getMatch());
+                updateList();
+                closeEditor();
+            });
+            dialog.getModifyConfirmDialog().open();
+        }
+        else if (matchCopy != null && matchCopy.toString().equals(event.getMatch().toString())) {
+//            System.out.println("No changes");
+        }
+        else{
+            service.saveMatch(event.getMatch());
+        }
         updateList();
         closeEditor();
     }
