@@ -31,6 +31,25 @@ insert into stadiums values('Molineux Stadium', 31700, 'Yes', 'No');
 insert into stadiums values('Turf Moor', 21944, 'Yes', 'No');
 insert into stadiums values('Etihad Stadium', 53400, 'Yes', 'No');
 
+insert into stadiums values('Borussia-Park', 59724, 'Yes', 'Yes');
+insert into stadiums values('Schüco-Arena', 26515, 'Yes', 'No');
+insert into stadiums values('WWK Arena', 30660, 'Yes', 'Yes');
+insert into stadiums values('Mercedes-Benz Arena', 17000, 'Yes', 'No');
+insert into stadiums values('Stadion An der Alten Försterei', 22012, 'Yes', 'Yes');
+insert into stadiums values('Volkswagen Arena', 30000, 'Yes', 'No');
+insert into stadiums values('Signal Iduna Park', 81365, 'Yes', 'No');
+insert into stadiums values('Opel Arena', 34034, 'Yes', 'No');
+insert into stadiums values('RheinEnergieStadion', 39572, 'Yes', 'Yes');
+insert into stadiums values('Red Bull Arena', 50000, 'Yes', 'No');
+insert into stadiums values('Sportpark Ronhof Thomas Sommer', 16626, 'Yes', 'No');
+insert into stadiums values('Vonovia Ruhrstadion', 27599, 'Yes', 'No');
+insert into stadiums values('Olympiastadion', 74475, 'Yes', 'Yes');
+insert into stadiums values('SC-Stadion', 34700, 'Yes', 'No');
+insert into stadiums values('Deutsche Bank Park', 51500, 'Yes', 'No');
+insert into stadiums values('BayArena', 30210, 'Yes', 'No');
+insert into stadiums values('PreZero Arena', 30150, 'Yes', 'No');
+insert into stadiums values('Allianz Arena', 75000, 'Yes', 'No');
+
 -- ---------------------------------------------------
 
 insert into teams values('FC Barcelona', 'Barcelona', 'Camp Nou');
@@ -64,11 +83,32 @@ insert into teams values('Wolves', 'Wolverhampton', 'Molineux Stadium');
 insert into teams values('Burnley', 'Lancashire', 'Turf Moor');
 insert into teams values('Manchester City', 'Manchester', 'Etihad Stadium');
 
+insert into teams values('Borussia Mönchengladbach', 'Mönchengladbach', 'Borussia-Park');
+insert into teams values('Arminia Bielefeld', 'Bielefeld', 'Schüco-Arena');
+insert into teams values('FC Augsburg', 'Augsburg', 'WWK Arena');
+insert into teams values('VfB Stuttgart', 'Stuttgart', 'Mercedes-Benz Arena');
+insert into teams values('Union Berlin', 'Berlin', 'Stadion An der Alten Försterei');
+insert into teams values('VfL Wolfsburg', 'Wolfsburg', 'Volkswagen Arena');
+insert into teams values('Borussia Dortmund', 'Dortmund', 'Signal Iduna Park');
+insert into teams values('Mainz 05', 'Mainz', 'Opel Arena');
+insert into teams values('FC Köln', 'Köln', 'RheinEnergieStadion');
+insert into teams values('RB Leipzig', 'Leipzig', 'Red Bull Arena');
+insert into teams values('SpVgg Greuther Fürth', 'Fürth', 'Sportpark Ronhof Thomas Sommer');
+insert into teams values('VfL Bochum', 'Bochum', 'Vonovia Ruhrstadion');
+insert into teams values('Hertha BSC', 'Berlin', 'Olympiastadion');
+insert into teams values('Newcastle', 'Newcastle', 'St. James Park');
+insert into teams values('SC Freiburg', 'Freiburg', 'SC-Stadion');
+insert into teams values('Eintracht Frankfurt', 'Frankfurt', 'Deutsche Bank Park');
+insert into teams values('Bayer 04 Leverkusen', 'Leverkusen', 'BayArena');
+insert into teams values('Hoffenheim', 'Hoffenheim', 'PreZero Arena');
+insert into teams values('FC Bayern', 'München', 'Allianz Arena');
+
 -- ---------------------------------------------------
 
 insert into league_seasons values('LaLiga Santander 2021', 2021, 1);
 insert into league_seasons values('PKO Ekstraklasa 2021', 2021, 1);
 insert into league_seasons values('Premier League 2021', 2021, 1);
+insert into league_seasons values('Bundesliga 2022', 2022, 1);
 
 -- ---------------------------------------------------
 
@@ -97,6 +137,13 @@ insert into club_employees values('11111111002', 'Son', 'Heung-min', 120000, DAT
 insert into club_employees values('11111111003', 'Jamie', 'Vardy', 65000, DATE '1987-01-11', 'Player', 'Forward', NULL, 'Leicester');
 insert into club_employees values('11111111004', 'Pierre-Emerick', 'Aubameyang', 250000, DATE '1989-07-18', 'Player', 'Forward', NULL, 'Arsenal');
 
+insert into club_employees values('11111111005', 'Robert', 'Lewandowski', 270000, DATE '1988-08-21', 'Player', 'Forward', NULL, 'FC Bayern');
+insert into club_employees values('11111111006', 'Patrik', 'Schick', 40000, DATE '1992-05-15', 'Player', 'Forward', NULL, 'Bayer 04 Leverkusen');
+insert into club_employees values('11111111007', 'Erling', 'Haaland', 180000, DATE '2000-07-21', 'Player', 'Forward', NULL, 'Borussia Dortmund');
+insert into club_employees values('11111111008', 'Serge', 'Gnabry', 120000, DATE '1995-07-14', 'Player', 'Forward', NULL, 'FC Bayern');
+insert into club_employees values('11111111009', 'Taiwo', 'Awoniyi', 65000, DATE '1997-08-12', 'Player', 'Forward', NULL, 'Union Berlin');
+insert into club_employees values('11111110001', 'Yussuf', 'Poulsen', 110000, DATE '1994-07-15', 'Player', 'Forward', NULL, 'RB Leipzig');
+
 -- ---------------------------------------------------
 
 insert into league_employees values('22222222221', 'Szymon', 'Marciniak', DATE '1981-01-07', 'Referee');
@@ -104,6 +151,8 @@ insert into league_employees values('22222222222', 'Antonio Mateu', 'Lahoz', DAT
 insert into league_employees values('22222222223', 'Felix', 'Brych', DATE '1975-08-3', 'Referee');
 insert into league_employees values('22222222224', 'John', 'Adams', DATE '1978-09-30', 'Delegate');
 insert into league_employees values('22222222225', 'Kacper', 'Kaczmarek', DATE '1984-10-13', 'Delegate');
+insert into league_employees values('22222222226', 'Alexander', 'Heckmann', DATE '1988-06-23', 'Delegate');
+insert into league_employees values('22222222227', 'Michael', 'Weiner', DATE '1969-03-21', 'Referee');
 
 -- ---------------------------------------------------
 
@@ -496,6 +545,160 @@ insert into matches values(match_seq.nextval, DATE '2021-05-23', 1, 0, '9554', '
 insert into matches values(match_seq.nextval, DATE '2021-05-23', 3, 0, '9755', 'West Ham', 'Southampton', 'London Stadium', 'Premier League 2021', '22222222224');
 insert into matches values(match_seq.nextval, DATE '2021-05-23', 1, 2, '18122', 'Wolves', 'Manchester United', 'Molineux Stadium', 'Premier League 2021', '22222222224');
 
+insert into matches values(match_seq.nextval, DATE '2021-08-13', 1, 1, '17566', 'Borussia Mönchengladbach', 'FC Bayern', 'Borussia-Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-14', 0, 0, '17733', 'Arminia Bielefeld', 'SC Freiburg', 'Schüco-Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-14', 0, 4, '11486', 'FC Augsburg', 'Hoffenheim', 'WWK Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-14', 5, 1, '11708', 'VfB Stuttgart', 'SpVgg Greuther Fürth', 'Mercedes-Benz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-14', 1, 1, '10043', 'Union Berlin', 'Bayer 04 Leverkusen', 'Stadion An der Alten Försterei', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-14', 1, 0, '12499', 'VfL Wolfsburg', 'VfL Bochum', 'Volkswagen Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-14', 5, 2, '19585', 'Borussia Dortmund', 'Eintracht Frankfurt', 'Signal Iduna Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-15', 1, 0, '16586', 'Mainz 05', 'RB Leipzig', 'Opel Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-15', 3, 1, '15667', 'FC Köln', 'Hertha BSC', 'RheinEnergieStadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-20', 4, 0, '10521', 'RB Leipzig', 'VfB Stuttgart', 'Red Bull Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-21', 1, 1, '11169', 'SpVgg Greuther Fürth', 'Arminia Bielefeld', 'Sportpark Ronhof Thomas Sommer', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-21', 2, 0, '13557', 'VfL Bochum', 'Mainz 05', 'Vonovia Ruhrstadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-21', 1, 2, '19490', 'Hertha BSC', 'VfL Wolfsburg', 'Olympiastadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-21', 2, 1, '17017', 'SC Freiburg', 'Borussia Dortmund', 'SC-Stadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-21', 0, 0, '15767', 'Eintracht Frankfurt', 'FC Augsburg', 'Deutsche Bank Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-21', 4, 0, '17962', 'Bayer 04 Leverkusen', 'Borussia Mönchengladbach', 'BayArena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-22', 2, 2, '19687', 'Hoffenheim', 'Union Berlin', 'PreZero Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-22', 3, 2, '20386', 'FC Bayern', 'FC Köln', 'Allianz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-27', 3, 2, '15973', 'Borussia Dortmund', 'Hoffenheim', 'Signal Iduna Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-28', 2, 1, '14082', 'FC Köln', 'VfL Bochum', 'RheinEnergieStadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-28', 1, 1, '12587', 'Arminia Bielefeld', 'Eintracht Frankfurt', 'Schüco-Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-28', 1, 4, '18734', 'FC Augsburg', 'Bayer 04 Leverkusen', 'WWK Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-28', 3, 0, '11573', 'Mainz 05', 'SpVgg Greuther Fürth', 'Opel Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-28', 2, 3, '17469', 'VfB Stuttgart', 'SC Freiburg', 'Mercedes-Benz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-28', 5, 0, '13721', 'FC Bayern', 'Hertha BSC', 'Allianz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-29', 2, 1, '10770', 'Union Berlin', 'Borussia Mönchengladbach', 'Stadion An der Alten Försterei', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-08-29', 1, 0, '19942', 'VfL Wolfsburg', 'RB Leipzig', 'Volkswagen Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-11', 0, 2, '19514', 'SpVgg Greuther Fürth', 'VfL Wolfsburg', 'Sportpark Ronhof Thomas Sommer', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-11', 0, 2, '10750', 'Hoffenheim', 'Mainz 05', 'PreZero Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-11', 1, 1, '19613', 'SC Freiburg', 'FC Köln', 'SC-Stadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-11', 0, 0, '15823', 'Union Berlin', 'FC Augsburg', 'Stadion An der Alten Försterei', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-11', 3, 4, '10048', 'Bayer 04 Leverkusen', 'Borussia Dortmund', 'BayArena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-11', 1, 4, '13812', 'RB Leipzig', 'FC Bayern', 'Red Bull Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-12', 1, 1, '18257', 'Eintracht Frankfurt', 'VfB Stuttgart', 'Deutsche Bank Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-12', 1, 3, '18830', 'VfL Bochum', 'Hertha BSC', 'Vonovia Ruhrstadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-12', 3, 1, '10175', 'Borussia Mönchengladbach', 'Arminia Bielefeld', 'Borussia-Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-17', 2, 1, '16069', 'Hertha BSC', 'SpVgg Greuther Fürth', 'Olympiastadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-18', 0, 0, '14910', 'Arminia Bielefeld', 'Hoffenheim', 'Schüco-Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-18', 1, 0, '18328', 'FC Augsburg', 'Borussia Mönchengladbach', 'WWK Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-18', 0, 0, '15708', 'Mainz 05', 'SC Freiburg', 'Opel Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-18', 7, 0, '13300', 'FC Bayern', 'VfL Bochum', 'Allianz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-18', 1, 1, '17300', 'FC Köln', 'RB Leipzig', 'RheinEnergieStadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-19', 1, 3, '16315', 'VfB Stuttgart', 'Bayer 04 Leverkusen', 'Mercedes-Benz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-19', 4, 2, '14825', 'Borussia Dortmund', 'Union Berlin', 'Signal Iduna Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-19', 1, 1, '19631', 'VfL Wolfsburg', 'Eintracht Frankfurt', 'Volkswagen Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-24', 1, 3, '15746', 'SpVgg Greuther Fürth', 'FC Bayern', 'Sportpark Ronhof Thomas Sommer', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-25', 3, 1, '20340', 'Hoffenheim', 'VfL Wolfsburg', 'PreZero Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-25', 1, 0, '18096', 'Union Berlin', 'Arminia Bielefeld', 'Stadion An der Alten Försterei', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-25', 1, 0, '10303', 'Bayer 04 Leverkusen', 'Mainz 05', 'BayArena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-25', 1, 1, '12120', 'Eintracht Frankfurt', 'FC Köln', 'Deutsche Bank Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-25', 6, 0, '9879', 'RB Leipzig', 'Hertha BSC', 'Red Bull Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-25', 1, 0, '17134', 'Borussia Mönchengladbach', 'Borussia Dortmund', 'Borussia-Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-26', 0, 0, '16160', 'VfL Bochum', 'VfB Stuttgart', 'Vonovia Ruhrstadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-09-26', 3, 0, '12167', 'SC Freiburg', 'FC Augsburg', 'SC-Stadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-01', 3, 1, '14905', 'FC Köln', 'SpVgg Greuther Fürth', 'RheinEnergieStadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-02', 1, 2, '14642', 'Hertha BSC', 'SC Freiburg', 'Olympiastadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-02', 3, 1, '14776', 'VfB Stuttgart', 'Hoffenheim', 'Mercedes-Benz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-02', 1, 3, '12579', 'VfL Wolfsburg', 'Borussia Mönchengladbach', 'Volkswagen Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-02', 2, 1, '16884', 'Borussia Dortmund', 'FC Augsburg', 'Signal Iduna Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-02', 3, 0, '19024', 'RB Leipzig', 'VfL Bochum', 'Red Bull Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-03', 1, 2, '18518', 'Mainz 05', 'Union Berlin', 'Opel Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-03', 1, 2, '16829', 'FC Bayern', 'Eintracht Frankfurt', 'Allianz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-03', 0, 4, '20176', 'Arminia Bielefeld', 'Bayer 04 Leverkusen', 'Schüco-Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-15', 5, 0, '16313', 'Hoffenheim', 'FC Köln', 'PreZero Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-16', 0, 1, '11445', 'SpVgg Greuther Fürth', 'VfL Bochum', 'Sportpark Ronhof Thomas Sommer', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-16', 1, 1, '10741', 'SC Freiburg', 'RB Leipzig', 'SC-Stadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-16', 2, 0, '16246', 'Union Berlin', 'VfL Wolfsburg', 'Stadion An der Alten Försterei', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-16', 1, 2, '14332', 'Eintracht Frankfurt', 'Hertha BSC', 'Deutsche Bank Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-16', 3, 1, '16877', 'Borussia Dortmund', 'Mainz 05', 'Signal Iduna Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-16', 1, 1, '13702', 'Borussia Mönchengladbach', 'VfB Stuttgart', 'Borussia-Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-17', 1, 5, '13165', 'Bayer 04 Leverkusen', 'FC Bayern', 'BayArena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-17', 1, 1, '9597', 'FC Augsburg', 'Arminia Bielefeld', 'WWK Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-22', 4, 1, '10843', 'Mainz 05', 'FC Augsburg', 'Opel Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-23', 1, 3, '19944', 'Arminia Bielefeld', 'Borussia Dortmund', 'Schüco-Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-23', 0, 2, '14150', 'VfL Wolfsburg', 'SC Freiburg', 'Volkswagen Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-23', 4, 1, '12143', 'RB Leipzig', 'SpVgg Greuther Fürth', 'Red Bull Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-23', 4, 0, '12665', 'FC Bayern', 'Hoffenheim', 'Allianz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-23', 1, 0, '19752', 'Hertha BSC', 'Borussia Mönchengladbach', 'Olympiastadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-24', 2, 2, '10960', 'FC Köln', 'Bayer 04 Leverkusen', 'RheinEnergieStadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-24', 1, 1, '14547', 'VfB Stuttgart', 'Union Berlin', 'Mercedes-Benz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-24', 2, 0, '12432', 'VfL Bochum', 'Eintracht Frankfurt', 'Vonovia Ruhrstadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-29', 2, 0, '15253', 'Hoffenheim', 'Hertha BSC', 'PreZero Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-30', 1, 2, '17054', 'Arminia Bielefeld', 'Mainz 05', 'Schüco-Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-30', 3, 1, '17284', 'SC Freiburg', 'SpVgg Greuther Fürth', 'SC-Stadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-30', 2, 5, '11576', 'Union Berlin', 'FC Bayern', 'Stadion An der Alten Försterei', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-30', 0, 2, '10421', 'Bayer 04 Leverkusen', 'VfL Wolfsburg', 'BayArena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-30', 2, 0, '16442', 'Borussia Dortmund', 'FC Köln', 'Signal Iduna Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-30', 1, 1, '15225', 'Eintracht Frankfurt', 'RB Leipzig', 'Deutsche Bank Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-31', 4, 1, '14133', 'FC Augsburg', 'VfB Stuttgart', 'WWK Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-10-31', 2, 1, '18528', 'Borussia Mönchengladbach', 'VfL Bochum', 'Borussia-Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-05', 1, 1, '20066', 'Mainz 05', 'Borussia Mönchengladbach', 'Opel Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-06', 2, 0, '10603', 'VfL Bochum', 'Hoffenheim', 'Vonovia Ruhrstadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-06', 0, 1, '9834', 'VfB Stuttgart', 'Arminia Bielefeld', 'Mercedes-Benz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-06', 1, 0, '13488', 'VfL Wolfsburg', 'FC Augsburg', 'Volkswagen Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-06', 2, 1, '18926', 'FC Bayern', 'SC Freiburg', 'Allianz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-06', 2, 1, '18629', 'RB Leipzig', 'Borussia Dortmund', 'Red Bull Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-07', 1, 1, '12159', 'Hertha BSC', 'Bayer 04 Leverkusen', 'Olympiastadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-07', 2, 2, '14114', 'FC Köln', 'Union Berlin', 'RheinEnergieStadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-07', 1, 2, '20382', 'SpVgg Greuther Fürth', 'Eintracht Frankfurt', 'Sportpark Ronhof Thomas Sommer', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-19', 2, 1, '10727', 'FC Augsburg', 'FC Bayern', 'WWK Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-20', 2, 2, '17094', 'Arminia Bielefeld', 'VfL Wolfsburg', 'Schüco-Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-20', 2, 0, '16690', 'Hoffenheim', 'RB Leipzig', 'PreZero Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-20', 4, 0, '10174', 'Borussia Mönchengladbach', 'SpVgg Greuther Fürth', 'Borussia-Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-20', 1, 0, '20093', 'Bayer 04 Leverkusen', 'VfL Bochum', 'BayArena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-20', 2, 1, '16137', 'Borussia Dortmund', 'VfB Stuttgart', 'Signal Iduna Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-20', 2, 0, '19586', 'Union Berlin', 'Hertha BSC', 'Stadion An der Alten Försterei', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-21', 0, 2, '17330', 'SC Freiburg', 'Eintracht Frankfurt', 'SC-Stadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-21', 1, 1, '9661', 'Mainz 05', 'FC Köln', 'Opel Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-26', 2, 1, '11639', 'VfB Stuttgart', 'Mainz 05', 'Mercedes-Benz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-27', 3, 6, '20323', 'SpVgg Greuther Fürth', 'Hoffenheim', 'Sportpark Ronhof Thomas Sommer', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-27', 2, 1, '15244', 'VfL Bochum', 'SC Freiburg', 'Vonovia Ruhrstadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-27', 4, 1, '12905', 'FC Köln', 'Borussia Mönchengladbach', 'RheinEnergieStadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-27', 1, 1, '12534', 'Hertha BSC', 'FC Augsburg', 'Olympiastadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-27', 1, 3, '16218', 'VfL Wolfsburg', 'Borussia Dortmund', 'Volkswagen Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-27', 1, 0, '19353', 'FC Bayern', 'Arminia Bielefeld', 'Allianz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-28', 2, 1, '15581', 'Eintracht Frankfurt', 'Union Berlin', 'Deutsche Bank Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-11-28', 1, 3, '19982', 'RB Leipzig', 'Bayer 04 Leverkusen', 'Red Bull Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-03', 2, 1, '9938', 'Union Berlin', 'RB Leipzig', 'Stadion An der Alten Försterei', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-04', 1, 1, '16116', 'Arminia Bielefeld', 'FC Köln', 'Schüco-Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-04', 2, 3, '15656', 'FC Augsburg', 'VfL Bochum', 'WWK Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-04', 3, 0, '13814', 'Mainz 05', 'VfL Wolfsburg', 'Opel Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-04', 3, 2, '10175', 'Hoffenheim', 'Eintracht Frankfurt', 'PreZero Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-04', 7, 1, '18502', 'Bayer 04 Leverkusen', 'SpVgg Greuther Fürth', 'BayArena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-04', 2, 3, '19076', 'Borussia Dortmund', 'FC Bayern', 'Signal Iduna Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-05', 2, 2, '20578', 'VfB Stuttgart', 'Hertha BSC', 'Mercedes-Benz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-05', 0, 6, '18390', 'Borussia Mönchengladbach', 'SC Freiburg', 'Borussia-Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-10', 0, 2, '16641', 'FC Köln', 'FC Augsburg', 'RheinEnergieStadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-11', 1, 1, '19021', 'VfL Bochum', 'Borussia Dortmund', 'Vonovia Ruhrstadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-11', 2, 0, '15172', 'Hertha BSC', 'Arminia Bielefeld', 'Olympiastadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-11', 1, 2, '11362', 'SC Freiburg', 'Hoffenheim', 'SC-Stadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-11', 4, 1, '19686', 'RB Leipzig', 'Borussia Mönchengladbach', 'Red Bull Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-11', 2, 1, '18442', 'FC Bayern', 'Mainz 05', 'Allianz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-11', 0, 2, '20765', 'VfL Wolfsburg', 'VfB Stuttgart', 'Volkswagen Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-12', 1, 0, '13725', 'SpVgg Greuther Fürth', 'Union Berlin', 'Sportpark Ronhof Thomas Sommer', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-12', 5, 2, '14377', 'Eintracht Frankfurt', 'Bayer 04 Leverkusen', 'Deutsche Bank Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-14', 0, 5, '10957', 'VfB Stuttgart', 'FC Bayern', 'Mercedes-Benz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-14', 2, 0, '14444', 'Arminia Bielefeld', 'VfL Bochum', 'Schüco-Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-14', 4, 0, '13358', 'Mainz 05', 'Hertha BSC', 'Opel Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-14', 2, 3, '16167', 'VfL Wolfsburg', 'FC Köln', 'Volkswagen Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-15', 2, 3, '16454', 'Borussia Mönchengladbach', 'Eintracht Frankfurt', 'Borussia-Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-15', 1, 1, '19434', 'FC Augsburg', 'RB Leipzig', 'WWK Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-15', 0, 0, '15692', 'Union Berlin', 'SC Freiburg', 'Stadion An der Alten Försterei', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-15', 2, 2, '18449', 'Bayer 04 Leverkusen', 'Hoffenheim', 'BayArena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-15', 3, 0, '15049', 'Borussia Dortmund', 'SpVgg Greuther Fürth', 'Signal Iduna Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-17', 4, 0, '19624', 'FC Bayern', 'VfL Wolfsburg', 'Allianz Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-18', 0, 0, '20112', 'SpVgg Greuther Fürth', 'FC Augsburg', 'Sportpark Ronhof Thomas Sommer', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-18', 0, 1, '14237', 'VfL Bochum', 'Union Berlin', 'Vonovia Ruhrstadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-18', 1, 1, '16435', 'Hoffenheim', 'Borussia Mönchengladbach', 'PreZero Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-18', 1, 0, '19412', 'Eintracht Frankfurt', 'Mainz 05', 'Deutsche Bank Park', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-18', 0, 2, '9746', 'RB Leipzig', 'Arminia Bielefeld', 'Red Bull Arena', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-18', 3, 2, '10455', 'Hertha BSC', 'Borussia Dortmund', 'Olympiastadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-19', 2, 1, '18805', 'SC Freiburg', 'Bayer 04 Leverkusen', 'SC-Stadion', 'Bundesliga 2022', '22222222226');
+insert into matches values(match_seq.nextval, DATE '2021-12-19', 1, 0, '17448', 'FC Köln', 'VfB Stuttgart', 'RheinEnergieStadion', 'Bundesliga 2022', '22222222226');
+
 -- ---------------------------------------------------
 
 insert into refereeing values('22222222221', 1, 'Referee');
@@ -561,6 +764,31 @@ insert into participating values('11111111003', 31, 2, 1, 'Yes', 'No');
 
 insert into participating values('11111111004', 34, 1, 1, 'Yes', 'No');
 insert into participating values('11111111004', 84, 1, 0, 'Yes', 'No');
+
+insert into participating values('11111111005', 387, 4, 1, 'Yes', 'No');
+insert into participating values('11111111005', 411, 3, 2, 'Yes', 'No');
+insert into participating values('11111111005', 427, 3, 0, 'Yes', 'No');
+insert into participating values('11111111005', 448, 2, 0, 'Yes', 'No');
+insert into participating values('11111111005', 518, 5, 1, 'Yes', 'No');
+
+insert into participating values('11111111006', 402, 3, 0, 'Yes', 'No');
+insert into participating values('11111111006', 418, 2, 0, 'Yes', 'No');
+insert into participating values('11111111006', 457, 1, 0, 'Yes', 'No');
+
+insert into participating values('11111111007', 445, 1, 1, 'Yes', 'No');
+insert into participating values('11111111007', 500, 2, 1, 'Yes', 'No');
+insert into participating values('11111111007', 510, 3, 0, 'Yes', 'No');
+insert into participating values('11111111007', 514, 2, 2, 'Yes', 'No');
+insert into participating values('11111111007', 537, 2, 2, 'Yes', 'No');
+
+insert into participating values('11111111008', 486, 1, 1, 'Yes', 'No');
+insert into participating values('11111111008', 404, 1, 2, 'Yes', 'No');
+
+insert into participating values('11111111009', 528, 3, 0, 'Yes', 'No');
+insert into participating values('11111111009', 533, 2, 1, 'Yes', 'No');
+
+insert into participating values('11111110001', 446, 1, 1, 'Yes', 'No');
+insert into participating values('11111110001', 517, 1, 0, 'Yes', 'No');
 
 -- ---------------------------------------------------
 
