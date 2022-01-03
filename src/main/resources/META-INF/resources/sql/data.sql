@@ -50,6 +50,11 @@ insert into stadiums values('BayArena', 30210, 'Yes', 'No');
 insert into stadiums values('PreZero Arena', 30150, 'Yes', 'No');
 insert into stadiums values('Allianz Arena', 75000, 'Yes', 'No');
 
+insert into stadiums values('Diego Armando Maradona', 54726, 'Yes', 'No');
+insert into stadiums values('San Siro', 80018, 'Yes', 'No');
+insert into stadiums values('Olimpico', 72698, 'Yes', 'No');
+insert into stadiums values('Allianz Stadium', 41507, 'Yes', 'No');
+
 -- ---------------------------------------------------
 
 insert into teams values('FC Barcelona', 'Barcelona', 'Camp Nou');
@@ -103,12 +108,19 @@ insert into teams values('Bayer 04 Leverkusen', 'Leverkusen', 'BayArena');
 insert into teams values('Hoffenheim', 'Hoffenheim', 'PreZero Arena');
 insert into teams values('FC Bayern', 'München', 'Allianz Arena');
 
+insert into teams values('Juventus F.C.', 'Turin', 'Allianz Stadium');
+insert into teams values('A.S. Roma', 'Roma', 'Olimpico');
+insert into teams values('A.C. Milan', 'Milan', 'San Siro');
+insert into teams values('Inter Milan', 'Milan', 'San Siro');
+insert into teams values('Napoli', 'Napoli', 'Diego Armando Maradona');
+
 -- ---------------------------------------------------
 
 insert into league_seasons values('LaLiga Santander 2021', 2021, 1);
 insert into league_seasons values('PKO Ekstraklasa 2021', 2021, 1);
 insert into league_seasons values('Premier League 2021', 2021, 1);
 insert into league_seasons values('Bundesliga 2022', 2022, 1);
+insert into league_seasons values('Serie A 2022', 2022, 1);
 
 -- ---------------------------------------------------
 
@@ -144,6 +156,15 @@ insert into club_employees values('11111111008', 'Serge', 'Gnabry', 120000, DATE
 insert into club_employees values('11111111009', 'Taiwo', 'Awoniyi', 65000, DATE '1997-08-12', 'Player', 'Forward', NULL, 'Union Berlin');
 insert into club_employees values('11111110001', 'Yussuf', 'Poulsen', 110000, DATE '1994-07-15', 'Player', 'Forward', NULL, 'RB Leipzig');
 
+insert into club_employees values('11111110002', 'Lautaro', 'Martinez', 120000, DATE '1995-07-14', 'Player', 'Forward', NULL, 'Inter Milan');
+insert into club_employees values('11111110003', 'Zlatan', 'Ibrahimovic', 165000, DATE '1998-08-12', 'Player', 'Forward', NULL, 'A.C. Milan');
+insert into club_employees values('11111110004', 'Tammy', 'Abraham', 110000, DATE '1995-08-15', 'Player', 'Forward', NULL, 'A.S. Roma');
+
+insert into club_employees values('11111110005', 'Pep', 'Guardiola', 170000, DATE '1971-01-18', 'Trainer', NULL, 'First coach', 'Manchester City');
+insert into club_employees values('11111110006', 'Mikel', 'Arteta', 85000, DATE '1982-03-26', 'Trainer', NULL, 'Assistant', 'Manchester City');
+insert into club_employees values('11111110007', 'Maciej', 'Skorża', 25000, DATE '1972-01-10', 'Trainer', NULL, 'First coach', 'Lech Poznań');
+insert into club_employees values('11111110008', 'Jan', 'Kowalski', 1100, DATE '1976-07-16', 'Employee', NULL, 'Bus driver', 'RB Leipzig');
+
 -- ---------------------------------------------------
 
 insert into league_employees values('22222222221', 'Szymon', 'Marciniak', DATE '1981-01-07', 'Referee');
@@ -153,6 +174,8 @@ insert into league_employees values('22222222224', 'John', 'Adams', DATE '1978-0
 insert into league_employees values('22222222225', 'Kacper', 'Kaczmarek', DATE '1984-10-13', 'Delegate');
 insert into league_employees values('22222222226', 'Alexander', 'Heckmann', DATE '1988-06-23', 'Delegate');
 insert into league_employees values('22222222227', 'Michael', 'Weiner', DATE '1969-03-21', 'Referee');
+insert into league_employees values('22222222228', 'Giuseppe', 'Russo', DATE '1959-05-27', 'Delegate');
+insert into league_employees values('22222222229', 'Pierluigi', 'Collina', DATE '1960-02-13', 'Referee');
 
 -- ---------------------------------------------------
 
@@ -699,6 +722,17 @@ insert into matches values(match_seq.nextval, DATE '2021-12-18', 3, 2, '10455', 
 insert into matches values(match_seq.nextval, DATE '2021-12-19', 2, 1, '18805', 'SC Freiburg', 'Bayer 04 Leverkusen', 'SC-Stadion', 'Bundesliga 2022', '22222222226');
 insert into matches values(match_seq.nextval, DATE '2021-12-19', 1, 0, '17448', 'FC Köln', 'VfB Stuttgart', 'RheinEnergieStadion', 'Bundesliga 2022', '22222222226');
 
+insert into matches values(match_seq.nextval, DATE '2021-09-11', 2, 1, '11956', 'Napoli', 'Juventus F.C.', 'Diego Armando Maradona', 'Serie A 2022', '22222222228');
+insert into matches values(match_seq.nextval, DATE '2021-09-19', 1, 1, '9635', 'Juventus F.C.', 'A.C. Milan', 'Allianz Stadium', 'Serie A 2022', '22222222228');
+insert into matches values(match_seq.nextval, DATE '2021-10-17', 1, 0, '11452', 'Juventus F.C.', 'A.S. Roma', 'Allianz Stadium', 'Serie A 2022', '22222222228');
+insert into matches values(match_seq.nextval, DATE '2021-10-24', 0, 0, '19104', 'A.S. Roma', 'Napoli', 'Olimpico', 'Serie A 2022', '22222222228');
+insert into matches values(match_seq.nextval, DATE '2021-10-24', 1, 1, '15525', 'Inter Milan', 'Juventus F.C.', 'San Siro', 'Serie A 2022', '22222222228');
+insert into matches values(match_seq.nextval, DATE '2021-10-31', 1, 2, '10746', 'A.S. Roma', 'A.C. Milan', 'Olimpico', 'Serie A 2022', '22222222228');
+insert into matches values(match_seq.nextval, DATE '2021-11-07', 1, 1, '14455', 'A.C. Milan', 'Inter Milan', 'San Siro', 'Serie A 2022', '22222222228');
+insert into matches values(match_seq.nextval, DATE '2021-11-21', 3, 2, '14412', 'Inter Milan', 'Napoli', 'San Siro', 'Serie A 2022', '22222222228');
+insert into matches values(match_seq.nextval, DATE '2021-12-04', 0, 3, '15737', 'A.S. Roma', 'Inter Milan', 'Olimpico', 'Serie A 2022', '22222222228');
+insert into matches values(match_seq.nextval, DATE '2021-12-19', 0, 1, '20298', 'A.C. Milan', 'Napoli', 'San Siro', 'Serie A 2022', '22222222228');
+
 -- ---------------------------------------------------
 
 insert into refereeing values('22222222221', 1, 'Referee');
@@ -720,6 +754,16 @@ insert into refereeing values('22222222222', 6, 'Linesman');
 insert into refereeing values('22222222223', 4, 'Linesman');
 insert into refereeing values('22222222223', 5, 'Linesman');
 insert into refereeing values('22222222223', 6, 'Linesman');
+
+insert into refereeing values('22222222227', 123, 'Referee');
+insert into refereeing values('22222222227', 234, 'Referee');
+insert into refereeing values('22222222227', 45, 'Referee');
+insert into refereeing values('22222222227', 24, 'Linesman');
+insert into refereeing values('22222222227', 76, 'Linesman');
+insert into refereeing values('22222222229', 76, 'Linesman');
+insert into refereeing values('22222222229', 535, 'Referee');
+insert into refereeing values('22222222229', 532, 'Linesman');
+insert into refereeing values('22222222229', 537, 'Referee');
 
 -- ---------------------------------------------------
 
@@ -789,6 +833,15 @@ insert into participating values('11111111009', 533, 2, 1, 'Yes', 'No');
 
 insert into participating values('11111110001', 446, 1, 1, 'Yes', 'No');
 insert into participating values('11111110001', 517, 1, 0, 'Yes', 'No');
+
+insert into participating values('11111110002', 546, 1, 1, 'Yes', 'No');
+insert into participating values('11111110002', 4547, 1, 2, 'Yes', 'No');
+
+insert into participating values('11111110003', 541, 3, 0, 'Yes', 'No');
+insert into participating values('11111110003', 545, 2, 1, 'Yes', 'No');
+
+insert into participating values('11111110004', 542, 1, 1, 'Yes', 'No');
+insert into participating values('11111110004', 548, 1, 0, 'Yes', 'No');
 
 -- ---------------------------------------------------
 
