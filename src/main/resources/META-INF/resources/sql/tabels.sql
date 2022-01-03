@@ -235,3 +235,13 @@ BEGIN
     SELECT COUNT(m.league_year) INTO vleague_count FROM MATCHES m WHERE m.league_year=vleague_name;
     RETURN vleague_count;
 END LeagueNameCount;
+
+-- ---------------------------------------------------
+
+CREATE INDEX club_employees_idx ON club_employees(first_name, last_name);
+CREATE INDEX league_employees_idx ON league_employees(first_name, last_name);
+CREATE INDEX league_seasons_idx ON league_seasons(name, end_year);
+CREATE INDEX matches_idx ON matches(home_team, away_team, league_year);
+CREATE INDEX participating_idx ON participating(match_id, pesel);
+CREATE INDEX stadiums_idx ON stadiums(name, capacity);
+CREATE INDEX teams_idx ON teams(name, city);
