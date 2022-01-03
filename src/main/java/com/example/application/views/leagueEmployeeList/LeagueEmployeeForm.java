@@ -1,6 +1,7 @@
 package com.example.application.views.leagueEmployeeList;
 
 import com.example.application.components.NotificationComponent;
+import com.example.application.data.ErrorHandler;
 import com.example.application.data.entity.LeagueEmployee;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
@@ -16,13 +17,15 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.BindingException;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.data.converter.LocalDateToDateConverter;
 import com.vaadin.flow.shared.Registration;
+import org.springframework.orm.jpa.JpaSystemException;
 
 public class LeagueEmployeeForm extends FormLayout {
-
     Binder<LeagueEmployee> binder = new BeanValidationBinder<>(LeagueEmployee.class);
+    ErrorHandler errorHandler = new ErrorHandler();
 
     TextField pesel = new TextField("Pesel");
     TextField firstName = new TextField("First Name");
@@ -75,10 +78,17 @@ public class LeagueEmployeeForm extends FormLayout {
             fireEvent(new SaveEvent(this, leagueEmployee));
             NotificationComponent notification = new NotificationComponent("League employee saved");
             notification.getSucessNotification().open();
-
         } catch (ValidationException e){
             e.printStackTrace();
-            NotificationComponent notification = new NotificationComponent(e.toString());
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
+            notification.getErrorNotification().open();
+        } catch (BindingException e){
+            e.printStackTrace();
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
+            notification.getErrorNotification().open();
+        } catch (JpaSystemException e){
+            e.printStackTrace();
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
             notification.getErrorNotification().open();
         }
     }

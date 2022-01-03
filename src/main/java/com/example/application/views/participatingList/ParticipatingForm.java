@@ -1,8 +1,8 @@
 package com.example.application.views.participatingList;
 
 import com.example.application.components.NotificationComponent;
+import com.example.application.data.ErrorHandler;
 import com.example.application.data.entity.*;
-import com.example.application.views.refereeingList.RefereeingForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -14,16 +14,18 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.BindingException;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
+import org.springframework.orm.jpa.JpaSystemException;
 
 import java.util.List;
 
 public class ParticipatingForm extends FormLayout {
     Binder<Participating> binder = new BeanValidationBinder<>(Participating.class);
+    ErrorHandler errorHandler = new ErrorHandler();
 
     ComboBox<ClubEmployee> pesel = new ComboBox<>("Club employee");
     ComboBox<Match> matchId = new ComboBox<>("Match");
@@ -86,10 +88,17 @@ public class ParticipatingForm extends FormLayout {
             fireEvent(new SaveEvent(this, participating));
             NotificationComponent notification = new NotificationComponent("Participating saved");
             notification.getSucessNotification().open();
-
         } catch (ValidationException e){
             e.printStackTrace();
-            NotificationComponent notification = new NotificationComponent(e.toString());
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
+            notification.getErrorNotification().open();
+        } catch (BindingException e){
+            e.printStackTrace();
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
+            notification.getErrorNotification().open();
+        } catch (JpaSystemException e){
+            e.printStackTrace();
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
             notification.getErrorNotification().open();
         }
     }

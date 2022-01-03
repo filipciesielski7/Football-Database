@@ -1,32 +1,26 @@
 package com.example.application.views.stadiumList;
 
 import com.example.application.components.NotificationComponent;
+import com.example.application.data.ErrorHandler;
 import com.example.application.data.entity.Stadium;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.BindingException;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
-
-import javax.management.remote.NotificationResult;
+import org.springframework.orm.jpa.JpaSystemException;
 
 public class StadiumForm extends FormLayout {
     Binder<Stadium> binder = new BeanValidationBinder<>(Stadium.class);
+    ErrorHandler errorHandler = new ErrorHandler();
 
     TextField Name = new TextField("Stadium Name");
     IntegerField Capacity = new IntegerField("Capacity");
@@ -80,10 +74,17 @@ public class StadiumForm extends FormLayout {
             fireEvent(new SaveEvent(this, stadium));
             NotificationComponent notification = new NotificationComponent("Stadium saved");
             notification.getSucessNotification().open();
-
         } catch (ValidationException e){
             e.printStackTrace();
-            NotificationComponent notification = new NotificationComponent(e.toString());
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
+            notification.getErrorNotification().open();
+        } catch (BindingException e){
+            e.printStackTrace();
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
+            notification.getErrorNotification().open();
+        } catch (JpaSystemException e){
+            e.printStackTrace();
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
             notification.getErrorNotification().open();
         }
     }

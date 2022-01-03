@@ -1,6 +1,7 @@
 package com.example.application.views.teamList;
 
 import com.example.application.components.NotificationComponent;
+import com.example.application.data.ErrorHandler;
 import com.example.application.data.entity.Stadium;
 import com.example.application.data.entity.Team;
 import com.vaadin.flow.component.Component;
@@ -16,13 +17,16 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.BindingException;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
+import org.springframework.orm.jpa.JpaSystemException;
 
 import java.util.List;
 
 public class TeamForm extends FormLayout {
     Binder<Team> binder = new BeanValidationBinder<>(Team.class);
+    ErrorHandler errorHandler = new ErrorHandler();
 
     TextField Name = new TextField("Team Name");
     TextField City = new TextField("City");
@@ -70,10 +74,17 @@ public class TeamForm extends FormLayout {
             fireEvent(new SaveEvent(this, team));
             NotificationComponent notification = new NotificationComponent("Team saved");
             notification.getSucessNotification().open();
-
         } catch (ValidationException e){
             e.printStackTrace();
-            NotificationComponent notification = new NotificationComponent(e.toString());
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
+            notification.getErrorNotification().open();
+        } catch (BindingException e){
+            e.printStackTrace();
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
+            notification.getErrorNotification().open();
+        } catch (JpaSystemException e){
+            e.printStackTrace();
+            NotificationComponent notification = new NotificationComponent(errorHandler.errorTranslator(e.toString()));
             notification.getErrorNotification().open();
         }
     }
