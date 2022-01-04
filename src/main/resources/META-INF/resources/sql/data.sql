@@ -835,7 +835,7 @@ insert into participating values('11111110001', 446, 1, 1, 'Yes', 'No');
 insert into participating values('11111110001', 517, 1, 0, 'Yes', 'No');
 
 insert into participating values('11111110002', 546, 1, 1, 'Yes', 'No');
-insert into participating values('11111110002', 4547, 1, 2, 'Yes', 'No');
+insert into participating values('11111110002', 547, 1, 2, 'Yes', 'No');
 
 insert into participating values('11111110003', 541, 3, 0, 'Yes', 'No');
 insert into participating values('11111110003', 545, 2, 1, 'Yes', 'No');

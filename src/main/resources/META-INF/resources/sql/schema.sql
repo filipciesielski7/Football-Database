@@ -1,3 +1,11 @@
+-- DROP INDEX club_employees_idx;
+-- DROP INDEX league_employees_idx;
+-- DROP INDEX league_seasons_idx;
+-- DROP INDEX league_seasons_name_idx;
+-- DROP INDEX matches_idx;
+-- DROP INDEX participating_idx;
+-- DROP INDEX stadiums_idx;
+
 -- DROP TABLE participating;
 -- DROP TABLE refereeing;
 -- DROP TABLE matches;
@@ -6,6 +14,8 @@
 -- DROP TABLE league_seasons;
 -- DROP TABLE teams;
 -- DROP TABLE stadiums;
+
+-- drop sequence match_seq;
 
 -- ---------------------------------------------------
 
@@ -73,7 +83,6 @@ CREATE TABLE matches (
                          delegate varchar2(11 char) references league_employees(pesel) on delete cascade
 );
 
--- drop sequence match_seq;
 create sequence match_seq start with 1 increment by 1;
 
 -- ---------------------------------------------------
@@ -203,6 +212,28 @@ SELECT * FROM attendance ORDER BY fans_number DESC, stadium_name, match_date, ho
 
 -- ---------------------------------------------------
 
+CREATE INDEX club_employees_idx ON club_employees(first_name, last_name);
+CREATE INDEX league_employees_idx ON league_employees(first_name, last_name);
+CREATE INDEX league_seasons_idx ON league_seasons(name, end_year);
+CREATE INDEX league_seasons_name_idx ON league_seasons(LOWER(name));
+CREATE INDEX matches_idx ON matches(home_team, away_team, league_year);
+CREATE INDEX participating_idx ON participating(match_id, pesel);
+CREATE INDEX stadiums_idx ON stadiums(name, capacity);
+CREATE INDEX teams_idx ON teams(name, city);
+
+-- ---------------------------------------------------
+
+CREATE OR REPLACE FUNCTION LeagueNameCount (
+vleague_name IN VARCHAR)
+RETURN NUMBER IS
+vleague_count NUMBER;
+BEGIN
+SELECT COUNT(m.league_year) INTO vleague_count FROM MATCHES m WHERE m.league_year=vleague_name;
+RETURN vleague_count;
+END LeagueNameCount;
+/
+-- ---------------------------------------------------
+
 CREATE OR REPLACE TRIGGER PayRise
     AFTER INSERT OR DELETE OR UPDATE ON participating
     FOR EACH ROW
@@ -226,22 +257,3 @@ END CASE;
 END;
 
 -- ---------------------------------------------------
-
-CREATE OR REPLACE FUNCTION LeagueNameCount (
-vleague_name IN VARCHAR)
-RETURN NUMBER IS
-vleague_count NUMBER;
-BEGIN
-SELECT COUNT(m.league_year) INTO vleague_count FROM MATCHES m WHERE m.league_year=vleague_name;
-RETURN vleague_count;
-END LeagueNameCount;
-
--- ---------------------------------------------------
-
-CREATE INDEX club_employees_idx ON club_employees(first_name, last_name);
-CREATE INDEX league_employees_idx ON league_employees(first_name, last_name);
-CREATE INDEX league_seasons_idx ON league_seasons(name, end_year);
-CREATE INDEX matches_idx ON matches(home_team, away_team, league_year);
-CREATE INDEX participating_idx ON participating(match_id, pesel);
-CREATE INDEX stadiums_idx ON stadiums(name, capacity);
-CREATE INDEX teams_idx ON teams(name, city);

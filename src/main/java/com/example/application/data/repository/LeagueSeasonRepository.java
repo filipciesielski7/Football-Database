@@ -15,7 +15,7 @@ public interface LeagueSeasonRepository extends JpaRepository<LeagueSeason, Stri
     List<LeagueSeason> search(@Param("searchTerm") String searchTerm);
 
     @Query("select c.name from LeagueSeason c " +
-            "where lower(c.name) like lower(concat('%', :searchTerm, '%'))")
+            "where lower(c.name) like lower(concat(:searchTerm, '%'))")
     List<String> searchName(@Param("searchTerm") String searchTerm);
 
     @Query("select c.name from LeagueSeason c ")
