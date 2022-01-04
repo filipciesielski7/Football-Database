@@ -95,23 +95,7 @@ public class MatchesView extends VerticalLayout {
     }
 
     private void saveMatch(MatchForm.SaveEvent event) {
-        Match matchCopy = service.findAllMatches().stream().filter(match -> event.getMatch().getMatchId().equals(match.getMatchId()))
-                .findAny().orElse(null);
-        if(matchCopy != null && !matchCopy.toString().equals(event.getMatch().toString())){
-            ConfirmDialogComponent dialog = new ConfirmDialogComponent(" match number " + matchCopy.getMatchId().toString());
-            dialog.getModifyConfirmDialog().addConfirmListener(event2 -> {
-                service.saveMatch(event.getMatch());
-                updateList();
-                closeEditor();
-            });
-            dialog.getModifyConfirmDialog().open();
-        }
-        else if (matchCopy != null && matchCopy.toString().equals(event.getMatch().toString())) {
-//            System.out.println("No changes");
-        }
-        else{
-            service.saveMatch(event.getMatch());
-        }
+        service.saveMatch(event.getMatch());
         updateList();
         closeEditor();
     }
