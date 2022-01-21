@@ -41,3 +41,9 @@ Projekt korzysta z Mavena, dlatego w celu uruchomienia go z terminala, wystarczy
 `mvnw` (Windows), lub `./mvnw` (Mac & Linux), a następnie otworzyć w swojej przeglądarce adres http://localhost:8080, na którym aplikacje będzie widoczna.
 
 Możliwe jest również zaimportowanie projektu do IDE według uznania, ponieważ projekt korzysta z Mavena.
+
+## Autorzy
+
+<a href="https://github.com/filipciesielski7/Football-Database/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=filipciesielski7/Football-Database" />
+</a>
